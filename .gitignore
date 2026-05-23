@@ -1,0 +1,104 @@
+# ============================================================
+# PROYECTO APPWEB - .gitignore UNIFICADO
+# Cubre: Next.js (Front_Back), Django (backend), Docker
+# ============================================================
+
+# ──────────────────────────────────────────────────────────
+# VARIABLES DE ENTORNO (nunca subir credenciales)
+# ──────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ──────────────────────────────────────────────────────────
+# ARCHIVOS DE AGENTES IA (no necesarios para el proyecto)
+# ──────────────────────────────────────────────────────────
+AGENTS.md
+CLAUDE.md
+
+# ──────────────────────────────────────────────────────────
+# NEXT.JS / NODE
+# ──────────────────────────────────────────────────────────
+Back_Front/.next/
+Back_Front/node_modules/
+Back_Front/out/
+Back_Front/.cache/
+Back_Front/build/
+Back_Front/dist/
+Back_Front/npm-debug.log*
+Back_Front/yarn-debug.log*
+Back_Front/yarn-error.log*
+
+# ──────────────────────────────────────────────────────────
+# PYTHON / DJANGO
+# ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+*.so
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Base de datos local de desarrollo
+db.sqlite3
+*.sqlite3
+
+# Archivos de migraciones (opcional, comentar si quieres versionarlas)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# ──────────────────────────────────────────────────────────
+# DOCKER
+# ──────────────────────────────────────────────────────────
+# Volúmenes y datos de contenedores (no código)
+docker-data/
+*.log
+
+# ──────────────────────────────────────────────────────────
+# SISTEMA OPERATIVO
+# ──────────────────────────────────────────────────────────
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ──────────────────────────────────────────────────────────
+# EDITORES E IDEs
+# ──────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# ──────────────────────────────────────────────────────────
+# OTROS
+# ──────────────────────────────────────────────────────────
+*.bak
+*.tmp
+*.temp
+coverage/
+.nyc_output/
