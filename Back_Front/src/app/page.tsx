@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Play, LogOut, GraduationCap, School, Lock, BookOpen, Code, Trophy, Star } from "lucide-react";
 
 const LESSONS_PER_MODULE: Record<number, { lessonIds: number[]; totalExercises: number }> = {
-  1: { lessonIds: [1, 2, 3, 4, 5, 6, 7, 14, 15, 18], totalExercises: 38 },
+  1: { lessonIds: [1, 2, 3, 4, 5, 6, 7, 14, 15, 18, 19], totalExercises: 41 },
   2: { lessonIds: [8, 9, 10, 11, 12, 13, 16, 17], totalExercises: 25 },
   3: { lessonIds: [], totalExercises: 0 },
   4: { lessonIds: [], totalExercises: 0 },

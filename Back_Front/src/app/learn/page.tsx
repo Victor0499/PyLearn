@@ -1348,6 +1348,102 @@ print("la wikipedia tiene", longitud, "caracteres.")
     }
   ]
 },
+{
+  id: 19,
+  title: "Concatenación con el método .format()",
+  module: "Conceptos Básicos",
+  theory: `## El método .format() en Python
+
+Además de usar el signo de suma (\`+\`) o las f-strings, existe una herramienta muy potente y limpia para estructurar textos dinámicos: el método **\`.format()\`**.
+
+Este método funciona utilizando **placeholders** o marcadores de posición, representados por llaves \`{}\` dentro del texto, que luego son reemplazados por los valores correspondientes.
+
+---
+
+### 1. Sintaxis Básica
+
+Colocas llaves en los lugares donde quieres que se inserten tus variables y, al final de la cadena de texto, llamas al método \`.format()\` pasando los datos en los paréntesis:
+
+\`\`\`python
+"Texto {} texto".format(variable)
+\`\`\`
+
+---
+
+### 2. Las Tres Formas de Uso Principales
+
+Existen tres maneras distintas de organizar y pasar los datos dentro de las llaves, dependiendo de la especificidad que necesites:
+
+#### Forma 1: Por orden posicional (Llaves vacías)
+Python asigna las variables de forma automática en el mismo orden exacto en el que las escribes dentro de los paréntesis del método.
+
+\`\`\`python
+nombre = "Carlos"
+edad = 25
+
+# La primera variable va al primer {}, la segunda al segundo
+print("Hola {}, tu edad es {} años.".format(nombre, edad))
+\`\`\`
+
+#### Forma 2: Por índice numérico
+Puedes controlar explícitamente qué variable va en cada lugar asignando números dentro de las llaves (empezando desde el 0). Esto es muy útil si necesitas cambiar el orden de aparición o repetir una misma variable.
+
+\`\`\`python
+nombre = "Carlos"
+edad = 25
+
+# {0} apunta a 'nombre' y {1} apunta a 'edad'
+print("Tu edad es {1} años, ¿verdad {0}?".format(nombre, edad))
+\`\`\`
+
+#### Forma 3: Por clave o nombre (Keywords)
+Puedes asignarles "etiquetas" o nombres internos a los valores dentro del \`.format()\`. Esto hace que el código sea más fácil de leer, ya que no dependes de la posición física.
+
+\`\`\`python
+# Asignamos claves personalizadas directamente dentro del formato
+print("Hola {n}, tu edad es {e} años.".format(n="Carlos", e=25))
+\`\`\`
+
+---
+
+### ¿Por qué se recomienda usar .format()?
+
+- **Evita conversiones manuales:** A diferencia de la concatenación tradicional con \`+\`, no necesitas transformar números o booleanos a texto usando \`str()\`. El método se encarga automáticamente.
+- **Previene errores:** Reduce la aparición de errores de tipo (\`TypeError\`).
+- **Legibilidad:** Mantiene la cadena de texto limpia y fácil de comprender de un solo vistazo.`,
+  exercises: [
+    {
+      id: 1901,
+      title: "Ejercicio 1: Orden posicional",
+      difficulty: "Básico",
+      difficultyColor: "green",
+      instructions: "Crea una variable \`pais = \"México\"\` y \`capital = \"Ciudad de México\"\`. Usa el método \`.format()\` con llaves vacías \`{}\` para imprimir: \`\"La capital de México es Ciudad de México.\"\`.",
+      initialCode: "pais = \"México\"\ncapital = \"Ciudad de México\"\n\n# Escribe tu print con .format() aquí\n",
+      outputCheck: "La capital de México es Ciudad de México.",
+      hint: "Usa: print(\"La capital de {} es {}.\".format(pais, capital))"
+    },
+    {
+      id: 1902,
+      title: "Ejercicio 2: Posición por índice",
+      difficulty: "Intermedio",
+      difficultyColor: "yellow",
+      instructions: "Crea la variable \`producto = \"laptop\"\` y \`precio = 800\`. Usa \`.format()\` con índices numéricos dentro de las llaves (\`{0}\` y \`{1}\`) para imprimir: \`\"El precio de la laptop es de 800 dólares. Repito, 800 dólares.\"\`.",
+      initialCode: "producto = \"laptop\"\nprecio = 800\n\n# Escribe tu print con índices aquí\n",
+      outputCheck: "El precio de la laptop es de 800 dólares. Repito, 800 dólares.",
+      hint: "Usa: print(\"El precio de la {0} es de {1} dólares. Repito, {1} dólares.\".format(producto, precio))"
+    },
+    {
+      id: 1903,
+      title: "Ejercicio 3: Formato por clave (Keyword)",
+      difficulty: "Reto",
+      difficultyColor: "red",
+      instructions: "Imprime directamente el mensaje \`\"Curso: Python. Duración: 4 semanas.\"\` usando el método \`.format()\` con claves/keywords dentro de las llaves (\`{curso}\` y \`{duracion}\`). Pasa los valores directamente dentro de \`.format()\` como argumentos nombrados, sin crear variables previamente.",
+      initialCode: "# Escribe tu print con keywords en .format() aquí\n",
+      outputCheck: "Curso: Python. Duración: 4 semanas.",
+      hint: "Usa: print(\"Curso: {curso}. Duración: {duracion}.\".format(curso=\"Python\", duracion=\"4 semanas\"))"
+    }
+  ]
+},
 ];
 
 function DifficultyBadge({ color, label }: { color: string; label: string }) {
