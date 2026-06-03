@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import { Play, LogOut, GraduationCap, School, Lock, BookOpen, Code, Trophy, Star } from "lucide-react";
 
 const LESSONS_PER_MODULE: Record<number, { lessonIds: number[]; totalExercises: number }> = {
-  1: { lessonIds: [1, 2, 3, 4, 5, 6, 7, 14, 15, 18, 19], totalExercises: 41 },
+  1: { lessonIds: [1, 2, 3, 4, 5, 6, 7, 14, 15, 18, 19, 20, 21], totalExercises: 47 },
   2: { lessonIds: [8, 9, 10, 11, 12, 13, 16, 17], totalExercises: 25 },
   3: { lessonIds: [], totalExercises: 0 },
   4: { lessonIds: [], totalExercises: 0 },
@@ -144,7 +144,7 @@ export default function Dashboard() {
           <div className="relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 p-8 lg:p-12 shadow-2xl">
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
-            
+
             <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
               <div className="max-w-2xl flex-1">
                 <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
@@ -153,8 +153,8 @@ export default function Dashboard() {
                 <p className="text-slate-400 text-lg mb-8 leading-relaxed pr-0 lg:pr-8">
                   Tu entorno interactivo está listo. Continúa justo donde te quedaste y sigue construyendo tus habilidades de programación.
                 </p>
-                
-                <button 
+
+                <button
                   onClick={() => router.push('/learn')}
                   className="group flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300"
                 >
@@ -170,9 +170,9 @@ export default function Dashboard() {
                 {/* Mascot Image */}
                 <div className="w-56 h-56 xl:w-72 xl:h-72 relative group z-10">
                   <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-blue-400 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                  <img 
-                    src="/noodle.jpg" 
-                    alt="Noodle, la mascota de PyLearn" 
+                  <img
+                    src="/noodle.jpg"
+                    alt="Noodle, la mascota de PyLearn"
                     className="w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-slate-800 transform rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 relative z-10"
                   />
                 </div>
@@ -180,7 +180,7 @@ export default function Dashboard() {
                 {/* Chat Bubble on the right */}
                 <div className="group/bubble relative -ml-6 bg-slate-800 border-2 border-[#25FABA]/40 hover:border-[#25FABA] text-slate-200 p-5 rounded-2xl shadow-2xl hover:shadow-[0_0_20px_rgba(37,250,186,0.6)] max-w-[240px] z-20 transform hover:-translate-y-1 transition-all duration-300">
                   <p className="text-sm font-medium leading-relaxed">
-                    ¡Hssss! 🐍 Soy <span className="text-[#25FABA] font-bold drop-shadow-[0_0_8px_rgba(37,250,186,0.5)]">Noodle</span>. <br/>
+                    ¡Hssss!  Soy <span className="text-[#25FABA] font-bold drop-shadow-[0_0_8px_rgba(37,250,186,0.5)]">Noodle</span>. <br />
                     Estoy aquí para acompañarte paso a paso en tu ruta de aprendizaje de Python.
                   </p>
                   {/* Little tail for the speech bubble pointing left */}
@@ -198,7 +198,7 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             {modules.map((mod) => (
-              <div 
+              <div
                 key={mod.id}
                 onClick={() => !mod.locked && router.push('/learn')}
                 className={mod.locked ? "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-slate-900/50 border-slate-800/50 cursor-not-allowed opacity-75" : "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-slate-900 border-slate-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 cursor-pointer"}

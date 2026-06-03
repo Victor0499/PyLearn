@@ -109,11 +109,10 @@ export default function RegisterPage() {
                 <button
                   type="button"
                   onClick={() => setRole("estudiante")}
-                  className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
-                    role === "estudiante"
+                  className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${role === "estudiante"
                       ? "border-blue-500 bg-blue-500/10 text-blue-400"
                       : "border-slate-700 bg-slate-800/50 text-slate-500 hover:border-slate-600"
-                  }`}
+                    }`}
                 >
                   <GraduationCap className="w-6 h-6 mb-1.5" />
                   <span className="text-sm font-medium">Estudiante</span>
@@ -121,11 +120,10 @@ export default function RegisterPage() {
                 <button
                   type="button"
                   onClick={() => setRole("profesor")}
-                  className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
-                    role === "profesor"
+                  className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${role === "profesor"
                       ? "border-indigo-500 bg-indigo-500/10 text-indigo-400"
                       : "border-slate-700 bg-slate-800/50 text-slate-500 hover:border-slate-600"
-                  }`}
+                    }`}
                 >
                   <School className="w-6 h-6 mb-1.5" />
                   <span className="text-sm font-medium">Profesor</span>
