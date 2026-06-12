@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 const AuthContext = createContext({
   user: /** @type {{ role: string; username: string } | null} */ (null),
   loading: true,
-  login: async (/** @type {string} */ _username, /** @type {string} */ _password) => {},
-  register: async (/** @type {string} */ _username, /** @type {string} */ _email, /** @type {string} */ _password, /** @type {string} */ _role) => {},
-  logout: () => {},
+  login: async (/** @type {string} */ _username, /** @type {string} */ _password) => { },
+  register: async (/** @type {string} */ _username, /** @type {string} */ _email, /** @type {string} */ _password, /** @type {string} */ _role) => { },
+  logout: () => { },
 });
 
 export function AuthProvider({ children }) {
@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (username, password) => {
-    // Ahora apunta a la API Route interna de Next.js (antes era http://localhost:8000)
+
     const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -37,11 +37,11 @@ export function AuthProvider({ children }) {
     localStorage.setItem("refresh_token", data.refresh);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
-    router.push("/");
+    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/');  // tester and estudiante go to '/
   };
 
   const register = async (username, email, password, role) => {
-    // Ahora apunta a la API Route interna de Next.js (antes era http://localhost:8000)
+
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("refresh_token", data.refresh);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
-    router.push("/");
+    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/');  // tester and estudiante go to '/
   };
 
   const logout = () => {

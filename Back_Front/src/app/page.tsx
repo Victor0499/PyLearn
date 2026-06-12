@@ -3,115 +3,145 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { Play, LogOut, GraduationCap, School, Lock, BookOpen, Code, Trophy, Star } from "lucide-react";
+import { Play, LogOut, GraduationCap, School, Lock, BookOpen, Code, Trophy, Star, Users, ArrowRight, Loader2, Check, GitBranch, Layers, Cpu, Database } from "lucide-react";
 
-const LESSONS_PER_MODULE: Record<number, { lessonIds: number[]; totalExercises: number }> = {
-  1: { lessonIds: [1, 2, 3, 4, 5, 6, 7, 14, 15, 18, 19, 20, 21], totalExercises: 47 },
-  2: { lessonIds: [8, 9, 10, 11, 12, 13, 16, 17], totalExercises: 25 },
-  3: { lessonIds: [], totalExercises: 0 },
-  4: { lessonIds: [], totalExercises: 0 },
-};
+interface MyClass {
+  id: number;
+  name: string;
+  code: string;
+  teacher_username: string;
+  joined_at: string;
+}
 
 export default function Dashboard() {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
-  const [moduleProgress, setModuleProgress] = useState<Record<number, number>>({ 1: 0, 2: 0, 3: 0, 4: 0 });
+  const [moduleProgress, setModuleProgress] = useState<Record<number, number>>({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 });
+  const [dynamicModules, setDynamicModules] = useState<any[]>([]);
+  const [myClasses, setMyClasses] = useState<MyClass[]>([]);
+  const [joinCode, setJoinCode] = useState("");
+  const [joining, setJoining] = useState(false);
+  const [joinMsg, setJoinMsg] = useState<{ text: string; ok: boolean } | null>(null);
 
   useEffect(() => {
     if (!loading && !user) router.push("/login");
+    if (!loading && user?.role === 'profesor') router.push('/profesor');
+    if (!loading && user?.role === 'admin') router.push('/admin');
+    // tester role stays on dashboard (no redirect)
   }, [user, loading, router]);
+
+  useEffect(() => {
+    if (!user || user.role !== 'estudiante') return;
+    const token = localStorage.getItem('access_token');
+    fetch('/api/classroom/mine', { headers: { Authorization: `Bearer ${token}` } })
+      .then((r) => r.ok ? r.json() : [])
+      .then((data) => setMyClasses(Array.isArray(data) ? data : []))
+      .catch(() => {});
+  }, [user]);
+
+  const handleJoinClass = async () => {
+    if (!joinCode.trim()) return;
+    setJoining(true);
+    setJoinMsg(null);
+    const token = localStorage.getItem('access_token');
+    try {
+      const res = await fetch('/api/classroom/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ code: joinCode.trim() }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setJoinMsg({ text: data.message, ok: true });
+        setJoinCode('');
+        setMyClasses((prev) => [
+          { id: data.classroom.id, name: data.classroom.name, code: data.classroom.code, teacher_username: '', joined_at: new Date().toISOString() },
+          ...prev,
+        ]);
+      } else {
+        setJoinMsg({ text: data.error, ok: false });
+      }
+    } catch {
+      setJoinMsg({ text: 'Error de conexión.', ok: false });
+    } finally {
+      setJoining(false);
+    }
+  };
 
   useEffect(() => {
     if (!user) return;
 
-    const loadProgress = async () => {
+    const loadModulesAndProgress = async () => {
       const token = localStorage.getItem("access_token");
       try {
-        const res = await fetch("/api/progress", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!res.ok) throw new Error("Failed");
-        const data = await res.json();
+        const [modRes, progRes] = await Promise.all([
+          fetch("/api/modules"),
+          fetch("/api/progress", { headers: { Authorization: `Bearer ${token}` } })
+        ]);
+        if (!modRes.ok || !progRes.ok) throw new Error("Failed");
+        
+        const modulesData = await modRes.json();
+        const progressData = await progRes.json();
 
         const progress: Record<number, number> = {};
-        const totalExercisesPerModule: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0 };
-
-        // Calcular total de ejercicios por módulo usando LESSONS_PER_MODULE
-        for (const [modId, cfg] of Object.entries(LESSONS_PER_MODULE)) {
-          const mid = Number(modId);
-          totalExercisesPerModule[mid] = cfg.totalExercises;
-        }
-
-        // Contar ejercicios completados
-        for (const [modId, cfg] of Object.entries(LESSONS_PER_MODULE)) {
-          const mid = Number(modId);
-          progress[mid] = 0;
-          if (totalExercisesPerModule[mid] === 0) continue;
-
-          // Verificar si el progreso se guarda por lesson_id o por exercise_id
-          data.forEach((p: { lesson_id: number; exercise_id: number; completed: boolean }) => {
-            if (cfg.lessonIds.includes(p.lesson_id) && p.completed) {
-              progress[mid] = (progress[mid] || 0) + 1;
-            }
-          });
-        }
-
         const result: Record<number, number> = {};
-        for (const [modId] of Object.entries(LESSONS_PER_MODULE)) {
-          const mid = Number(modId);
-          result[mid] = totalExercisesPerModule[mid] > 0 ? Math.round((progress[mid] / totalExercisesPerModule[mid]) * 100) : 0;
-        }
+
+        modulesData.forEach((m: any) => {
+           if (user.role === 'admin' || user.role === 'tester') {
+             result[m.id] = 100;
+             return;
+           }
+
+           progress[m.id] = 0;
+           if (m.totalExercises === 0) {
+             result[m.id] = 0;
+             return;
+           }
+           
+           progressData.forEach((p: { lesson_id: number; exercise_id: number; completed: boolean }) => {
+             if (m.lessonIds.includes(p.lesson_id) && p.completed) {
+               progress[m.id] = (progress[m.id] || 0) + 1;
+             }
+           });
+           
+           result[m.id] = Math.round((progress[m.id] / m.totalExercises) * 100);
+        });
+        
         setModuleProgress(result);
+        setDynamicModules(modulesData);
       } catch (err) {
         console.error("Error loading dashboard progress:", err);
       }
     };
 
-    loadProgress();
+    loadModulesAndProgress();
   }, [user]);
 
   if (loading || !user) return (
     <div className="min-h-screen bg-slate-950" />
   );
 
-  const modules = [
-    {
-      id: 1,
-      title: "Conceptos Básicos",
-      description: "Aprende qué son las variables, tipos de datos, y cómo imprimir texto en la consola.",
-      icon: <Code className="w-8 h-8 text-blue-400" />,
-      color: "from-blue-600 to-indigo-600",
-      progress: moduleProgress[1],
-      locked: false,
-    },
-    {
-      id: 2,
-      title: "Estructuras de Control",
-      description: "Domina el flujo de tu programa usando condiciones (if/else) y bucles (for/while).",
-      icon: <BookOpen className="w-8 h-8 text-emerald-400" />,
-      color: "from-emerald-600 to-teal-600",
-      progress: moduleProgress[2],
-      locked: moduleProgress[1] < 100,
-    },
-    {
-      id: 3,
-      title: "Funciones Modulares",
-      description: "Crea bloques de código reutilizables para hacer tus programas más eficientes.",
-      icon: <Trophy className="w-8 h-8 text-orange-400" />,
-      color: "from-orange-500 to-red-500",
-      progress: moduleProgress[3],
-      locked: true,
-    },
-    {
-      id: 4,
-      title: "Estructuras de Datos",
-      description: "Aprende a usar Listas, Diccionarios y Tuplas para almacenar grandes cantidades de información.",
-      icon: <Star className="w-8 h-8 text-purple-400" />,
-      color: "from-purple-600 to-fuchsia-600",
-      progress: moduleProgress[4],
-      locked: true,
+  const iconStyle = { filter: 'drop-shadow(1px 0 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(0 -1px 0 black)' };
+
+  const getIcon = (name: string) => {
+    switch(name) {
+      case 'Code': return <Code className="w-8 h-8 text-white" style={iconStyle} />;
+      case 'GitBranch': return <GitBranch className="w-8 h-8 text-white" style={iconStyle} />;
+      case 'Layers': return <Layers className="w-8 h-8 text-white" style={iconStyle} />;
+      case 'Cpu': return <Cpu className="w-8 h-8 text-white" style={iconStyle} />;
+      case 'Database': return <Database className="w-8 h-8 text-white" style={iconStyle} />;
+      default: return <BookOpen className="w-8 h-8 text-white" style={iconStyle} />;
     }
-  ];
+  };
+
+  const modules = dynamicModules.map((m, idx) => ({
+    ...m,
+    icon: getIcon(m.icon_name),
+    color: m.color_gradient,
+    progress: moduleProgress[m.id] || 0,
+    // Bloquear si el módulo anterior no tiene 100% (y no es el primer módulo), a menos que sea admin
+    locked: (user.role === 'admin' || user.role === 'tester') ? false : (m.is_locked || (idx > 0 && (moduleProgress[dynamicModules[idx - 1].id] || 0) < 100))
+  }));
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 font-sans">
@@ -155,7 +185,10 @@ export default function Dashboard() {
                 </p>
 
                 <button
-                  onClick={() => router.push('/learn')}
+                  onClick={() => {
+                    const activeMod = modules.find(m => !m.locked && m.progress < 100)?.id || 1;
+                    router.push('/learn?moduleId=' + activeMod);
+                  }}
                   className="group flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300"
                 >
                   <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -191,6 +224,63 @@ export default function Dashboard() {
           </div>
         </section>
 
+        {/* Sección Mis Clases (solo estudiantes) */}
+        {user.role === 'estudiante' && (
+          <section className="mb-14">
+            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+              <Users className="w-6 h-6 text-blue-400" />
+              Mis Clases
+            </h3>
+            {/* Unirse a clase */}
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-5">
+              <p className="text-sm font-semibold text-slate-400 mb-3">Ingresa el código de invitación de tu profesor</p>
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  value={joinCode}
+                  onChange={(e) => { setJoinCode(e.target.value.toUpperCase()); setJoinMsg(null); }}
+                  onKeyDown={(e) => e.key === 'Enter' && handleJoinClass()}
+                  placeholder="Ej. PY4A2Z"
+                  maxLength={6}
+                  className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-600 font-mono tracking-widest uppercase focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors text-lg"
+                />
+                <button
+                  onClick={handleJoinClass}
+                  disabled={joining || !joinCode.trim()}
+                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-blue-500/20"
+                >
+                  {joining ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
+                  Unirse
+                </button>
+              </div>
+              {joinMsg && (
+                <p className={`mt-3 text-sm flex items-center gap-2 ${joinMsg.ok ? 'text-emerald-400' : 'text-red-400'}`}>
+                  {joinMsg.ok && <Check className="w-4 h-4" />}
+                  {joinMsg.text}
+                </p>
+              )}
+            </div>
+            {/* Lista de clases */}
+            {myClasses.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {myClasses.map((cls) => (
+                  <div key={cls.id} className="bg-slate-900 border border-slate-800 hover:border-blue-500/40 rounded-2xl p-5 transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/10">
+                    <h4 className="text-base font-bold text-white mb-1 truncate">{cls.name}</h4>
+                    {cls.teacher_username && (
+                      <p className="text-xs text-slate-500 mb-3 flex items-center gap-1">
+                        <School className="w-3 h-3" /> Prof. {cls.teacher_username}
+                      </p>
+                    )}
+                    <span className="text-xs font-mono font-bold tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded-lg">
+                      {cls.code}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+
         <section>
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-2xl font-bold text-white">Ruta de Aprendizaje</h3>
@@ -200,10 +290,10 @@ export default function Dashboard() {
             {modules.map((mod) => (
               <div
                 key={mod.id}
-                onClick={() => !mod.locked && router.push('/learn')}
+                onClick={() => !mod.locked && router.push('/learn?moduleId=' + mod.id)}
                 className={mod.locked ? "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-slate-900/50 border-slate-800/50 cursor-not-allowed opacity-75" : "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-slate-900 border-slate-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 cursor-pointer"}
               >
-                <div className={`h-32 bg-gradient-to-br ${mod.color} flex items-center justify-center relative overflow-hidden`}>
+                <div className="h-32 flex items-center justify-center relative overflow-hidden" style={{ background: mod.color }}>
                   <div className="absolute inset-0 bg-black/20"></div>
                   <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
                     {mod.locked ? <Lock className="w-12 h-12 text-white/50" /> : mod.icon}

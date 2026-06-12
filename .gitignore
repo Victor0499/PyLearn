@@ -102,3 +102,12 @@ $RECYCLE.BIN/
 *.temp
 coverage/
 .nyc_output/
+
+# ──────────────────────────────────────────────────────────
+# SCRIPTS TEMPORALES Y DE MIGRACIÓN
+# ──────────────────────────────────────────────────────────
+build_modules.py
+count_exercises.py
+count_exercises2.py
+get_lessons.py
+split_lessons.py
