@@ -220,7 +220,7 @@ export default function Dashboard() {
                     const activeMod = modules.find(m => !m.locked && m.progress < 100)?.id || 1;
                     router.push('/learn?moduleId=' + activeMod);
                   }}
-                  className="group flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300"
+                  className="group flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-lg border border-slate-300 dark:border-transparent hover:bg-blue-50 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20 hover:border-blue-300 dark:hover:border-transparent transition-all duration-300"
                 >
                   <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Play className="w-4 h-4 text-slate-900 dark:text-white fill-white" />

@@ -105,9 +105,24 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             }
           }
         });
-
         setAllSuccesses(restored);
         setAllCodes(restoredCodes);
+
+        if (user.role !== 'admin') {
+          let foundIncomplete = false;
+          for (let li = 0; li < lessons.length; li++) {
+            for (let ei = 0; ei < lessons[li].exercises.length; ei++) {
+              if (!restored[li][ei]) {
+                setActiveLessonIdx(li);
+                setActiveExercise(ei);
+                foundIncomplete = true;
+                break;
+              }
+            }
+            if (foundIncomplete) break;
+          }
+        }
+
         setProgressLoaded(true);
       } catch (err) {
         console.error("Error loading progress:", err);
@@ -219,13 +234,38 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               const done = allSuccesses[idx]?.filter(Boolean).length || 0;
               const total = l.exercises.length;
               const isActive = idx === activeLessonIdx;
+
+              let isLocked = false;
+              if (user.role === 'estudiante' && idx > 0) {
+                const prevDone = allSuccesses[idx - 1]?.filter(Boolean).length || 0;
+                const prevTotal = lessons[idx - 1].exercises.length;
+                if (prevDone < prevTotal) {
+                  isLocked = true;
+                }
+              }
+
               return (
-                <button key={l.id} onClick={() => switchLesson(idx)}
-                  className={`w-full flex items-center px-4 py-3 transition-colors text-left ${isActive ? 'bg-blue-500/10 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-r-2 border-blue-500' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50'}`}>
-                  {done === total ? <CheckCircle className="w-4 h-4 mr-3 shrink-0 text-green-400" /> : <Circle className="w-4 h-4 mr-3 shrink-0" />}
+                <button key={l.id} 
+                  onClick={() => !isLocked && switchLesson(idx)}
+                  className={`w-full flex items-center px-4 py-3 transition-colors text-left ${
+                    isActive 
+                      ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 border-r-2 border-blue-500' 
+                      : isLocked 
+                        ? 'opacity-50 cursor-not-allowed text-slate-400 dark:text-slate-600 bg-slate-50 dark:bg-slate-900/50 hover:bg-blue-100 dark:hover:bg-slate-800/50' 
+                        : 'text-slate-600 dark:text-slate-400 hover:bg-blue-100 dark:hover:bg-slate-800/50'
+                  }`}>
+                  {isLocked ? (
+                    <Lock className="w-4 h-4 mr-3 shrink-0 text-slate-400 dark:text-slate-600" />
+                  ) : done === total ? (
+                    <CheckCircle className="w-4 h-4 mr-3 shrink-0 text-green-400" />
+                  ) : (
+                    <Circle className="w-4 h-4 mr-3 shrink-0" />
+                  )}
                   <div className="min-w-0">
                     <div className="text-sm font-medium leading-snug">{l.title}</div>
-                    <div className="text-xs text-slate-500 dark:text-slate-500 mt-0.5">{done}/{total} ejercicios</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-500 mt-0.5">
+                      {isLocked ? 'Desbloquea la anterior' : `${done}/${total} ejercicios`}
+                    </div>
                   </div>
                 </button>
               );
@@ -348,11 +388,11 @@ function LearnContent({ lessons }: { lessons: any[] }) {
                 <ReactMarkdown components={codeComponents}>{currentEx.instructions}</ReactMarkdown>
               </div>
               <button onClick={() => { const nh = showHint.map(a => [...a]); nh[activeLessonIdx][activeExercise] = !nh[activeLessonIdx][activeExercise]; setShowHint(nh); }}
-                className="mt-1 text-xs text-yellow-500/70 hover:text-yellow-400 transition-colors">
+                className="mt-1 text-xs text-amber-600 dark:text-yellow-500/70 hover:text-amber-700 dark:hover:text-yellow-400 transition-colors">
                 {showHint[activeLessonIdx][activeExercise] ? '▲ Ocultar pista' : '💡 Ver pista'}
               </button>
               {showHint[activeLessonIdx][activeExercise] && (
-                <div className="mt-2 text-xs text-yellow-400/80 bg-yellow-500/5 border border-yellow-500/20 rounded-lg px-3 py-2">{currentEx.hint}</div>
+                <div className="mt-2 text-xs text-amber-800 dark:text-yellow-400/80 bg-amber-50 dark:bg-yellow-500/5 border border-amber-300 dark:border-yellow-500/20 rounded-lg px-3 py-2 font-medium">{currentEx.hint}</div>
               )}
             </div>
 
@@ -399,9 +439,9 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             <div className="bg-slate-100 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 rounded-xl p-4 mb-5">
               <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-wrap font-mono">{errorModal.message}</p>
             </div>
-            <p className="text-slate-500 dark:text-slate-500 text-xs text-center mb-5">💡 Usa el botón <span className="text-yellow-400">"Ver pista"</span> si necesitas ayuda.</p>
+            <p className="text-slate-500 dark:text-slate-500 text-xs text-center mb-5">💡 Usa el botón <span className="text-amber-600 dark:text-yellow-400">"Ver pista"</span> si necesitas ayuda.</p>
             <button onClick={() => setErrorModal(null)}
-              className="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 border border-slate-600 text-slate-900 dark:text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
+              className="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
               <X className="w-4 h-4" />Cerrar e Intentar de Nuevo
             </button>
           </div>

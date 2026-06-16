@@ -136,7 +136,7 @@ export default function ProfesorDashboard() {
           <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
-                Bienvenido, <span className="text-indigo-400">{user.username}</span> 👋
+                Bienvenido, <span className="text-indigo-400">{user.username}</span>
               </h2>
               <p className="text-slate-500 dark:text-slate-400 text-base">
                 Desde aquí puedes gestionar tus clases y monitorear el progreso de tus estudiantes.
