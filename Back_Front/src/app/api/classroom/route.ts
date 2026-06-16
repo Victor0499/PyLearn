@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
 
   // Para cada clase, contar los estudiantes
   const classesWithCount = await Promise.all(
-    (classes || []).map(async (cls) => {
+    (classes || []).map(async (cls: any) => {
       const { count } = await supabaseAdmin
         .from('api_classroom_member')
         .select('id', { count: 'exact', head: true })

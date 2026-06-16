@@ -12,7 +12,7 @@ export async function GET() {
   }
 
   // Transform data to include total exercises and lesson ids for progress calculation
-  const result = modules.map(m => {
+  const result = modules.map((m: any) => {
     const lessonIds = m.lessons.map((l: any) => l.id);
     const totalExercises = m.lessons.reduce((acc: number, l: any) => acc + (l.exercises?.length || 0), 0);
     

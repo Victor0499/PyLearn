@@ -43,7 +43,7 @@ export async function GET(
     });
   }
 
-  const studentIds = members.map((m) => m.student_id);
+  const studentIds = members.map((m: any) => m.student_id);
 
   // Obtener usernames de los estudiantes
   const { data: users } = await supabaseAdmin
@@ -59,12 +59,12 @@ export async function GET(
     .eq('completed', true);
 
   // Construir el resultado agregado por estudiante
-  const usersMap = new Map((users || []).map((u) => [u.id, u]));
+  const usersMap = new Map((users || []).map((u: any) => [u.id, u]));
 
-  const students = members.map((member) => {
-    const user = usersMap.get(member.student_id);
+  const students = members.map((member: any) => {
+    const user: any = usersMap.get(member.student_id);
     const studentProgress = (progressData || []).filter(
-      (p) => p.user_id === member.student_id
+      (p: any) => p.user_id === member.student_id
     );
 
     // Agrupar por lección
@@ -86,7 +86,7 @@ export async function GET(
     const totalCompleted = studentProgress.length;
     const lastActivity =
       studentProgress.length > 0
-        ? studentProgress.reduce((latest, p) =>
+        ? studentProgress.reduce((latest: string, p: any) =>
             !latest || p.completed_at > latest ? p.completed_at : latest,
             ''
           )
@@ -99,7 +99,7 @@ export async function GET(
       joined_at: member.joined_at,
       total_exercises_completed: totalCompleted,
       last_activity: lastActivity,
-      lessons: Object.values(lessonMap).sort((a, b) => a.lesson_id - b.lesson_id),
+      lessons: Object.values(lessonMap).sort((a: any, b: any) => a.lesson_id - b.lesson_id),
     };
   });
 

@@ -6,6 +6,7 @@ import CodeEditor from "@/components/CodeEditor";
 import { useAuth } from "@/context/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
 import { Play, CheckCircle, Circle, Terminal, BookOpen, AlertCircle, LogOut, GraduationCap, School, Lock, Trophy, XCircle, X, Menu, ArrowLeft, ChevronRight } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -120,7 +121,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
   }, [user]);
 
   if (loading || !user || allCodes.length === 0) return (
-    <div className="min-h-screen bg-slate-950" />
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />
   );
 
   const lesson = lessons[activeLessonIdx];
@@ -190,13 +191,13 @@ function LearnContent({ lessons }: { lessons: any[] }) {
           {String(children).replace(/\n$/, '')}
         </SyntaxHighlighter>
       ) : (
-        <code className="text-orange-300 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700/50" {...props}>{children}</code>
+        <code className="text-orange-600 dark:text-orange-300 bg-orange-50 dark:bg-slate-900 px-1.5 py-0.5 rounded border border-orange-200 dark:border-slate-700/50" {...props}>{children}</code>
       );
     }
   };
 
   return (
-    <div className="flex h-[100dvh] bg-slate-950 text-slate-200 font-sans overflow-hidden">
+    <div className="flex h-[100dvh] bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans overflow-hidden">
 
       {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
@@ -204,8 +205,8 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0 transform transition-transform duration-300 lg:static lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="p-5 border-b border-slate-800">
+      <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 border-r border-slate-300 dark:border-slate-800 flex flex-col shrink-0 transform transition-transform duration-300 lg:static lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="p-5 border-b border-slate-300 dark:border-slate-800">
           <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
             <h1 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center gap-2">
               <ArrowLeft className="w-4 h-4 text-blue-400" /> Dashboard
@@ -220,23 +221,23 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               const isActive = idx === activeLessonIdx;
               return (
                 <button key={l.id} onClick={() => switchLesson(idx)}
-                  className={`w-full flex items-center px-4 py-3 transition-colors text-left ${isActive ? 'bg-blue-900/20 text-blue-400 border-r-2 border-blue-500' : 'text-slate-400 hover:bg-slate-800/50'}`}>
+                  className={`w-full flex items-center px-4 py-3 transition-colors text-left ${isActive ? 'bg-blue-500/10 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-r-2 border-blue-500' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50'}`}>
                   {done === total ? <CheckCircle className="w-4 h-4 mr-3 shrink-0 text-green-400" /> : <Circle className="w-4 h-4 mr-3 shrink-0" />}
                   <div className="min-w-0">
                     <div className="text-sm font-medium leading-snug">{l.title}</div>
-                    <div className="text-xs text-slate-500 mt-0.5">{done}/{total} ejercicios</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-500 mt-0.5">{done}/{total} ejercicios</div>
                   </div>
                 </button>
               );
             })}
           </div>
         </div>
-        <div className="p-4 border-t border-slate-800">
-          <div className="flex justify-between text-xs text-slate-500 mb-2">
+        <div className="p-4 border-t border-slate-300 dark:border-slate-800">
+          <div className="flex justify-between text-xs text-slate-500 dark:text-slate-500 mb-2">
             <span>Progreso lección</span>
             <span className="text-blue-400 font-medium">{completedCount}/{exercises.length}</span>
           </div>
-          <div className="w-full bg-slate-800 rounded-full h-1.5">
+          <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5">
             <div className="bg-gradient-to-r from-blue-500 to-indigo-500 h-1.5 rounded-full transition-all duration-500" style={{ width: `${(completedCount / exercises.length) * 100}%` }} />
           </div>
         </div>
@@ -245,9 +246,9 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="py-2.5 lg:py-0 lg:h-14 bg-slate-900 border-b border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between px-4 lg:px-6 shrink-0 gap-2.5 lg:gap-0">
+        <header className="py-2.5 lg:py-0 lg:h-14 bg-white dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between px-4 lg:px-6 shrink-0 gap-2.5 lg:gap-0">
           <div className="flex items-center gap-3 overflow-hidden">
-            <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-slate-400 hover:text-white shrink-0">
+            <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white shrink-0">
               <Menu className="w-5 h-5" />
             </button>
             <h2 className="text-sm lg:text-base font-semibold leading-snug truncate lg:text-clip">{lesson.title}</h2>
@@ -256,17 +257,18 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             <div className="flex items-center text-xs">
               <div className={`w-2 h-2 rounded-full mr-1.5 ${isReady ? 'bg-green-500' : 'bg-yellow-500 animate-pulse'}`} />
               <span className="hidden sm:inline">{isReady ? 'Entorno Listo' : 'Inicializando...'}</span>
-              <span className="sm:hidden text-[10px] text-slate-300">{isReady ? 'Listo' : 'Cargando'}</span>
+              <span className="sm:hidden text-[10px] text-slate-700 dark:text-slate-300">{isReady ? 'Listo' : 'Cargando'}</span>
             </div>
-            <div className="h-3 w-px bg-slate-700" />
+            <div className="h-3 w-px bg-slate-200 dark:bg-slate-700" />
             <div className="flex items-center space-x-1.5 sm:space-x-2">
               {user.role === 'profesor' ? <School className="w-3.5 h-3.5 text-indigo-400 hidden sm:block" /> : <GraduationCap className="w-3.5 h-3.5 text-blue-400 hidden sm:block" />}
-              <span className="text-[11px] sm:text-sm text-slate-300 font-medium truncate max-w-[80px] sm:max-w-none">{user.username}</span>
+              <span className="text-[11px] sm:text-sm text-slate-700 dark:text-slate-300 font-medium truncate max-w-[80px] sm:max-w-none">{user.username}</span>
               <span className={`text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full border ${user.role === 'profesor' ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30' : 'bg-blue-500/20 text-blue-400 border-blue-500/30'}`}>
                 {user.role === 'profesor' ? 'Profesor' : 'Estudiante'}
               </span>
             </div>
-            <button onClick={logout} className="flex items-center text-slate-500 hover:text-red-400 transition-colors text-xs ml-auto">
+            <ThemeToggle />
+          <button onClick={logout} className="flex items-center text-slate-500 dark:text-slate-500 hover:text-red-400 transition-colors text-xs ml-auto">
               <LogOut className="w-4 h-4 sm:mr-1" />
               <span className="hidden sm:inline">Salir</span>
             </button>
@@ -274,15 +276,15 @@ function LearnContent({ lessons }: { lessons: any[] }) {
         </header>
 
         {/* Mobile View Tabs */}
-        <div className="flex lg:hidden border-b border-slate-800 bg-slate-900 shrink-0">
+        <div className="flex lg:hidden border-b border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 shrink-0">
           <button
             onClick={() => setMobileView('theory')}
-            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${mobileView === 'theory' ? 'border-blue-500 text-blue-400 bg-blue-900/10' : 'border-transparent text-slate-400'}`}>
+            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${mobileView === 'theory' ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-900/10' : 'border-transparent text-slate-500 dark:text-slate-400'}`}>
             Teoría
           </button>
           <button
             onClick={() => setMobileView('exercises')}
-            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${mobileView === 'exercises' ? 'border-blue-500 text-blue-400 bg-blue-900/10' : 'border-transparent text-slate-400'}`}>
+            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${mobileView === 'exercises' ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-900/10' : 'border-transparent text-slate-500 dark:text-slate-400'}`}>
             Ejercicios
           </button>
         </div>
@@ -290,23 +292,23 @@ function LearnContent({ lessons }: { lessons: any[] }) {
         {/* Workspace */}
         <div className="flex-1 flex overflow-hidden relative">
           {/* Theory */}
-          <div className={`${mobileView === 'theory' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static lg:w-[42%] flex-col border-r border-slate-800 bg-slate-950 overflow-hidden shrink-0 z-10 lg:z-0`}>
-            <div className="flex items-center px-6 py-3 border-b border-slate-800 bg-slate-900/60">
+          <div className={`${mobileView === 'theory' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static lg:w-[42%] flex-col border-r border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 overflow-hidden shrink-0 z-10 lg:z-0`}>
+            <div className="flex items-center px-6 py-3 border-b border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900/60">
               <BookOpen className="w-4 h-4 mr-2 text-blue-400" />
               <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">Teoría</span>
             </div>
             <div className="flex-1 overflow-y-auto p-6">
-              <div className="prose prose-invert prose-blue prose-sm max-w-none">
+              <div className="prose prose-slate dark:prose-invert prose-blue prose-sm max-w-none">
                 <ReactMarkdown components={codeComponents}>{lesson.theory}</ReactMarkdown>
               </div>
             </div>
           </div>
 
           {/* Exercises */}
-          <div className={`${mobileView === 'exercises' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static lg:flex-1 flex-col bg-slate-950 overflow-y-hidden z-10 lg:z-0`}>
+          <div className={`${mobileView === 'exercises' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static lg:flex-1 flex-col bg-slate-50 dark:bg-slate-950 overflow-y-hidden z-10 lg:z-0`}>
             {/* Tabs */}
             <div className="relative">
-              <div ref={tabsRef} className="flex border-b border-slate-800 bg-slate-900/60 shrink-0 overflow-x-auto"
+              <div ref={tabsRef} className="flex border-b border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900/60 shrink-0 overflow-x-auto"
                 onWheel={(e) => {
                   e.preventDefault();
                   e.currentTarget.scrollLeft += e.deltaY;
@@ -317,7 +319,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
                 }}>
                 {exercises.map((ex: any, i: number) => (
                   <button key={ex.id} ref={(el) => { tabBtnRefs.current[i] = el; }} onClick={() => setActiveExercise(i)}
-                    className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-all whitespace-nowrap shrink-0 ${activeExercise === i ? 'border-blue-500 text-blue-400 bg-blue-900/10' : 'border-transparent text-slate-500 hover:text-slate-300 hover:bg-slate-800/50'}`}>
+                    className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-all whitespace-nowrap shrink-0 ${activeExercise === i ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-900/10' : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50'}`}>
                     {successes[i] ? <CheckCircle className="w-4 h-4 text-green-400 shrink-0" /> : <Circle className="w-4 h-4 shrink-0" />}
                     Ejercicio {i + 1}
                   </button>
@@ -328,7 +330,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
                   onClick={() => {
                     if (tabsRef.current) tabsRef.current.scrollLeft += 200;
                   }}
-                  className="absolute top-1.5 right-1 w-8 h-8 rounded-lg flex items-center justify-center transition-all scale-110 bg-slate-800"
+                  className="absolute top-1.5 right-1 w-8 h-8 rounded-lg flex items-center justify-center transition-all scale-110 bg-slate-100 dark:bg-slate-800"
                   style={{ filter: "drop-shadow(0 0 4px #F58400) drop-shadow(0 0 10px #F58400) drop-shadow(0 0 20px rgba(245,132,0,0.6))", zIndex: 10 }}
                 >
                   <ChevronRight className="w-7 h-7" style={{ color: "#F58400" }} />
@@ -337,12 +339,12 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             </div>
 
             {/* Instructions */}
-            <div className="px-5 py-3 bg-slate-900/40 border-b border-slate-800 shrink-0">
+            <div className="px-5 py-3 bg-white dark:bg-slate-900/40 border-b border-slate-300 dark:border-slate-800 shrink-0">
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-sm font-semibold text-white">{currentEx.title}</span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-white">{currentEx.title}</span>
                 <DifficultyBadge color={currentEx.difficultyColor} label={currentEx.difficulty} />
               </div>
-              <div className="prose prose-invert prose-sm max-w-none text-slate-300">
+              <div className="prose prose-slate dark:prose-invert prose-sm max-w-none text-slate-700 dark:text-slate-300">
                 <ReactMarkdown components={codeComponents}>{currentEx.instructions}</ReactMarkdown>
               </div>
               <button onClick={() => { const nh = showHint.map(a => [...a]); nh[activeLessonIdx][activeExercise] = !nh[activeLessonIdx][activeExercise]; setShowHint(nh); }}
@@ -355,7 +357,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             </div>
 
             {/* Editor toolbar */}
-            <div className="flex items-center justify-end px-4 py-2 bg-slate-900 border-b border-slate-800 shrink-0">
+            <div className="flex items-center justify-end px-4 py-2 bg-white dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 shrink-0">
               <button onClick={handleRun} disabled={!isReady || running}
                 className="flex items-center px-4 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-medium rounded-lg shadow-lg shadow-blue-500/20 disabled:opacity-50 transition-all">
                 {running ? <div className="w-3.5 h-3.5 mr-1.5 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Play className="w-3.5 h-3.5 mr-1.5" />}
@@ -370,8 +372,8 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             </div>
 
             {/* Terminal */}
-            <div className="h-36 bg-black border-t border-slate-800 p-3 font-mono text-xs overflow-y-auto shrink-0">
-              <div className="flex items-center text-slate-500 mb-1.5">
+            <div className="h-36 bg-slate-900 dark:bg-black border-t border-slate-300 dark:border-slate-800 p-3 font-mono text-xs overflow-y-auto shrink-0">
+              <div className="flex items-center text-slate-400 mb-1.5">
                 <Terminal className="w-3.5 h-3.5 mr-1.5" /><span>Salida de Consola</span>
               </div>
               {outputs[activeExercise] && <div className="text-green-400 whitespace-pre-wrap">{outputs[activeExercise]}</div>}
@@ -389,17 +391,17 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       {/* Error Modal */}
       {errorModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 border border-red-500/30 rounded-2xl p-8 max-w-md w-full shadow-2xl">
+          <div className="bg-white dark:bg-slate-900 border border-red-500/30 rounded-2xl p-8 max-w-md w-full shadow-2xl">
             <div className="w-14 h-14 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
               <XCircle className="w-7 h-7 text-red-400" />
             </div>
-            <h3 className="text-lg font-bold text-white text-center mb-3">{errorModal.title}</h3>
-            <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-4 mb-5">
-              <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap font-mono">{errorModal.message}</p>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white text-center mb-3">{errorModal.title}</h3>
+            <div className="bg-slate-100 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 rounded-xl p-4 mb-5">
+              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-wrap font-mono">{errorModal.message}</p>
             </div>
-            <p className="text-slate-500 text-xs text-center mb-5">💡 Usa el botón <span className="text-yellow-400">"Ver pista"</span> si necesitas ayuda.</p>
+            <p className="text-slate-500 dark:text-slate-500 text-xs text-center mb-5">💡 Usa el botón <span className="text-yellow-400">"Ver pista"</span> si necesitas ayuda.</p>
             <button onClick={() => setErrorModal(null)}
-              className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
+              className="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 border border-slate-600 text-slate-900 dark:text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
               <X className="w-4 h-4" />Cerrar e Intentar de Nuevo
             </button>
           </div>
@@ -409,12 +411,12 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       {/* Completion Modal */}
       {completedCount === exercises.length && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-2xl">
+          <div className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-2xl">
             <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/30">
-              <Trophy className="w-8 h-8 text-white" />
+              <Trophy className="w-8 h-8 text-slate-900 dark:text-white" />
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">¡Felicidades!</h3>
-            <p className="text-slate-400 text-sm mb-6">Completaste todos los ejercicios de <strong className="text-white">"{lesson.title}"</strong>.</p>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">¡Felicidades!</h3>
+            <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Completaste todos los ejercicios de <strong className="text-slate-900 dark:text-white">"{lesson.title}"</strong>.</p>
             <button onClick={() => updateLessonState(setAllSuccesses, a => a.map(() => false))}
               className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium rounded-xl transition-all">
               Seguir Practicando
@@ -446,7 +448,7 @@ function LearnPageWrapper() {
   }, [modId]);
 
   if (!lessons) {
-    return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-500">Cargando módulo desde base de datos...</div>;
+    return <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center text-slate-500 dark:text-slate-500">Cargando módulo desde base de datos...</div>;
   }
 
   return <LearnContent key={modId} lessons={lessons} />;
@@ -454,7 +456,7 @@ function LearnPageWrapper() {
 
 export default function Home() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-500">Cargando módulo...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center text-slate-500 dark:text-slate-500">Cargando módulo...</div>}>
       <LearnPageWrapper />
     </Suspense>
   );

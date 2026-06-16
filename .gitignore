@@ -29,22 +29,7 @@ Back_Front/npm-debug.log*
 Back_Front/yarn-debug.log*
 Back_Front/yarn-error.log*
 
-# ──────────────────────────────────────────────────────────
-# PYTHON / DJANGO
-# ──────────────────────────────────────────────────────────
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.pyc
-.Python
-*.egg
-*.egg-info/
-dist/
-build/
-eggs/
-.eggs/
-*.so
+
 
 # Entornos virtuales
 .venv/
@@ -52,9 +37,7 @@ venv/
 env/
 ENV/
 
-# Base de datos local de desarrollo
-db.sqlite3
-*.sqlite3
+
 
 # Archivos de migraciones (opcional, comentar si quieres versionarlas)
 # */migrations/*.py
@@ -106,8 +89,29 @@ coverage/
 # ──────────────────────────────────────────────────────────
 # SCRIPTS TEMPORALES Y DE MIGRACIÓN
 # ──────────────────────────────────────────────────────────
-build_modules.py
-count_exercises.py
-count_exercises2.py
-get_lessons.py
-split_lessons.py
+Back_Front/scripts/01_curriculum_schema.sql
+Back_Front/scripts/02_add_solution_code.sql
+Back_Front/scripts/03_password_reset.sql
+Back_Front/scripts/04_classroom_invitations.sql
+Back_Front/scripts/autoSolve.mjs
+Back_Front/scripts/checkConflicts.mjs
+Back_Front/scripts/checkDB.mjs
+Back_Front/scripts/createAdmin.mjs
+Back_Front/scripts/dark_mode_refactor.py
+Back_Front/scripts/extractLessons.mjs
+Back_Front/scripts/fixBug.mjs
+Back_Front/scripts/fix_borders.py
+Back_Front/scripts/fix_button_text.py
+Back_Front/scripts/fix_dark_doubles.py
+Back_Front/scripts/insertSolutions.mjs
+Back_Front/scripts/insertSolutions2.mjs
+Back_Front/scripts/insertSolutions3.mjs
+Back_Front/scripts/insertSolutions4.mjs
+Back_Front/scripts/insertSolutions5.mjs
+Back_Front/scripts/listLessons.mjs
+Back_Front/scripts/migrateCurriculum.ts
+Back_Front/scripts/runInvitationsSQL.mjs
+Back_Front/scripts/runMigrate.mjs
+Back_Front/scripts/setTester.mjs
+Back_Front/scripts/updateModuleColors.mjs
+Back_Front/scripts/upgrade_borders_light.py

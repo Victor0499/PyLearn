@@ -7,6 +7,7 @@ import {
   School, LogOut, Plus, Copy, Check, Users, ChevronRight,
   BookOpen, Loader2, X
 } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface Classroom {
   id: number;
@@ -93,33 +94,34 @@ export default function ProfesorDashboard() {
     }
   };
 
-  if (loading || !user) return <div className="min-h-screen bg-slate-950" />;
+  if (loading || !user) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />;
 
   const totalStudents = classes.reduce((sum, c) => sum + c.student_count, 0);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans">
       {/* Header */}
-      <header className="h-16 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20">
-            <span className="font-bold text-white text-lg leading-none">Py</span>
+      <header className="h-16 bg-white dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-300 dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50">
+        <div className="flex items-center gap-3 group">
+          <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 group-hover:shadow-indigo-500/50 transition-all duration-300">
+            <span className="font-bold text-slate-900 dark:text-white text-lg leading-none group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all">Py</span>
           </div>
-          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 hidden sm:block">
+          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 hidden sm:block group-hover:brightness-125 transition-all duration-300">
             PyLearn – Panel Profesor
           </h1>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-700/50">
+          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700/50">
             <School className="w-4 h-4 text-indigo-400" />
-            <span className="text-sm text-slate-300 font-medium">{user.username}</span>
+            <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
             <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-indigo-500/20 text-indigo-400 border-indigo-500/30">
               Profesor
             </span>
           </div>
+          <ThemeToggle />
           <button
             onClick={logout}
-            className="p-2 text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
+            className="p-2 text-slate-500 dark:text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
             title="Cerrar Sesión"
           >
             <LogOut className="w-5 h-5" />
@@ -133,21 +135,21 @@ export default function ProfesorDashboard() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
           <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
                 Bienvenido, <span className="text-indigo-400">{user.username}</span> 👋
               </h2>
-              <p className="text-slate-400 text-base">
+              <p className="text-slate-500 dark:text-slate-400 text-base">
                 Desde aquí puedes gestionar tus clases y monitorear el progreso de tus estudiantes.
               </p>
               <div className="flex gap-6 mt-5">
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-white">{classes.length}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">Clases activas</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{classes.length}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Clases activas</p>
                 </div>
-                <div className="w-px bg-slate-700" />
+                <div className="w-px bg-slate-200 dark:bg-slate-700" />
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-white">{totalStudents}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">Estudiantes totales</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalStudents}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Estudiantes totales</p>
                 </div>
               </div>
             </div>
@@ -163,7 +165,7 @@ export default function ProfesorDashboard() {
 
         {/* Lista de clases */}
         <section>
-          <h3 className="text-lg font-bold text-slate-200 mb-5 flex items-center gap-2">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-slate-200 mb-5 flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-indigo-400" />
             Mis Clases
           </h3>
@@ -173,35 +175,35 @@ export default function ProfesorDashboard() {
               <Loader2 className="w-8 h-8 text-indigo-400 animate-spin" />
             </div>
           ) : classes.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-900/40 p-16 text-center">
+            <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/40 p-16 text-center">
               <School className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-              <p className="text-slate-400 font-medium mb-1">Aún no has creado ninguna clase</p>
-              <p className="text-slate-500 text-sm">Haz clic en &quot;Nueva Clase&quot; para empezar.</p>
+              <p className="text-slate-500 dark:text-slate-400 font-medium mb-1">Aún no has creado ninguna clase</p>
+              <p className="text-slate-500 dark:text-slate-500 text-sm">Haz clic en &quot;Nueva Clase&quot; para empezar.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {classes.map((cls) => (
                 <div
                   key={cls.id}
-                  className="group bg-slate-900 border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-0.5"
+                  className="group bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-0.5"
                 >
                   {/* Nombre */}
                   <div className="flex items-start justify-between mb-5">
                     <div>
-                      <h4 className="text-lg font-bold text-white leading-tight">{cls.name}</h4>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <h4 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">{cls.name}</h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-500 mt-1">
                         Creada {new Date(cls.created_at).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })}
                       </p>
                     </div>
-                    <div className="flex items-center gap-1.5 bg-slate-800 px-2.5 py-1 rounded-full">
-                      <Users className="w-3.5 h-3.5 text-slate-400" />
-                      <span className="text-xs font-medium text-slate-300">{cls.student_count}</span>
+                    <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-full">
+                      <Users className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
+                      <span className="text-xs font-medium text-slate-700 dark:text-slate-300">{cls.student_count}</span>
                     </div>
                   </div>
 
                   {/* Código de invitación */}
-                  <div className="bg-slate-800/80 rounded-xl p-3 mb-5">
-                    <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-2">Código de invitación</p>
+                  <div className="bg-slate-100 dark:bg-slate-800/80 rounded-xl p-3 mb-5">
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-500 mb-2">Código de invitación</p>
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-2xl font-bold tracking-[0.3em] text-indigo-400 font-mono">
                         {cls.code}
@@ -222,7 +224,7 @@ export default function ProfesorDashboard() {
                   {/* Botón ver clase */}
                   <button
                     onClick={() => router.push(`/profesor/clase/${cls.id}`)}
-                    className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 py-2.5 rounded-xl transition-all duration-200 group-hover:bg-indigo-600/20 group-hover:text-indigo-300 group-hover:border-indigo-500/30 border border-slate-700"
+                    className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 py-2.5 rounded-xl transition-all duration-200 group-hover:bg-indigo-600/20 group-hover:text-indigo-300 group-hover:border-indigo-500/30 border border-slate-300 dark:border-slate-700"
                   >
                     Ver progreso de la clase
                     <ChevronRight className="w-4 h-4" />
@@ -237,17 +239,17 @@ export default function ProfesorDashboard() {
       {/* Modal Nueva Clase */}
       {showModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 w-full max-w-md shadow-2xl">
+          <div className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-8 w-full max-w-md shadow-2xl">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-white">Nueva Clase</h3>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Nueva Clase</h3>
               <button
                 onClick={() => setShowModal(false)}
-                className="p-2 text-slate-500 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                className="p-2 text-slate-500 dark:text-slate-500 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:bg-slate-800 rounded-lg transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <label className="block text-sm font-medium text-slate-400 mb-2">
+            <label className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">
               Nombre de la clase
             </label>
             <input
@@ -256,19 +258,19 @@ export default function ProfesorDashboard() {
               onChange={(e) => setNewClassName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleCreateClass()}
               placeholder="Ej. Programación I – Sección A"
-              className="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors mb-2"
+              className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors mb-2"
               autoFocus
             />
             {createError && (
               <p className="text-red-400 text-sm mb-3">{createError}</p>
             )}
-            <p className="text-xs text-slate-500 mb-6">
+            <p className="text-xs text-slate-500 dark:text-slate-500 mb-6">
               Se generará automáticamente un código único de 6 caracteres para que tus estudiantes puedan unirse.
             </p>
             <div className="flex gap-3">
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 py-3 rounded-xl border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors font-medium"
+                className="flex-1 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:bg-slate-800 transition-colors font-medium"
               >
                 Cancelar
               </button>

@@ -20,22 +20,22 @@ export const metadata: Metadata = {
   description: "Plataforma Interactiva para Aprender Python",
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <head>
+    <html lang="es" suppressHydrationWarning>
+      <body className={`${poppins.className} ${geistMono.variable} antialiased dark:bg-slate-950 dark:text-slate-200 bg-slate-50 text-slate-900 transition-colors duration-300`}>
         <Script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js" strategy="beforeInteractive" />
-      </head>
-      <body
-        className={`${poppins.className} ${geistMono.variable} antialiased`}
-      >
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -67,13 +67,38 @@ export async function DELETE(req: NextRequest) {
 
   const { userId } = await req.json();
 
-  // Cascade delete will handle the profile
-  const { error } = await supabaseAdmin
-    .from('auth_user')
-    .delete()
-    .eq('id', userId);
+  try {
+    // 1. Delete classroom memberships as student
+    await supabaseAdmin.from('api_classroom_member').delete().eq('student_id', userId);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    // 2. Delete classrooms where this user is teacher (and memberships of those classrooms)
+    const { data: classrooms } = await supabaseAdmin
+      .from('api_classroom')
+      .select('id')
+      .eq('teacher_id', userId);
 
-  return NextResponse.json({ success: true });
+    if (classrooms && classrooms.length > 0) {
+      const classIds = classrooms.map((c: any) => c.id);
+      await supabaseAdmin.from('api_classroom_member').delete().in('classroom_id', classIds);
+      await supabaseAdmin.from('api_classroom').delete().eq('teacher_id', userId);
+    }
+
+    // 3. Delete user progress
+    await supabaseAdmin.from('api_userprogress').delete().eq('user_id', userId);
+
+    // 4. Delete user profile
+    await supabaseAdmin.from('api_userprofile').delete().eq('user_id', userId);
+
+    // 5. Delete auth user
+    const { error } = await supabaseAdmin
+      .from('auth_user')
+      .delete()
+      .eq('id', userId);
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+    return NextResponse.json({ success: true });
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message || 'Error deleting user' }, { status: 500 });
+  }
 }

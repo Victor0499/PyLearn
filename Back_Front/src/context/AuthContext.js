@@ -1,11 +1,13 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 const AuthContext = createContext({
   user: /** @type {{ role: string; username: string } | null} */ (null),
   loading: true,
   login: async (/** @type {string} */ _username, /** @type {string} */ _password) => { },
+  loginWithGoogle: async () => { },
   register: async (/** @type {string} */ _username, /** @type {string} */ _email, /** @type {string} */ _password, /** @type {string} */ _role) => { },
   logout: () => { },
 });
@@ -40,6 +42,13 @@ export function AuthProvider({ children }) {
     router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/');  // tester and estudiante go to '/
   };
 
+  const loginWithGoogle = async () => {
+    const res = await fetch('/api/auth/google-url');
+    const data = await res.json();
+    if (!res.ok || !data.url) throw new Error('No se pudo generar la URL de Google.');
+    window.location.href = data.url;
+  };
+
   const register = async (username, email, password, role) => {
 
     const res = await fetch("/api/auth/register", {
@@ -61,11 +70,12 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("user");
     setUser(null);
+    supabase.auth.signOut(); // Clean up Supabase session as well
     router.push("/login");
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, loginWithGoogle, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
