@@ -2,7 +2,7 @@ import Editor from "@monaco-editor/react";
 
 export default function CodeEditor({ code, onChange, disabled }) {
   return (
-    <div className="h-64 w-full rounded-md overflow-hidden border border-slate-700 shadow-inner">
+    <div className="flex-1 flex flex-col min-h-0 w-full rounded-md overflow-hidden border border-slate-700 shadow-inner">
       <Editor
         height="100%"
         language="python"
@@ -16,12 +16,12 @@ export default function CodeEditor({ code, onChange, disabled }) {
           scrollBeyondLastLine: false,
           padding: { top: 16 }
         }}
-      loading={
-        <div className="flex items-center gap-2 text-slate-400 text-sm">
-          <div className="w-4 h-4 border-2 border-slate-500 border-t-blue-400 rounded-full animate-spin" />
-          Cargando...
-        </div>
-      }
+        loading={
+          <div className="flex items-center gap-2 text-slate-400 text-sm">
+            <div className="w-4 h-4 border-2 border-slate-500 border-t-blue-400 rounded-full animate-spin" />
+            Cargando...
+          </div>
+        }
       />
     </div>
   );

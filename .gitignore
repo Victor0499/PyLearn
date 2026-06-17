@@ -10,11 +10,7 @@
 .env.*
 !.env.example
 
-# ──────────────────────────────────────────────────────────
-# ARCHIVOS DE AGENTES IA (no necesarios para el proyecto)
-# ──────────────────────────────────────────────────────────
-AGENTS.md
-CLAUDE.md
+
 
 # ──────────────────────────────────────────────────────────
 # NEXT.JS / NODE
@@ -39,14 +35,8 @@ ENV/
 
 
 
-# Archivos de migraciones (opcional, comentar si quieres versionarlas)
-# */migrations/*.py
-# !*/migrations/__init__.py
 
-# ──────────────────────────────────────────────────────────
-# DOCKER
-# ──────────────────────────────────────────────────────────
-# Volúmenes y datos de contenedores (no código)
+# Volúmenes y datos de contenedores 
 docker-data/
 *.log
 

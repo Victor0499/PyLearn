@@ -245,15 +245,14 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               }
 
               return (
-                <button key={l.id} 
+                <button key={l.id}
                   onClick={() => !isLocked && switchLesson(idx)}
-                  className={`w-full flex items-center px-4 py-3 transition-colors text-left ${
-                    isActive 
-                      ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 border-r-2 border-blue-500' 
-                      : isLocked 
-                        ? 'opacity-50 cursor-not-allowed text-slate-400 dark:text-slate-600 bg-slate-50 dark:bg-slate-900/50 hover:bg-blue-100 dark:hover:bg-slate-800/50' 
+                  className={`w-full flex items-center px-4 py-3 transition-colors text-left ${isActive
+                      ? 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 border-r-2 border-blue-500'
+                      : isLocked
+                        ? 'opacity-50 cursor-not-allowed text-slate-400 dark:text-slate-600 bg-slate-50 dark:bg-slate-900/50 hover:bg-blue-100 dark:hover:bg-slate-800/50'
                         : 'text-slate-600 dark:text-slate-400 hover:bg-blue-100 dark:hover:bg-slate-800/50'
-                  }`}>
+                    }`}>
                   {isLocked ? (
                     <Lock className="w-4 h-4 mr-3 shrink-0 text-slate-400 dark:text-slate-600" />
                   ) : done === total ? (
@@ -308,7 +307,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               </span>
             </div>
             <ThemeToggle />
-          <button onClick={logout} className="flex items-center text-slate-500 dark:text-slate-500 hover:text-red-400 transition-colors text-xs ml-auto">
+            <button onClick={logout} className="flex items-center text-slate-500 dark:text-slate-500 hover:text-red-400 transition-colors text-xs ml-auto">
               <LogOut className="w-4 h-4 sm:mr-1" />
               <span className="hidden sm:inline">Salir</span>
             </button>
@@ -345,7 +344,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
           </div>
 
           {/* Exercises */}
-          <div className={`${mobileView === 'exercises' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static lg:flex-1 flex-col bg-slate-50 dark:bg-slate-950 overflow-y-hidden z-10 lg:z-0`}>
+          <div className={`${mobileView === 'exercises' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static lg:flex-1 flex-col bg-slate-50 dark:bg-slate-950 overflow-y-auto z-10 lg:z-0`}>
             {/* Tabs */}
             <div className="relative">
               <div ref={tabsRef} className="flex border-b border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900/60 shrink-0 overflow-x-auto"
@@ -379,7 +378,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             </div>
 
             {/* Instructions */}
-            <div className="px-5 py-3 bg-white dark:bg-slate-900/40 border-b border-slate-300 dark:border-slate-800 shrink-0">
+            <div className="px-5 py-3 bg-white dark:bg-slate-900/40 border-b border-slate-300 dark:border-slate-800 shrink-0 overflow-y-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[35vh] custom-scrollbar">
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-sm font-semibold text-slate-900 dark:text-white">{currentEx.title}</span>
                 <DifficultyBadge color={currentEx.difficultyColor} label={currentEx.difficulty} />
@@ -405,14 +404,14 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               </button>
             </div>
 
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 overflow-hidden flex flex-col min-h-[300px] relative">
               <CodeEditor code={codes[activeExercise]}
                 onChange={(v: string | undefined) => { const n = allCodes.map(a => [...a]); n[activeLessonIdx][activeExercise] = v || ""; setAllCodes(n); }}
                 disabled={!isReady} />
             </div>
 
             {/* Terminal */}
-            <div className="h-36 bg-slate-900 dark:bg-black border-t border-slate-300 dark:border-slate-800 p-3 font-mono text-xs overflow-y-auto shrink-0">
+            <div className="h-28 lg:h-36 bg-slate-900 dark:bg-black border-t border-slate-300 dark:border-slate-800 p-3 font-mono text-xs overflow-y-auto shrink-0">
               <div className="flex items-center text-slate-400 mb-1.5">
                 <Terminal className="w-3.5 h-3.5 mr-1.5" /><span>Salida de Consola</span>
               </div>
@@ -471,7 +470,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
 function LearnPageWrapper() {
   const searchParams = useSearchParams();
   const modId = searchParams.get('moduleId') || '1';
-  
+
   const [lessons, setLessons] = useState<any[] | null>(null);
 
   useEffect(() => {
