@@ -10,6 +10,7 @@ import {
   GitBranch, Layers, Cpu, Database
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import Footer from "@/components/Footer";
 type Tab = "users" | "catalog";
 /* ------------------------------------------------------------------ */
 /* TYPES                                                                */
@@ -313,7 +314,7 @@ function CatalogTab({ token }: { token: string }) {
           </div>
           Módulo {expandedModule}: {mod?.title}
         </h2>
-        <div className="border border-slate-300 dark:border-slate-800 rounded-xl divide-y divide-slate-800/50 bg-white dark:bg-slate-900/40">
+        <div className="border border-slate-300 dark:border-slate-800 rounded-xl divide-y divide-slate-800/50 bg-white dark:bg-slate-900/40 overflow-hidden">
           {lessons.filter(l => l.module_id === expandedModule).map(l => (
             <button key={l.id} onClick={() => openLesson(l.id)}
               className="w-full flex items-center gap-3 px-6 py-4 hover:bg-slate-100 dark:bg-slate-800/60 transition-colors text-left group"
@@ -433,19 +434,20 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans">
       {/* Header */}
-      <header className="h-16 bg-orange-500/10 backdrop-blur-md border-b border-orange-500/20 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-lg flex items-center justify-center shadow-lg shadow-orange-500/20">
-            <ShieldAlert className="w-5 h-5 text-slate-900 dark:text-white" />
+      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-300 dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50 shrink-0">
+        <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => router.push('/')}>
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+            <span className="font-bold text-white text-lg leading-none">Py</span>
           </div>
-          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-yellow-300 hidden sm:block">
-            Panel de administrador
-          </h1>
+          <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-slate-700 to-sky-600 dark:from-white dark:via-slate-200 dark:to-sky-400 bg-clip-text text-transparent hidden sm:block group-hover:brightness-110 transition-all">
+            Py<span className="text-sky-500 dark:text-sky-400 drop-shadow-[0_0_8px_rgba(14,165,233,0.2)] dark:drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]">Learn</span>
+            <span className="text-xs font-medium ml-2 text-slate-400 dark:text-slate-500 uppercase tracking-wider">Admin</span>
+          </span>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 bg-white dark:bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700/50">
+          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-950 px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700/50">
             <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
             <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30 font-bold">Admin</span>
           </div>
@@ -456,7 +458,7 @@ export default function AdminDashboard() {
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-6 lg:px-10 py-8">
+      <main className="max-w-7xl mx-auto px-6 lg:px-10 py-8 lg:py-12 flex-1 w-full">
         {/* Hero Banner */}
         <div className="relative rounded-2xl bg-emerald-900/20 border border-emerald-500/20 p-6 mb-8 overflow-hidden">
           <div className="relative z-10 flex items-center justify-between">
@@ -489,7 +491,8 @@ export default function AdminDashboard() {
         {/* Tab content */}
         {tab === "users" && <UsersTab token={token} />}
         {tab === "catalog" && <CatalogTab token={token} />}
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import { LogIn, Eye, EyeOff, BookOpen } from "lucide-react";
+import { LogIn, Eye, EyeOff, BookOpen, ArrowLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function LoginPage() {
@@ -13,6 +13,13 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [showBackBtn, setShowBackBtn] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('from=landing')) {
+      setShowBackBtn(true);
+    }
+  }, []);
 
   const handleGoogleLogin = async () => {
     setError("");
@@ -39,7 +46,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 relative">
+      {/* Back Button */}
+      {showBackBtn && (
+        <Link 
+          href="/" 
+          className="absolute top-6 left-6 p-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm transition-all z-50 flex items-center gap-2 pr-4 group"
+        >
+          <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full group-hover:bg-white dark:group-hover:bg-slate-700 transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+          </div>
+          <span className="text-sm font-medium">Volver</span>
+        </Link>
+      )}
+
       {/* Background glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />

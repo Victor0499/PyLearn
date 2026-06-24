@@ -110,8 +110,8 @@ export default function RegisterPage() {
                   type="button"
                   onClick={() => setRole("estudiante")}
                   className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${role === "estudiante"
-                      ? "border-blue-500 bg-blue-500/10 text-blue-400"
-                      : "border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-500 hover:border-slate-600"
+                    ? "border-blue-500 bg-blue-500/10 text-blue-400"
+                    : "border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-500 hover:border-slate-600"
                     }`}
                 >
                   <GraduationCap className="w-6 h-6 mb-1.5" />
@@ -121,8 +121,8 @@ export default function RegisterPage() {
                   type="button"
                   onClick={() => setRole("profesor")}
                   className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${role === "profesor"
-                      ? "border-indigo-500 bg-indigo-500/10 text-indigo-400"
-                      : "border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-500 hover:border-slate-600"
+                    ? "border-indigo-500 bg-indigo-500/10 text-indigo-400"
+                    : "border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-500 hover:border-slate-600"
                     }`}
                 >
                   <School className="w-6 h-6 mb-1.5" />

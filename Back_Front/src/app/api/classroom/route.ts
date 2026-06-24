@@ -3,7 +3,7 @@ import { supabaseAdmin } from '@/lib/supabase';
 import { getAuthUser } from '@/lib/auth';
 
 function generateClassCode(): string {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // sin O/0/1/I para evitar confusión
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = '';
   for (let i = 0; i < 6; i++) {
     code += chars[Math.floor(Math.random() * chars.length)];
@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Error al obtener las clases.' }, { status: 500 });
   }
 
-  // Para cada clase, contar los estudiantes
+
   const classesWithCount = await Promise.all(
     (classes || []).map(async (cls: any) => {
       const { count } = await supabaseAdmin

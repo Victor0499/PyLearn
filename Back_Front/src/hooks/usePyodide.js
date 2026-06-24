@@ -37,8 +37,7 @@ export function usePyodide() {
       }
     }
 
-    // Try to init, if window.loadPyodide is not there yet, Next.js script is still loading.
-    // In a real app we might want to poll or wait for the script to load.
+
     const interval = setInterval(() => {
       if (window.loadPyodide && !isReady) {
         clearInterval(interval);

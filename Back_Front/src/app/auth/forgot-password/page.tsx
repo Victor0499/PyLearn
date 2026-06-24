@@ -101,20 +101,15 @@ export default function ForgotPasswordPage() {
               <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm flex items-start space-x-3">
                 <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="font-semibold mb-1">Solicitud Procesada</h3>
+                  <h3 className="font-semibold mb-1">¡Correo Enviado!</h3>
                   <p className="text-slate-700 dark:text-slate-300">
-                    Si el correo ingresado se encuentra registrado directamente en la aplicación, recibirás un enlace para restablecer tu contraseña.
+                    Si el correo ingresado se encuentra registrado en nuestra plataforma, hemos enviado un enlace para restablecer tu contraseña. Revisa tu bandeja de entrada o la carpeta de spam.
                   </p>
-                  {process.env.NODE_ENV === "development" && (
-                    <p className="text-blue-400 mt-3 text-xs bg-blue-950/40 p-2 rounded border border-blue-900/50">
-                      <strong>Entorno de desarrollo:</strong> Hemos impreso el enlace de restablecimiento en la consola de la terminal.
-                    </p>
-                  )}
                 </div>
               </div>
               <Link
                 href="/login"
-                className="w-full flex items-center justify-center py-2.5 px-4 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white font-medium rounded-lg transition-colors text-sm"
+                className="w-full flex items-center justify-center py-2.5 px-4 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-medium rounded-lg transition-colors text-sm"
               >
                 Volver al Inicio de Sesión
               </Link>

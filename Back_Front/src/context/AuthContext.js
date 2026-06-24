@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("refresh_token", data.refresh);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
-    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/');  // tester and estudiante go to '/
+    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/dashboard');  // tester and estudiante go to '/dashboard'
   };
 
   const loginWithGoogle = async () => {
@@ -62,7 +62,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("refresh_token", data.refresh);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
-    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/');  // tester and estudiante go to '/
+    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/dashboard');  // tester and estudiante go to '/dashboard'
   };
 
   const logout = () => {

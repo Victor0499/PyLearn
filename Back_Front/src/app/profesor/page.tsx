@@ -8,6 +8,7 @@ import {
   BookOpen, Loader2, X
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import Footer from "@/components/Footer";
 
 interface Classroom {
   id: number;
@@ -96,25 +97,6 @@ export default function ProfesorDashboard() {
 
   if (loading || !user) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />;
 
-  const totalStudents = classes.reduce((sum, c) => sum + c.student_count, 0);
-
-  return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans">
-      {/* Header */}
-      <header className="h-16 bg-white dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-300 dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50">
-        <div className="flex items-center gap-3 group">
-          <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 group-hover:shadow-indigo-500/50 transition-all duration-300">
-            <span className="font-bold text-slate-900 dark:text-white text-lg leading-none group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all">Py</span>
-          </div>
-          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 hidden sm:block group-hover:brightness-125 transition-all duration-300">
-            PyLearn – Panel Profesor
-          </h1>
-        </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700/50">
-            <School className="w-4 h-4 text-indigo-400" />
-            <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
-            <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-indigo-500/20 text-indigo-400 border-indigo-500/30">
               Profesor
             </span>
           </div>
@@ -129,7 +111,7 @@ export default function ProfesorDashboard() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 lg:px-10 py-10">
+      <main className="max-w-6xl mx-auto px-6 lg:px-10 py-10 flex-1 w-full">
         {/* Banner de bienvenida */}
         <div className="relative rounded-2xl bg-gradient-to-br from-indigo-900/40 to-purple-900/30 border border-indigo-500/20 p-8 mb-10 overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
@@ -286,6 +268,7 @@ export default function ProfesorDashboard() {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

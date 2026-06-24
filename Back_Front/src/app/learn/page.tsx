@@ -5,7 +5,7 @@ import { usePyodide } from "@/hooks/usePyodide";
 import CodeEditor from "@/components/CodeEditor";
 import { useAuth } from "@/context/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
-import { Play, CheckCircle, Circle, Terminal, BookOpen, AlertCircle, LogOut, GraduationCap, School, Lock, Trophy, XCircle, X, Menu, ArrowLeft, ChevronRight } from "lucide-react";
+import { Play, CheckCircle, Circle, Terminal, BookOpen, AlertCircle, LogOut, GraduationCap, School, Lock, Trophy, XCircle, X, Menu, ArrowLeft, ChevronRight, ChevronsRight, ChevronsLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 import ReactMarkdown from 'react-markdown';
@@ -47,6 +47,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
   const [showHint, setShowHint] = useState(() => lessons.map((l: any) => l.exercises.map(() => false)));
   const [errorModal, setErrorModal] = useState<{ title: string; message: string } | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
   const [mobileView, setMobileView] = useState<'theory' | 'exercises'>('theory');
   const [tabNeedsScroll, setTabNeedsScroll] = useState(false);
   const [tabScrollEnd, setTabScrollEnd] = useState(false);
@@ -220,13 +221,21 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 border-r border-slate-300 dark:border-slate-800 flex flex-col shrink-0 transform transition-transform duration-300 lg:static lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="p-5 border-b border-slate-300 dark:border-slate-800">
+      <div className={`fixed inset-y-0 left-0 z-50 bg-white dark:bg-slate-900 border-r border-slate-300 dark:border-slate-800 flex flex-col shrink-0 transform transition-all duration-300 lg:static lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} ${isDesktopSidebarOpen ? 'lg:w-72' : 'lg:w-0 lg:border-r-0 lg:overflow-hidden'} w-72`}>
+        <div className="p-5 border-b border-slate-300 dark:border-slate-800 relative flex items-center justify-between min-w-[288px]">
           <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
             <h1 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center gap-2">
               <ArrowLeft className="w-4 h-4 text-blue-400" /> Dashboard
             </h1>
           </Link>
+          {/* Desktop sidebar collapse button */}
+          <button
+            onClick={() => setIsDesktopSidebarOpen(false)}
+            className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 dark:bg-slate-300 dark:hover:bg-slate-200 transition-colors"
+            title="Ocultar panel"
+          >
+            <ChevronsLeft className="w-4 h-4 text-slate-200 dark:text-slate-800" />
+          </button>
         </div>
         <div className="flex-1 overflow-y-auto py-3">
           <div className="mb-4">
@@ -290,6 +299,16 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white shrink-0">
               <Menu className="w-5 h-5" />
             </button>
+            {/* Desktop expand button — shown only when sidebar is hidden */}
+            {!isDesktopSidebarOpen && (
+              <button
+                onClick={() => setIsDesktopSidebarOpen(true)}
+                className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 dark:bg-slate-300 dark:hover:bg-slate-200 transition-colors shrink-0"
+                title="Mostrar panel"
+              >
+                <ChevronsRight className="w-4 h-4 text-slate-200 dark:text-slate-800" />
+              </button>
+            )}
             <h2 className="text-sm lg:text-base font-semibold leading-snug truncate lg:text-clip">{lesson.title}</h2>
           </div>
           <div className="flex items-center w-full lg:w-auto space-x-2 sm:space-x-3 shrink-0 pl-8 lg:pl-0">
@@ -331,7 +350,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
         {/* Workspace */}
         <div className="flex-1 flex overflow-hidden relative">
           {/* Theory */}
-          <div className={`${mobileView === 'theory' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static lg:w-[42%] flex-col border-r border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 overflow-hidden shrink-0 z-10 lg:z-0`}>
+          <div className={`${mobileView === 'theory' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static flex-col border-r border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 overflow-hidden shrink-0 z-10 lg:z-0 transition-all duration-300 ${isDesktopSidebarOpen ? 'lg:w-[42%]' : 'lg:w-1/2'}`}>
             <div className="flex items-center px-6 py-3 border-b border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900/60">
               <BookOpen className="w-4 h-4 mr-2 text-blue-400" />
               <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">Teoría</span>

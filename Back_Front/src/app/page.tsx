@@ -1,402 +1,348 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { Play, LogOut, GraduationCap, School, Lock, BookOpen, Code, Trophy, Star, Users, ArrowRight, Loader2, Check, GitBranch, Layers, Cpu, Database } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import Footer from "@/components/Footer";
+import {
+  ArrowRight, BookOpen, Laptop, Users, CheckCircle,
+  Terminal, Play, Code, Star, GitBranch, MessageSquare,
+  Video, Loader2
+} from "lucide-react";
 
-interface MyClass {
-  id: number;
-  name: string;
-  code: string;
-  teacher_username: string;
-  joined_at: string;
-}
-
-export default function Dashboard() {
-  const { user, loading, logout } = useAuth();
+export default function LandingPage() {
+  const { user, loading } = useAuth();
   const router = useRouter();
-  const [moduleProgress, setModuleProgress] = useState<Record<number, number>>({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 });
-  const [dynamicModules, setDynamicModules] = useState<any[]>([]);
-  const [myClasses, setMyClasses] = useState<MyClass[]>([]);
-  const [joinCode, setJoinCode] = useState("");
-  const [joining, setJoining] = useState(false);
-  const [joinMsg, setJoinMsg] = useState<{ text: string; ok: boolean } | null>(null);
-  const [invitations, setInvitations] = useState<any[]>([]);
+  const [activeCode, setActiveCode] = useState("hola");
+  const [consoleOutput, setConsoleOutput] = useState("Haz clic en \"Ejecutar Código\" para ver el resultado aquí...");
+  const [isRunning, setIsRunning] = useState(false);
 
-  useEffect(() => {
-    if (!loading && !user) router.push("/login");
-    if (!loading && user?.role === 'profesor') router.push('/profesor');
-    if (!loading && user?.role === 'admin') router.push('/admin');
-    // tester role stays on dashboard (no redirect)
-  }, [user, loading, router]);
-
-  useEffect(() => {
-    if (!user || user.role !== 'estudiante') return;
-    const token = localStorage.getItem('access_token');
-    
-    // Cargar clases
-    fetch('/api/classroom/mine', { headers: { Authorization: `Bearer ${token}` } })
-      .then((r) => r.ok ? r.json() : [])
-      .then((data) => setMyClasses(Array.isArray(data) ? data : []))
-      .catch(() => {});
-      
-    // Cargar invitaciones
-    fetch('/api/classroom/invitations', { headers: { Authorization: `Bearer ${token}` } })
-      .then((r) => r.ok ? r.json() : [])
-      .then((data) => setInvitations(Array.isArray(data) ? data : []))
-      .catch(() => {});
-  }, [user]);
-
-  const handleRespondInvitation = async (invId: number, action: 'accept' | 'reject') => {
-    const token = localStorage.getItem('access_token');
-    try {
-      const res = await fetch(`/api/classroom/invitations/${invId}/respond`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ action }),
-      });
-      if (res.ok) {
-        setInvitations(prev => prev.filter(inv => inv.id !== invId));
-        if (action === 'accept') {
-          // Recargar clases
-          fetch('/api/classroom/mine', { headers: { Authorization: `Bearer ${token}` } })
-            .then(r => r.ok ? r.json() : [])
-            .then(data => setMyClasses(Array.isArray(data) ? data : []));
-        }
-      }
-    } catch (e) {}
+  const examples: Record<string, string> = {
+    hola: `def saludar(nombre):\n    return f"¡Hola, {nombre}! Bienvenido a PyLearn."\n\n# Ejecuta tu primer código en Python\nprint(saludar("Futuro Programador"))`,
+    bucle: `# Imprimir números del 1 al 5 usando un bucle 'for'\nprint("Iniciando contador...")\nfor i in range(1, 6):\n    print(f"Número actual: {i}")\n\nprint("¡Bucle completado con éxito!")`,
+    clase: `# Función para verificar si un número es par o impar\ndef es_par(numero):\n    if numero % 2 == 0:\n        return True\n    return False\n\nnumero_a_evaluar = 24\nresultado = es_par(numero_a_evaluar)\nprint(f"¿El número {numero_a_evaluar} es par?: {resultado}")`
   };
 
-  const handleJoinClass = async () => {
-    if (!joinCode.trim()) return;
-    setJoining(true);
-    setJoinMsg(null);
-    const token = localStorage.getItem('access_token');
-    try {
-      const res = await fetch('/api/classroom/join', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ code: joinCode.trim() }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setJoinMsg({ text: data.message, ok: true });
-        setJoinCode('');
-        setMyClasses((prev) => [
-          { id: data.classroom.id, name: data.classroom.name, code: data.classroom.code, teacher_username: '', joined_at: new Date().toISOString() },
-          ...prev,
-        ]);
-      } else {
-        setJoinMsg({ text: data.error, ok: false });
-      }
-    } catch {
-      setJoinMsg({ text: 'Error de conexión.', ok: false });
-    } finally {
-      setJoining(false);
-    }
+  const outputs: Record<string, string> = {
+    hola: `> python main.py\n¡Hola, Futuro Programador! Bienvenido a PyLearn.`,
+    bucle: `> python main.py\nIniciando contador...\nNúmero actual: 1\nNúmero actual: 2\nNúmero actual: 3\nNúmero actual: 4\nNúmero actual: 5\n¡Bucle completado con éxito!`,
+    clase: `> python main.py\n¿El número 24 es par?: True`
   };
 
-  useEffect(() => {
-    if (!user) return;
-
-    const loadModulesAndProgress = async () => {
-      const token = localStorage.getItem("access_token");
-      try {
-        const [modRes, progRes] = await Promise.all([
-          fetch("/api/modules"),
-          fetch("/api/progress", { headers: { Authorization: `Bearer ${token}` } })
-        ]);
-        if (!modRes.ok || !progRes.ok) throw new Error("Failed");
-        
-        const modulesData = await modRes.json();
-        const progressData = await progRes.json();
-
-        const progress: Record<number, number> = {};
-        const result: Record<number, number> = {};
-
-        modulesData.forEach((m: any) => {
-           if (user.role === 'admin' || user.role === 'tester') {
-             result[m.id] = 100;
-             return;
-           }
-
-           progress[m.id] = 0;
-           if (m.totalExercises === 0) {
-             result[m.id] = 0;
-             return;
-           }
-           
-           progressData.forEach((p: { lesson_id: number; exercise_id: number; completed: boolean }) => {
-             if (m.lessonIds.includes(p.lesson_id) && p.completed) {
-               progress[m.id] = (progress[m.id] || 0) + 1;
-             }
-           });
-           
-           result[m.id] = Math.round((progress[m.id] / m.totalExercises) * 100);
-        });
-        
-        setModuleProgress(result);
-        setDynamicModules(modulesData);
-      } catch (err) {
-        console.error("Error loading dashboard progress:", err);
-      }
-    };
-
-    loadModulesAndProgress();
-  }, [user]);
-
-  if (loading || !user) return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />
-  );
-
-  const iconStyle = { filter: 'drop-shadow(1px 0 0 black) drop-shadow(-1px 0 0 black) drop-shadow(0 1px 0 black) drop-shadow(0 -1px 0 black)' };
-
-  const getIcon = (name: string) => {
-    switch(name) {
-      case 'Code': return <Code className="w-8 h-8 text-slate-900 dark:text-white" style={iconStyle} />;
-      case 'GitBranch': return <GitBranch className="w-8 h-8 text-slate-900 dark:text-white" style={iconStyle} />;
-      case 'Layers': return <Layers className="w-8 h-8 text-slate-900 dark:text-white" style={iconStyle} />;
-      case 'Cpu': return <Cpu className="w-8 h-8 text-slate-900 dark:text-white" style={iconStyle} />;
-      case 'Database': return <Database className="w-8 h-8 text-slate-900 dark:text-white" style={iconStyle} />;
-      default: return <BookOpen className="w-8 h-8 text-slate-900 dark:text-white" style={iconStyle} />;
-    }
+  const handleRunCode = () => {
+    setIsRunning(true);
+    setConsoleOutput("Compilando y ejecutando...");
+    setTimeout(() => {
+      setConsoleOutput(outputs[activeCode]);
+      setIsRunning(false);
+    }, 800);
   };
 
-  const modules = dynamicModules.map((m, idx) => ({
-    ...m,
-    icon: getIcon(m.icon_name),
-    color: m.color_gradient,
-    progress: moduleProgress[m.id] || 0,
-    // Bloquear si el módulo anterior no tiene 100% (y no es el primer módulo), a menos que sea admin
-    locked: (user.role === 'admin' || user.role === 'tester') ? false : (m.is_locked || (idx > 0 && (moduleProgress[dynamicModules[idx - 1].id] || 0) < 100))
-  }));
+  const formatCodeHTML = (code: string) => {
+    // Basic syntax highlighting simulation
+    return code
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/#(.*)/g, '<span class="text-slate-400 dark:text-slate-500 font-normal italic">#$1</span>')
+      .replace(/\b(def|return|for|in|if|print)\b/g, '<span class="text-fuchsia-600 dark:text-pink-400 font-semibold">$1</span>')
+      .replace(/\b(range)\b/g, '<span class="text-sky-600 dark:text-sky-400">$1</span>')
+      .replace(/(["'])(.*?)\1/g, '<span class="text-emerald-600 dark:text-amber-300">"$2"</span>')
+      .replace(/\b(\d+)\b/g, '<span class="text-amber-600 dark:text-orange-400">$1</span>');
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans">
-      <header className="h-16 bg-white dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-300 dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50">
-        <div className="flex items-center gap-3 group">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 group-hover:shadow-blue-500/50 transition-all duration-300">
-            <span className="font-bold text-slate-900 dark:text-white text-lg leading-none group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all">Py</span>
-          </div>
-          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 hidden sm:block group-hover:brightness-125 transition-all duration-300">
-            PyLearn Platform
-          </h1>
-        </div>
-
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700/50">
-            {user.role === 'profesor' ? <School className="w-4 h-4 text-indigo-400" /> : <GraduationCap className="w-4 h-4 text-blue-400" />}
-            <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
-            <span className={user.role === 'profesor' ? "text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-indigo-500/20 text-indigo-400 border-indigo-500/30" : "text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30"}>
-              {user.role === 'profesor' ? 'Profesor' : 'Estudiante'}
-            </span>
-          </div>
-          <ThemeToggle />
-          <button onClick={logout} className="p-2 text-slate-500 dark:text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors" title="Cerrar Sesión">
-            <LogOut className="w-5 h-5" />
-          </button>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-6 lg:px-10 py-8 lg:py-12">
-        <section className="mb-16">
-          <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-8 lg:p-12 shadow-2xl">
-            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
-              <div className="max-w-2xl flex-1">
-                <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
-                  ¡Hola de nuevo, <span className="text-blue-400">{user.username}</span>!
-                </h2>
-                <p className="text-slate-500 dark:text-slate-400 text-lg mb-8 leading-relaxed pr-0 lg:pr-8">
-                  Tu entorno interactivo está listo. Continúa justo donde te quedaste y sigue construyendo tus habilidades de programación.
-                </p>
-
-                <button
-                  onClick={() => {
-                    const activeMod = modules.find(m => !m.locked && m.progress < 100)?.id || 1;
-                    router.push('/learn?moduleId=' + activeMod);
-                  }}
-                  className="group flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-lg border border-slate-300 dark:border-transparent hover:bg-blue-50 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20 hover:border-blue-300 dark:hover:border-transparent transition-all duration-300"
-                >
-                  <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Play className="w-4 h-4 text-slate-900 dark:text-white fill-white" />
-                  </div>
-                  Continuar Aprendiendo
-                </button>
+    <div className="min-h-screen flex flex-col selection:bg-sky-500/30 selection:text-sky-600 dark:selection:text-sky-300">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        .bg-dynamic {
+          background-attachment: fixed;
+          background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.04) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.04) 0%, transparent 50%);
+        }
+        .dark .bg-dynamic {
+          background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 50%);
+        }
+      `}} />
+      <div className="bg-dynamic flex-grow">
+        {/* HEADER */}
+        <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-300 dark:border-slate-800 transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div className="flex items-center space-x-3 group cursor-pointer">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                <span className="font-bold text-white text-xl leading-none">Py</span>
               </div>
-
-              {/* Noodle Mascot & Chat Bubble (Right Side) */}
-              <div className="hidden lg:flex shrink-0 items-center relative z-20">
-                {/* Mascot Image */}
-                <div className="w-56 h-56 xl:w-72 xl:h-72 relative group z-10">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-blue-400 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                  <img
-                    src="/noodle.jpg"
-                    alt="Noodle, la mascota de PyLearn"
-                    className="w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-slate-300 dark:border-slate-800 transform rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 relative z-10"
-                  />
-                </div>
-
-                {/* Chat Bubble on the right */}
-                <div className="group/bubble relative -ml-6 bg-slate-100 dark:bg-slate-800 border-2 border-[#25FABA]/40 hover:border-[#25FABA] text-slate-900 dark:text-slate-200 p-5 rounded-2xl shadow-2xl hover:shadow-[0_0_20px_rgba(37,250,186,0.6)] max-w-[240px] z-20 transform hover:-translate-y-1 transition-all duration-300">
-                  <p className="text-sm font-medium leading-relaxed">
-                    ¡Hssss!  Soy <span className="text-[#25FABA] font-bold drop-shadow-[0_0_8px_rgba(37,250,186,0.5)]">Noodle</span>. <br />
-                    Estoy aquí para acompañarte paso a paso en tu ruta de aprendizaje de Python.
-                  </p>
-                  {/* Little tail for the speech bubble pointing left */}
-                  <div className="absolute top-1/2 -left-[10px] w-[18px] h-[18px] bg-slate-100 dark:bg-slate-800 border-l-2 border-t-2 border-[#25FABA]/40 group-hover/bubble:border-[#25FABA] transform -rotate-45 -translate-y-1/2 transition-colors duration-300"></div>
-                </div>
-              </div>
+              <span className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-slate-700 to-sky-600 dark:from-white dark:via-slate-200 dark:to-sky-400 bg-clip-text text-transparent">
+                Py<span className="text-sky-500 dark:text-sky-400 drop-shadow-[0_0_8px_rgba(14,165,233,0.2)] dark:drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]">Learn</span>
+              </span>
             </div>
-          </div>
-        </section>
 
-        {/* Sección Mis Clases (solo estudiantes) */}
-        {user.role === 'estudiante' && (
-          <section className="mb-14">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-              <Users className="w-6 h-6 text-blue-400" />
-              Mis Clases
-            </h3>
 
-            {/* Invitaciones */}
-            {invitations.length > 0 && (
-              <div className="mb-8">
-                <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
-                  </span>
-                  Tienes {invitations.length} invitación{invitations.length > 1 ? 'es' : ''} pendiente{invitations.length > 1 ? 's' : ''}
-                </h4>
-                <div className="flex flex-col gap-3">
-                  {invitations.map((inv) => (
-                    <div key={inv.id} className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                      <div>
-                        <p className="text-slate-900 dark:text-white font-medium">Te han invitado a unirte a <span className="font-bold text-blue-400">{inv.classroom_name}</span></p>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Prof. {inv.teacher_username}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => handleRespondInvitation(inv.id, 'reject')}
-                          className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-medium transition-colors"
-                        >
-                          Rechazar
-                        </button>
-                        <button
-                          onClick={() => handleRespondInvitation(inv.id, 'accept')}
-                          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors"
-                        >
-                          Aceptar
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Unirse a clase */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-2xl p-6 mb-5">
-              <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3">Ingresa el código de invitación de tu profesor</p>
-              <div className="flex gap-3">
-                <input
-                  type="text"
-                  value={joinCode}
-                  onChange={(e) => { setJoinCode(e.target.value.toUpperCase()); setJoinMsg(null); }}
-                  onKeyDown={(e) => e.key === 'Enter' && handleJoinClass()}
-                  placeholder="Ej. PY4A2Z"
-                  maxLength={6}
-                  className="flex-1 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 font-mono tracking-widest uppercase focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors text-lg"
-                />
-                <button
-                  onClick={handleJoinClass}
-                  disabled={joining || !joinCode.trim()}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-blue-500/20"
-                >
-                  {joining ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
-                  Unirse
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <ThemeToggle />
+
+              {!loading && user ? (
+                <button onClick={() => router.push('/dashboard')} className="px-4 py-2.5 text-sm font-bold bg-gradient-to-r from-sky-500 to-indigo-600 text-white rounded-lg shadow-md hover:shadow-sky-500/20">
+                  Ir a mi Dashboard
                 </button>
-              </div>
-              {joinMsg && (
-                <p className={`mt-3 text-sm flex items-center gap-2 ${joinMsg.ok ? 'text-emerald-400' : 'text-red-400'}`}>
-                  {joinMsg.ok && <Check className="w-4 h-4" />}
-                  {joinMsg.text}
-                </p>
+              ) : (
+                <>
+                  <Link href="/login?from=landing" className="px-4 py-2.5 text-sm font-bold bg-gradient-to-r from-sky-500 to-indigo-600 text-white rounded-lg transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg hover:shadow-sky-500/20">
+                    Comenzar Gratis
+                  </Link>
+                </>
               )}
             </div>
-            {/* Lista de clases */}
-            {myClasses.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {myClasses.map((cls) => (
-                  <div key={cls.id} className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-blue-500/40 rounded-2xl p-5 transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/10">
-                    <h4 className="text-base font-bold text-slate-900 dark:text-white mb-1 truncate">{cls.name}</h4>
-                    {cls.teacher_username && (
-                      <p className="text-xs text-slate-500 dark:text-slate-500 mb-3 flex items-center gap-1">
-                        <School className="w-3 h-3" /> Prof. {cls.teacher_username}
-                      </p>
-                    )}
-                    <span className="text-xs font-mono font-bold tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded-lg">
-                      {cls.code}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-        )}
-
-        <section>
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Ruta de Aprendizaje</h3>
           </div>
+        </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            {modules.map((mod) => (
-              <div
-                key={mod.id}
-                onClick={() => !mod.locked && router.push('/learn?moduleId=' + mod.id)}
-                className={mod.locked ? "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-white dark:bg-slate-900/50 border-slate-300 dark:border-slate-800/50 cursor-not-allowed opacity-75" : "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 cursor-pointer"}
-              >
-                <div className="h-32 flex items-center justify-center relative overflow-hidden" style={{ background: mod.color }}>
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
-                    {mod.locked ? <Lock className="w-12 h-12 text-slate-900 dark:text-white/50" /> : mod.icon}
-                  </div>
+        <main>
+          {/* HERO */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 md:pt-20 lg:pt-28">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+              <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
+                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 dark:border-sky-400/20 text-sky-600 dark:text-sky-400 text-xs font-semibold uppercase tracking-wider">
+                  <span className="flex h-2 w-2 rounded-full bg-sky-500 dark:bg-sky-400 animate-pulse"></span>
+                  <span>Plataforma Educativa de Siguiente Generación</span>
                 </div>
 
-                <div className="p-6">
-                  <div className="text-xs font-bold tracking-widest text-slate-500 dark:text-slate-500 uppercase mb-2">Módulo {mod.id}</div>
-                  <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3 leading-tight">{mod.title}</h4>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">{mod.description}</p>
-                </div>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                  Domina el lenguaje del <br className="hidden sm:inline" />
+                  <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 dark:from-sky-400 dark:via-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
+                    futuro con PyLearn
+                  </span>
+                </h1>
 
-                <div className="px-6 pb-6 mt-auto">
-                  {!mod.locked ? (
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-xs font-medium">
-                        <span className="text-blue-400">Progreso</span>
-                        <span className="text-slate-700 dark:text-slate-300">{mod.progress}%</span>
-                      </div>
-                      <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                        <div className="bg-blue-500 h-full rounded-full" style={{ width: mod.progress + "%" }}></div>
-                      </div>
-                    </div>
+                <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                  Aprende Python desde cero con lecciones dinámicas, desafíos en tiempo real y un potente ecosistema de aulas virtuales diseñado para estudiantes, profesores y entusiastas del código.
+                </p>
+
+                <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 pt-4">
+                  {!loading && user ? (
+                    <button onClick={() => router.push('/dashboard')} className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-extrabold rounded-xl hover:-translate-y-1 transition-transform shadow-lg shadow-sky-500/20 flex items-center justify-center space-x-2">
+                      <span>Continuar Aprendiendo</span>
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
                   ) : (
-                    <div className="flex items-center text-xs font-medium text-slate-500 dark:text-slate-500 bg-slate-100 dark:bg-slate-800/50 w-max px-3 py-1.5 rounded-lg">
-                      <Lock className="w-3 h-3 mr-1.5" /> Bloqueado
-                    </div>
+                    <>
+                      <a href="#caracteristicas" className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900/60 border border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium rounded-xl transition-colors flex items-center justify-center">
+                        Ver Características
+                      </a>
+                      <a href="#classroom" className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900/60 border border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium rounded-xl transition-colors flex items-center justify-center">
+                        Aula Virtual
+                      </a>
+                    </>
                   )}
                 </div>
+
+                <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200 dark:border-slate-900 max-w-md mx-auto lg:mx-0">
+                  <div>
+                    <p className="text-2xl sm:text-3xl font-bold ">+80</p>
+                    <p className="text-xs text-slate-500">Lecciones Prácticas</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl sm:text-3xl font-bold">100%</p>
+                    <p className="text-xs text-slate-500">Ejecución Web</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl sm:text-3xl font-bold">Class</p>
+                    <p className="text-xs text-slate-500">Gestión Docente</p>
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
-        </section>
-      </main>
+
+              {/* CONSOLA INTERACTIVA */}
+              <div className="lg:col-span-5 w-full">
+                <div className="bg-white dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] dark:shadow-[0_0_20px_rgba(56,189,248,0.15)]">
+                  <div className="bg-slate-100 dark:bg-slate-900 px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80">
+                    <div className="flex items-center space-x-2">
+                      <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
+                      <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                      <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
+                    </div>
+                    <span className="text-xs text-slate-500 font-mono flex items-center gap-1.5">
+                      <Code className="w-3 h-3 text-sky-500" /> main.py
+                    </span>
+                    <div className="text-xs text-slate-500 font-mono">PyLearn Compiler</div>
+                  </div>
+
+                  <div className="bg-slate-50 dark:bg-slate-900/40 px-4 py-2 flex items-center space-x-2 overflow-x-auto border-b border-slate-200 dark:border-slate-900 text-xs">
+                    <span className="text-slate-400 whitespace-nowrap">Ejemplos:</span>
+                    {["hola", "bucle", "clase"].map(key => (
+                      <button
+                        key={key}
+                        onClick={() => { setActiveCode(key); setConsoleOutput("Haz clic en \"Ejecutar Código\" para ver el resultado aquí..."); }}
+                        className={`px-2 py-1 rounded font-mono ${activeCode === key ? 'bg-slate-200 dark:bg-slate-800 text-sky-600 dark:text-sky-400 border border-slate-300 dark:border-slate-700' : 'text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800'}`}
+                      >
+                        {key === 'hola' ? 'Hola_Mundo.py' : key === 'bucle' ? 'Contador.py' : 'Funciones.py'}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto h-52 bg-slate-50/50 dark:bg-slate-950/70 text-slate-800 dark:text-slate-200" dangerouslySetInnerHTML={{ __html: formatCodeHTML(examples[activeCode]) }} />
+
+                  <div className="bg-slate-100 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <Terminal className="w-4 h-4 text-emerald-500" /> Consola de Salida
+                      </span>
+                      <button onClick={handleRunCode} className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-white dark:text-slate-950 text-xs font-bold rounded-md transition-all shadow-md flex items-center space-x-1.5">
+                        {isRunning ? <Loader2 className="w-3 h-3 animate-spin" /> : <Play className="w-3 h-3 fill-current" />}
+                        <span>Ejecutar Código</span>
+                      </button>
+                    </div>
+                    <div className="bg-white dark:bg-slate-950 rounded-lg p-3 h-24 font-mono text-xs overflow-y-auto border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+                      {consoleOutput.split('\n').map((line, i) => <div key={i}>{line}</div>)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* FEATURES */}
+          <section id="caracteristicas" className="py-20 border-t border-slate-200 dark:border-slate-900/60 bg-slate-50 dark:bg-slate-950/40">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center max-w-3xl mx-auto space-y-4">
+                <h2 className="text-xs font-bold text-sky-600 dark:text-sky-400 tracking-wider uppercase">Un ecosistema completo</h2>
+                <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Todo lo que necesitas para dominar Python</p>
+                <p className="text-slate-500 dark:text-slate-400">
+                  Hemos fusionado la interactividad de un compilador en la nube con la estructura formal de una academia de clases.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-300 dark:border-slate-800/80 hover:border-sky-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
+                  <div className="w-12 h-12 rounded-xl bg-sky-500/20 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">Lecciones Interactivas</h3>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                    Aprende teoría explicada paso a paso. No solo lees; modificas ejemplos de código directamente sobre la lección para asimilar conceptos rápidamente.
+                  </p>
+                </div>
+
+                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-300 dark:border-slate-800/80 hover:border-indigo-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
+                  <div className="w-12 h-12 rounded-xl bg-indigo-500/20 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Laptop className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">Ejercicios y Desafíos</h3>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                    Resuelve desafíos algorítmicos autoevaluados. Nuestro sistema verifica tu código en segundos y te brinda feedback inmediato sobre errores.
+                  </p>
+                </div>
+
+                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-300 dark:border-slate-800/80 hover:border-purple-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/20 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Users className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">Gestión Estilo Classroom</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    ¿Eres docente? Crea aulas, asigna tareas de programación, haz seguimiento en tiempo real del progreso de tus alumnos y califica sus códigos de forma centralizada.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* CLASSROOM */}
+          <section id="classroom" className="py-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+                    <Users className="w-4 h-4" />
+                    <span>PyLearn Classroom</span>
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight">
+                    Aulas Virtuales integradas para Profesores y Estudiantes
+                  </h2>
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                    Inspirado en plataformas educativas líderes, pero optimizado al 100% para enseñar a programar. Olvídate de recibir códigos en capturas de pantalla o correos electrónicos.
+                  </p>
+                  <ul className="space-y-3">
+                    {["Crea clases, asigna lecciones y califica proyectos.", "Monitoreo de las respuestas de tus estudiantes.", "Retroalimentación directa sobre líneas específicas de código."].map((text, i) => (
+                      <li key={i} className="flex items-start space-x-3 text-sm text-slate-700 dark:text-slate-300">
+                        <CheckCircle className="w-5 h-5 text-sky-500 shrink-0 mt-0.5" />
+                        <span>{text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="lg:col-span-7">
+                  <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+                    <div className="absolute -top-12 -right-12 w-48 h-48 bg-sky-500/5 rounded-full blur-2xl"></div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-6 relative z-10">
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white">Módulo 1: Fundamentos de Python</h3>
+                        <p className="text-xs text-slate-600 dark:text-slate-400">Progreso del curso &bull; Nivel: <strong className="text-sky-600 dark:text-sky-400">Principiante</strong></p>
+                      </div>
+                      <span className="mt-2 sm:mt-0 px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 text-xs font-semibold w-fit">
+                        Rol: Estudiante
+                      </span>
+                    </div>
+
+                    <div className="space-y-4 relative z-10">
+                      <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800/80 flex items-center justify-between hover:border-sky-300 dark:hover:border-sky-500/50 transition-colors cursor-pointer group">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 rounded-lg bg-indigo-500/20 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Code className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Lección: Estructuras de Control</h4>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">Condicionales if, elif, else</p>
+                          </div>
+                        </div>
+                        <span className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-500/20 dark:bg-emerald-500/10 px-3 py-1.5 rounded-md font-bold shadow-sm">Continuar</span>
+                      </div>
+
+                      <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800/80 flex items-center justify-between opacity-75">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center">
+                            <Star className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Desafío: Calculadora Básica</h4>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">Requiere completar lecciones previas</p>
+                          </div>
+                        </div>
+                        <span className="text-xs text-slate-600 dark:text-slate-400 bg-slate-200 dark:bg-slate-800 px-2.5 py-1 rounded-md font-medium">Bloqueado</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800 relative z-10">
+                      <h4 className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-3">Tus Logros Recientes</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div className="flex items-center justify-between p-2.5 bg-slate-50/80 dark:bg-slate-950/30 rounded-lg border border-slate-200 dark:border-slate-800/40 text-xs">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-6 h-6 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold shadow-sm">🏆</div>
+                            <span className="text-slate-700 dark:text-slate-200 font-medium">Primer Código</span>
+                          </div>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">Desbloqueado</span>
+                        </div>
+                        <div className="flex items-center justify-between p-2.5 bg-slate-50/80 dark:bg-slate-950/30 rounded-lg border border-slate-200 dark:border-slate-800/40 text-xs">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-6 h-6 rounded-full bg-sky-100 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold shadow-sm">🔥</div>
+                            <span className="text-slate-700 dark:text-slate-200 font-medium">Racha de 3 días</span>
+                          </div>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">Activa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <Footer />
     </div>
   );
 }
