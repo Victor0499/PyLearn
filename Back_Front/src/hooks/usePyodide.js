@@ -78,4 +78,4 @@ export function usePyodide() {
   return { isReady, output, error, runCode };
 }
 
-// lalo123
+

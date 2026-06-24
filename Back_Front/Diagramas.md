@@ -494,3 +494,70 @@ flowchart TB
     Mailer -- "Conexión TLS" --> SMTP
     Auth_Supabase -- "Valida proveedor" --> OAuth
 ```
+
+---
+
+## 15 Partes Fundamentales del Código para la Elaboración y Codificación
+
+Para documentar adecuadamente el desarrollo del sistema en tu trabajo de grado o informe técnico, es crucial destacar los componentes que demuestran la arquitectura, seguridad, interactividad y lógica de negocio. A continuación, se detallan las 15 partes más importantes del código fuente que deberías incluir:
+
+### 1. Configuración de Conexión a la Base de Datos (Supabase Client)
+**Archivo:** [`src/lib/supabase.ts`](./src/lib/supabase.ts)
+**Importancia:** Es la piedra angular de la persistencia de datos. Demuestra cómo la aplicación Next.js se conecta de manera segura con el backend (PostgreSQL vía Supabase) utilizando variables de entorno.
+
+### 2. Contexto de Autenticación Global (AuthContext)
+**Archivo:** [`src/context/AuthContext.js`](./src/context/AuthContext.js)
+**Importancia:** Muestra el manejo de estados globales usando React Context. Es vital para demostrar cómo se protege la aplicación, manteniendo la sesión del usuario, sus roles y manejando el login/logout en toda la plataforma.
+
+### 3. Motor de Ejecución de Python en el Navegador (Pyodide)
+**Archivo:** [`src/hooks/usePyodide.js`](./src/hooks/usePyodide.js)
+**Importancia:** Es el núcleo innovador de la plataforma. Este Custom Hook demuestra la integración de WebAssembly (Pyodide) para compilar y ejecutar código Python del lado del cliente, evitando sobrecargar el servidor y garantizando seguridad (sandboxing).
+
+### 4. Componente Interactivo del Editor de Código
+**Archivo:** [`src/components/CodeEditor.js`](./src/components/CodeEditor.js)
+**Importancia:** Representa la interfaz principal de aprendizaje. Muestra el uso de componentes de UI avanzados, manejo de eventos de teclado (como tabulaciones) y la sincronización en tiempo real entre lo que el usuario escribe y el estado de React.
+
+### 5. API REST para Registro de Usuarios
+**Archivo:** [`src/app/api/auth/register/route.ts`](./src/app/api/auth/register/route.ts)
+**Importancia:** Demuestra el desarrollo del backend en Next.js (Route Handlers). Ilustra cómo se reciben peticiones HTTP POST, se validan los datos, se encriptan contraseñas (delegado a Supabase Auth) y se inicializa el perfil del usuario con su rol correspondiente.
+
+### 6. Controlador de Progreso del Estudiante (Progress API)
+**Archivo:** [`src/app/api/progress/route.ts`](./src/app/api/progress/route.ts)
+**Importancia:** Esencial para la gamificación y seguimiento. Este endpoint demuestra la lógica de negocio donde se verifica el token del usuario y se insertan o actualizan registros en la tabla de progreso cuando completa un módulo.
+
+### 7. Dashboard Principal del Estudiante
+**Archivo:** [`src/app/dashboard/page.tsx`](./src/app/dashboard/page.tsx)
+**Importancia:** Representa la integración entre Frontend y Backend. Muestra cómo se consumen las APIs (fetch), cómo se maneja el estado de carga (loading states) y cómo se renderizan dinámicamente las estadísticas y aulas a las que pertenece el alumno.
+
+### 8. Panel de Gestión para Profesores (Teacher Dashboard)
+**Archivo:** [`src/app/profesor/page.tsx`](./src/app/profesor/page.tsx)
+**Importancia:** Demuestra el Control de Acceso Basado en Roles (RBAC). El código evidencia cómo la interfaz se adapta a un usuario con privilegios elevados, permitiéndole realizar operaciones CRUD (Crear, Leer, Actualizar, Borrar) sobre aulas y visualizar el progreso de sus alumnos.
+
+### 9. Panel de Administración y Seguridad
+**Archivo:** [`src/app/admin/page.tsx`](./src/app/admin/page.tsx)
+**Importancia:** Muestra la administración de más alto nivel de la plataforma. Destaca el consumo de listas completas de usuarios, la capacidad de suspender cuentas y cambiar roles, lo cual es vital para el mantenimiento del sistema.
+
+### 10. Lógica de Enrutamiento Dinámico de Lecciones
+**Archivo:** [`src/app/learn/page.tsx`](./src/app/learn/page.tsx)
+**Importancia:** Muestra el manejo de rutas complejas y la renderización condicional. Es fundamental para explicar cómo el sistema carga dinámicamente el contenido teórico (arreglos u objetos JSON) y los ejercicios prácticos correspondientes al nivel del usuario.
+
+### 11. Validación Automática de Ejercicios
+**Archivo:** [`src/app/api/exercises/[id]/validate/route.ts`](./src/app/api/exercises/[id]/validate/route.ts)
+**Importancia:** Este script de backend demuestra el algoritmo de evaluación. Explica cómo la plataforma compara la salida (stdout) generada por el estudiante con el resultado esperado, otorgando calificaciones de manera automatizada.
+
+### 12. Gestión de Aulas Virtuales (Classroom CRUD)
+**Archivo:** [`src/app/api/classroom/route.ts`](./src/app/api/classroom/route.ts)
+**Importancia:** Ilustra la arquitectura relacional. Demuestra cómo se crean entidades conectadas (profesor -> aula -> alumnos) y cómo se manejan los códigos únicos de invitación para cada clase.
+
+### 13. Integración de Autenticación Social (Google OAuth)
+**Archivo:** [`src/app/api/auth/google/route.ts`](./src/app/api/auth/google/route.ts)
+**Importancia:** Muestra el uso de estándares de la industria para autenticación de terceros. Es un gran añadido técnico para el informe, ya que demuestra la capacidad de interactuar con APIs externas y gestionar de forma segura tokens JWT.
+
+### 14. Proveedor de Temas (Modo Oscuro/Claro)
+**Archivo:** [`src/components/ThemeProvider.tsx`](./src/components/ThemeProvider.tsx)
+**Importancia:** Demuestra la atención a la Experiencia de Usuario (UX). El código ilustra cómo se manipulan las clases de TailwindCSS a nivel del DOM y cómo se persisten las preferencias del usuario utilizando `localStorage`.
+
+### 15. Arquitectura Base y Layout Principal
+**Archivo:** [`src/app/layout.tsx`](./src/app/layout.tsx)
+**Importancia:** Es el contenedor raíz de toda la aplicación. Incluir esta parte en el trabajo escrito demuestra comprensión de la arquitectura de Next.js App Router, inyección de metadatos SEO y cómo se envuelven los componentes hijos dentro de los Providers globales (Auth, Theme).
+
