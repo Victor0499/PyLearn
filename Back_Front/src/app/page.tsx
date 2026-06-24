@@ -138,7 +138,7 @@ export default function LandingPage() {
                   )}
                 </div>
 
-                <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200 dark:border-slate-900 max-w-md mx-auto lg:mx-0">
+                <div className="grid grid-cols-3 gap-6 pt-8 border-t border-slate-500 dark:border-white max-w-md mx-auto lg:mx-0">
                   <div>
                     <p className="text-2xl sm:text-3xl font-bold ">+80</p>
                     <p className="text-xs text-slate-500">Lecciones Prácticas</p>
@@ -156,8 +156,8 @@ export default function LandingPage() {
 
               {/* CONSOLA INTERACTIVA */}
               <div className="lg:col-span-5 w-full">
-                <div className="bg-white dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] dark:shadow-[0_0_20px_rgba(56,189,248,0.15)]">
-                  <div className="bg-slate-100 dark:bg-slate-900 px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80">
+                <div className="bg-white dark:bg-slate-950 rounded-2xl border border-slate-300 dark:border-slate-800 shadow-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] dark:shadow-[0_0_20px_rgba(56,189,248,0.15)]">
+                  <div className="bg-slate-100 dark:bg-slate-900 px-4 py-3 flex items-center justify-between border-b border-slate-300 dark:border-slate-800/80">
                     <div className="flex items-center space-x-2">
                       <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
                       <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
@@ -166,16 +166,16 @@ export default function LandingPage() {
                     <span className="text-xs text-slate-500 font-mono flex items-center gap-1.5">
                       <Code className="w-3 h-3 text-sky-500" /> main.py
                     </span>
-                    <div className="text-xs text-slate-500 font-mono">PyLearn Compiler</div>
+                    <div className="text-xs text-slate-500 font-mono">PyLearn Interpreter</div>
                   </div>
 
-                  <div className="bg-slate-50 dark:bg-slate-900/40 px-4 py-2 flex items-center space-x-2 overflow-x-auto border-b border-slate-200 dark:border-slate-900 text-xs">
+                  <div className="bg-slate-50 dark:bg-slate-900/40 px-4 py-2 flex items-center space-x-2 overflow-x-auto border-b border-slate-300 dark:border-slate-900 text-xs">
                     <span className="text-slate-400 whitespace-nowrap">Ejemplos:</span>
                     {["hola", "bucle", "clase"].map(key => (
                       <button
                         key={key}
                         onClick={() => { setActiveCode(key); setConsoleOutput("Haz clic en \"Ejecutar Código\" para ver el resultado aquí..."); }}
-                        className={`px-2 py-1 rounded font-mono ${activeCode === key ? 'bg-slate-200 dark:bg-slate-800 text-sky-600 dark:text-sky-400 border border-slate-300 dark:border-slate-700' : 'text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800'}`}
+                        className={`px-2 py-1 rounded font-mono ${activeCode === key ? 'bg-slate-200 dark:bg-slate-800 text-sky-600 dark:text-sky-400 border border-slate-400 dark:border-slate-700' : 'text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800'}`}
                       >
                         {key === 'hola' ? 'Hola_Mundo.py' : key === 'bucle' ? 'Contador.py' : 'Funciones.py'}
                       </button>
@@ -184,7 +184,7 @@ export default function LandingPage() {
 
                   <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto h-52 bg-slate-50/50 dark:bg-slate-950/70 text-slate-800 dark:text-slate-200" dangerouslySetInnerHTML={{ __html: formatCodeHTML(examples[activeCode]) }} />
 
-                  <div className="bg-slate-100 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-4">
+                  <div className="bg-slate-100 dark:bg-slate-900 border-t border-slate-300 dark:border-slate-800 p-4">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
                         <Terminal className="w-4 h-4 text-emerald-500" /> Consola de Salida
@@ -194,7 +194,7 @@ export default function LandingPage() {
                         <span>Ejecutar Código</span>
                       </button>
                     </div>
-                    <div className="bg-white dark:bg-slate-950 rounded-lg p-3 h-24 font-mono text-xs overflow-y-auto border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+                    <div className="bg-white dark:bg-slate-950 rounded-lg p-3 h-24 font-mono text-xs overflow-y-auto border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300">
                       {consoleOutput.split('\n').map((line, i) => <div key={i}>{line}</div>)}
                     </div>
                   </div>
@@ -274,10 +274,10 @@ export default function LandingPage() {
                 </div>
 
                 <div className="lg:col-span-7">
-                  <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+                  <div className="bg-white dark:bg-slate-900 border border-slate-700 dark:border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
                     <div className="absolute -top-12 -right-12 w-48 h-48 bg-sky-500/5 rounded-full blur-2xl"></div>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-6 relative z-10">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-black dark:border-white pb-4 mb-6 relative z-10">
                       <div>
                         <h3 className="text-lg font-bold text-slate-900 dark:text-white">Módulo 1: Fundamentos de Python</h3>
                         <p className="text-xs text-slate-600 dark:text-slate-400">Progreso del curso &bull; Nivel: <strong className="text-sky-600 dark:text-sky-400">Principiante</strong></p>
@@ -288,7 +288,7 @@ export default function LandingPage() {
                     </div>
 
                     <div className="space-y-4 relative z-10">
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800/80 flex items-center justify-between hover:border-sky-300 dark:hover:border-sky-500/50 transition-colors cursor-pointer group">
+                      <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800/80 flex items-center justify-between hover:border-sky-300 dark:hover:border-sky-500/50 transition-colors group">
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 rounded-lg bg-indigo-500/20 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <Code className="w-5 h-5" />
@@ -315,7 +315,7 @@ export default function LandingPage() {
                       </div>
                     </div>
 
-                    <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800 relative z-10">
+                    <div className="mt-6 pt-6 border-t border-black dark:border-white relative z-10">
                       <h4 className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-3">Tus Logros Recientes</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="flex items-center justify-between p-2.5 bg-slate-50/80 dark:bg-slate-950/30 rounded-lg border border-slate-200 dark:border-slate-800/40 text-xs">

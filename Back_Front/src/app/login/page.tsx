@@ -53,7 +53,7 @@ export default function LoginPage() {
           href="/" 
           className="absolute top-6 left-6 p-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm transition-all z-50 flex items-center gap-2 pr-4 group"
         >
-          <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full group-hover:bg-white dark:group-hover:bg-slate-700 transition-colors">
+          <div className="bg-slate-200 dark:bg-slate-800 p-1.5 rounded-full group-hover:bg-slate-300 dark:group-hover:bg-slate-700 transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </div>
           <span className="text-sm font-medium">Volver</span>
