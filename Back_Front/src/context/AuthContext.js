@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("refresh_token", data.refresh);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
-    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/dashboard');  // tester and estudiante go to '/dashboard'
+    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/dashboard');  
   };
 
   const loginWithGoogle = async () => {
@@ -62,7 +62,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("refresh_token", data.refresh);
     localStorage.setItem("user", JSON.stringify(data.user));
     setUser(data.user);
-    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/dashboard');  // tester and estudiante go to '/dashboard'
+    router.push(data.user.role === 'admin' ? '/admin' : data.user.role === 'profesor' ? '/profesor' : '/dashboard');  
   };
 
   const logout = () => {
@@ -70,7 +70,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("user");
     setUser(null);
-    supabase.auth.signOut(); // Clean up Supabase session as well
+    supabase.auth.signOut(); 
     router.push("/login");
   };
 
@@ -84,3 +84,5 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   return useContext(AuthContext);
 }
+
+

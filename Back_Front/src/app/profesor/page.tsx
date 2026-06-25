@@ -97,10 +97,22 @@ export default function ProfesorDashboard() {
 
   if (loading || !user) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />;
 
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col font-sans transition-colors duration-300">
+      {/* Navbar / Header */}
+      <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10 transition-colors duration-300">
+        <div className="max-w-6xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="bg-gradient-to-tr from-sky-500 to-indigo-500 text-white p-1.5 rounded-lg">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <span className="font-bold text-xl text-slate-800 dark:text-white tracking-tight">PyLearn</span>
+            <span className="px-2 py-0.5 ml-2 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
               Profesor
             </span>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
           <button
             onClick={logout}
             className="p-2 text-slate-500 dark:text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"

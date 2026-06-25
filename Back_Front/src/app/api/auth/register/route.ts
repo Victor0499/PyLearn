@@ -5,7 +5,7 @@ import { hashPassword, generateToken } from '@/lib/auth';
 export async function POST(req: NextRequest) {
   const { username, email, password, role } = await req.json();
 
-  // Validaciones básicas
+  
   if (!username?.trim() || !email?.trim() || !password) {
     return NextResponse.json({ error: 'Todos los campos son requeridos.' }, { status: 400 });
   }
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Rol inválido.' }, { status: 400 });
   }
 
-  // Verificar si el username ya existe
+  
   const { data: existingUser } = await supabaseAdmin
     .from('auth_user')
     .select('id')
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Ese nombre de usuario ya está en uso.' }, { status: 400 });
   }
 
-  // Verificar si el email ya existe
+
   const { data: existingEmail } = await supabaseAdmin
     .from('auth_user')
     .select('id')
@@ -35,7 +35,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Ese correo electrónico ya está registrado.' }, { status: 400 });
   }
 
-  // Crear usuario en auth_user (tabla de Django)
   const hashedPassword = hashPassword(password);
   const now = new Date().toISOString();
 
@@ -61,12 +60,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Error al crear el usuario.' }, { status: 500 });
   }
 
-  // Crear perfil con el rol
+  
   await supabaseAdmin
     .from('api_userprofile')
     .insert({ user_id: newUser.id, role });
 
-  // Generar token JWT
+  
   const token = generateToken({ userId: newUser.id, username: newUser.username, email: newUser.email, role });
 
   return NextResponse.json({
@@ -76,3 +75,4 @@ export async function POST(req: NextRequest) {
     refresh: token,
   }, { status: 201 });
 }
+

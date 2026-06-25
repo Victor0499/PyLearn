@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
   const now = new Date().toISOString();
 
-  // Buscar si ya existe un registro para actualizar (upsert)
+  
   const { data: existing } = await supabaseAdmin
     .from('api_userprogress')
     .select('id')
@@ -73,3 +73,5 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json(result, { status: created ? 201 : 200 });
 }
+
+

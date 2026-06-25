@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       ? `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`
       : 'http://localhost:3000/auth/callback';
 
-    // 1. Intercambiar el código de Google por un token de acceso
+    
     const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Error al obtener token de Google.' }, { status: 401 });
     }
 
-    // 2. Obtener la información del usuario de Google
+    
     const userInfoRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
       headers: { Authorization: `Bearer ${tokenData.access_token}` },
     });
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     const email = googleUser.email;
     const displayName = googleUser.name || email.split('@')[0];
 
-    // 3. Buscar si el usuario ya existe en nuestra base de datos
+    
     const { data: existingUser } = await supabaseAdmin
       .from('auth_user')
       .select('id, username, email, is_active')
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       .single();
 
     if (existingUser) {
-      // --- USUARIO EXISTENTE: iniciar sesión directamente ---
+      
       if (!existingUser.is_active) {
         return NextResponse.json({ error: 'Esta cuenta está desactivada.' }, { status: 401 });
       }
@@ -76,8 +76,8 @@ export async function POST(req: NextRequest) {
         refresh: token,
       });
     } else {
-      // --- USUARIO NUEVO: pedir rol antes de crear la cuenta ---
-      // Guardamos un token temporal firmado con sus datos de Google
+      
+      
       return NextResponse.json({
         isNewUser: true,
         googleAccessToken: tokenData.access_token,
@@ -90,3 +90,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Error interno del servidor.' }, { status: 500 });
   }
 }
+
+

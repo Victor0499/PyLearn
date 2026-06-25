@@ -105,3 +105,5 @@ Back_Front/scripts/runMigrate.mjs
 Back_Front/scripts/setTester.mjs
 Back_Front/scripts/updateModuleColors.mjs
 Back_Front/scripts/upgrade_borders_light.py
+
+Back_Front/Diagramas.md

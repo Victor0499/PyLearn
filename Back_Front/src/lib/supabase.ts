@@ -8,8 +8,9 @@ export const supabaseAdmin = typeof window === 'undefined'
     )
   : (null as any);
 
-// Cliente para uso en el navegador (acceso público con RLS activo)
+// Cliente para uso en el navegador (acceso publico con RLS activo)
 export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
+

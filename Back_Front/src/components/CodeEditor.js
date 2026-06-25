@@ -26,3 +26,4 @@ export default function CodeEditor({ code, onChange, disabled }) {
     </div>
   );
 }
+
