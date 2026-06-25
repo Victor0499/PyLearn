@@ -18,7 +18,7 @@ export async function POST(
     return NextResponse.json({ error: 'Ejercicio no encontrado.' }, { status: 404 });
   }
 
-  // Obtener el código de prueba del ejercicio
+  
   const { data: testCase } = await supabaseAdmin
     .from('api_exercisetest')
     .select('test_code')
@@ -30,3 +30,4 @@ export async function POST(
     test_code: testCase?.test_code || '',
   });
 }
+
