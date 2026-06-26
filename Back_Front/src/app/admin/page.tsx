@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -7,7 +7,7 @@ import {
   LogOut, ShieldAlert, Users, BookOpen, Code, Trash2, Ban,
   CheckCircle, XCircle, ChevronDown, ChevronRight, PenSquare,
   Save, X, Plus, Loader2, Eye, ArrowLeft, AlertTriangle,
-  GitBranch, Layers, Cpu, Database
+  GitBranch, Layers, Cpu, Database, Trophy
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Footer from "@/components/Footer";
@@ -451,6 +451,7 @@ export default function AdminDashboard() {
             <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
             <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30 font-bold">Admin</span>
           </div>
+          <button onClick={() => router.push('/leaderboard')} className="p-2 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-full transition-colors" title="Ranking"><Trophy className="w-5 h-5" /></button>
           <ThemeToggle />
           <button onClick={logout} className="p-2 text-slate-500 dark:text-slate-500 hover:text-yellow-400 hover:bg-yellow-500/10 rounded-full transition-colors" title="Cerrar Sesión">
             <LogOut className="w-5 h-5" />
@@ -496,4 +497,6 @@ export default function AdminDashboard() {
     </div>
   );
 }
+
+
 

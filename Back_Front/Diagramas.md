@@ -9,6 +9,7 @@ A continuación se presenta el modelo de Casos de Uso del sistema, el cual descr
 ```mermaid
 flowchart LR
     %% Definición de Actores
+    Visitante(("Visitante"))
     Estudiante(("Estudiante"))
     Profesor(("Profesor"))
     Admin(("Administrador"))
@@ -67,18 +68,33 @@ flowchart LR
     Admin --> UC12
     Admin --> UC13
     Admin --> UC14
+
+    %% Casos de uso - Ranking
+    subgraph Ranking ["Ranking Global (Público)"]
+        UC15(["Ver Ranking Global de Estudiantes"])
+        UC16(["Ver Top 5 en Landing Page"])
+    end
+
+    Visitante --> UC15
+    Visitante --> UC16
+    Estudiante --> UC15
+    Estudiante --> UC16
+    Profesor --> UC15
+    Admin --> UC15
 ```
 
 ### Especificación de Actores
 
-1. **Estudiante:** El usuario principal del sistema. Su objetivo es aprender a programar consumiendo el currículo y experimentando en el editor.
-2. **Profesor:** Un usuario con permisos para agrupar estudiantes en "Aulas". Su objetivo principal es monitorear qué tanto avanzan sus grupos.
-3. **Administrador:** El superusuario de la plataforma. Su objetivo es mantener el sistema operando, gestionando las cuentas conflictivas y actualizando el material de estudio.
+1. **Visitante:** Usuario anónimo que accede a la plataforma sin autenticarse. Puede explorar la Landing Page y consultar el Ranking público.
+2. **Estudiante:** El usuario principal del sistema. Su objetivo es aprender a programar consumiendo el currículo y experimentando en el editor.
+3. **Profesor:** Un usuario con permisos para agrupar estudiantes en "Aulas". Su objetivo principal es monitorear qué tanto avanzan sus grupos.
+4. **Administrador:** El superusuario de la plataforma. Su objetivo es mantener el sistema operando, gestionando las cuentas conflictivas y actualizando el material de estudio.
 
 ### Relaciones Principales
 
 *   **Autonomía del Estudiante:** El estudiante puede realizar todas las tareas de aprendizaje de forma autodidacta. Sin embargo, puede optar por `Unirse a un Aula` si pertenece a una institución.
 *   **Aislamiento Docente:** El profesor únicamente puede monitorear a los alumnos de sus propias aulas. No tiene acceso al currículo global para editarlo.
+*   **Ranking Público:** La tabla de posiciones (`/leaderboard`) es accesible sin autenticación. Cualquier visitante puede ver la clasificación, lo que actúa como motivación externa para que nuevos usuarios se registren.
 *   **Control Total Administrativo:** El Administrador gestiona el currículo y las cuentas, pero no interactúa en las aulas como los profesores.
 
 ---
@@ -561,3 +577,52 @@ Para documentar adecuadamente el desarrollo del sistema en tu trabajo de grado o
 **Archivo:** [`src/app/layout.tsx`](./src/app/layout.tsx)
 **Importancia:** Es el contenedor raíz de toda la aplicación. Incluir esta parte en el trabajo escrito demuestra comprensión de la arquitectura de Next.js App Router, inyección de metadatos SEO y cómo se envuelven los componentes hijos dentro de los Providers globales (Auth, Theme).
 
+---
+
+## 8. Secuencia de Capturas de Pantalla (Screenshots) Recomendadas
+
+Para enriquecer tu trabajo de investigación y demostrar el recorrido completo (User Journey) de la aplicación, te sugiero tomar las siguientes **11 capturas de pantalla** en este orden lógico. Servirán como una excelente ejemplificación visual de todo el desarrollo:
+
+### 1. Pantalla de Bienvenida / Autenticación (`/login`)
+- **Qué capturar:** El formulario de inicio de sesión y registro.
+- **Propósito:** Demostrar el punto de entrada al sistema, el diseño UI/UX (efecto Glassmorphism) y las opciones de acceso.
+
+### 2. Dashboard del Estudiante - Visión General (`/dashboard`)
+- **Qué capturar:** La pantalla principal tras iniciar sesión como alumno.
+- **Propósito:** Mostrar la estructura del panel de control, el banner de bienvenida con el nombre del usuario, la tarjeta de "Mis Clases" y la cuadrícula de los módulos del currículo (Conceptos Básicos, Control de Flujo, etc.).
+
+### 3. Interacción del Alumno: Unirse a una Clase
+- **Qué capturar:** El campo de texto o el modal donde el estudiante ingresa el código alfanumérico (Ej. `PY4A2Z`).
+- **Propósito:** Evidenciar la funcionalidad que conecta a los estudiantes con sus profesores a través de la base de datos relacional.
+
+### 4. Entorno de Aprendizaje Interactivo - IDE Web (`/learn`)
+- **Qué capturar:** La interfaz de estudio dividida. El panel lateral con el temario, el área central de teoría y el editor de código a la derecha.
+- **Propósito:** Es la captura más importante. Demuestra la integración del Editor Monaco y el diseño del aula virtual directamente en el navegador.
+
+### 5. Ejecución de Código y Feedback en Consola (`/learn`)
+- **Qué capturar:** El editor con algo de código escrito por ti, y el panel inferior ("Salida de Consola") mostrando el resultado de la ejecución (o un error), junto con algún mensaje de la mascota Noodle.
+- **Propósito:** Probar el funcionamiento del motor Pyodide (WASM) evaluando código Python real en el lado del cliente y demostrando la retroalimentación pedagógica.
+
+### 6. Dashboard del Profesor - Resumen Directivo (`/profesor`)
+- **Qué capturar:** La vista principal al entrar con un usuario rol "Profesor".
+- **Propósito:** Demostrar el Control de Acceso Basado en Roles (RBAC). El profesor tiene una vista distinta, centrada en aulas, número total de estudiantes y opciones de gestión docente.
+
+### 7. Panel del Profesor: Gestión de Estudiantes
+- **Qué capturar:** La lista desplegada de los alumnos inscritos dentro de un aula específica del profesor.
+- **Propósito:** Mostrar cómo los profesores monitorean qué alumnos pertenecen a sus clases y evidenciar la relación N:M en la base de datos.
+
+### 8. Dashboard Supremo de Administración (`/admin`)
+- **Qué capturar:** La vista principal de la pestaña de "Gestión de Usuarios".
+- **Propósito:** Enseñar las facultades de nivel administrativo: listado completo de la plataforma, roles asignados y los botones de control para suspender (banear) o eliminar usuarios.
+
+### 9. Administración: Catálogo y Currículo (`/admin`)
+- **Qué capturar:** La segunda pestaña del panel admin, donde aparecen las tarjetas de los módulos y lecciones editables.
+- **Propósito:** Demostrar que el contenido de aprendizaje no es estático, sino dinámico y gestionable desde la propia plataforma por personal autorizado.
+
+### 10. Accesibilidad: Comparativa Modo Claro vs Oscuro
+- **Qué capturar:** Un collage o dos capturas juntas (Ej. el Dashboard de Estudiante) mostrando cómo se ve en Modo Claro y al lado en Modo Oscuro.
+- **Propósito:** Evidenciar la atención a la experiencia de usuario (UX) mediante la implementación de Tailwind Dark Mode y la persistencia del tema.
+
+### 11. Adaptabilidad y Responsive Design (Móvil)
+- **Qué capturar:** Redimensiona la ventana de tu navegador para que simule la pantalla de un teléfono celular estando en la ruta `/learn` o `/dashboard`.
+- **Propósito:** Demostrar que la aplicación web es completamente *Responsive* y que la interfaz y los menús se adaptan de forma correcta a dispositivos móviles sin romperse.

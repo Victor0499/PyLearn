@@ -11,6 +11,7 @@ Back_Front/
 │   │   ├── api/                # Endpoints del Backend (Route Handlers)
 │   │   │   ├── auth/           # Lógica de Autenticación (Login, Registro, OAuth)
 │   │   │   ├── classroom/      # Lógica de gestión de aulas y profesores
+│   │   │   ├── leaderboard/    # Endpoint para extraer y ordenar el Top Estudiantes
 │   │   │   ├── modules/        # Lógica de carga del currículo (Lecciones, Ejercicios)
 │   │   │   └── progress/       # Lógica de guardado y consulta de progreso
 │   │   ├── auth/
@@ -19,6 +20,8 @@ Back_Front/
 │   │   │   └── reset-password/ # Formulario de restablecimiento de contraseña
 │   │   ├── learn/
 │   │   │   └── page.tsx        # Aula Interactiva (Teoría, Monaco Editor, Consola)
+│   │   ├── leaderboard/
+│   │   │   └── page.tsx        # Página pública del Salón de la Fama / Ranking Global
 │   │   ├── login/
 │   │   │   └── page.tsx        # Interfaz de Inicio de Sesión
 │   │   ├── profesor/

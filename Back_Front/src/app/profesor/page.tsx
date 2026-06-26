@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import {
   School, LogOut, Plus, Copy, Check, Users, ChevronRight,
-  BookOpen, Loader2, X
+  BookOpen, Loader2, X, Trophy
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Footer from "@/components/Footer";
@@ -159,6 +159,7 @@ export default function ProfesorDashboard() {
             </span>
           </div>
           <div className="flex items-center space-x-4">
+            <button onClick={() => router.push('/leaderboard')} className="p-2 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-full transition-colors" title="Ranking"><Trophy className="w-5 h-5" /></button>
             <ThemeToggle />
           <button
             onClick={logout}
@@ -337,4 +338,6 @@ export default function ProfesorDashboard() {
     </div>
   );
 }
+
+
 
