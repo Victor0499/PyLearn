@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -82,7 +82,7 @@ export default function LandingPage() {
       `}} />
       <div className="bg-dynamic flex-grow">
         {/* HEADER */}
-        <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-300 dark:border-slate-800 transition-all duration-300">
+        <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 transition-all duration-300">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div className="flex items-center space-x-3 group cursor-pointer">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
@@ -143,10 +143,10 @@ export default function LandingPage() {
                     </button>
                   ) : (
                     <>
-                      <a href="#caracteristicas" className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900/60 border border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium rounded-xl transition-colors flex items-center justify-center">
+                      <a href="#caracteristicas" className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900/60 border border-black dark:border-slate-800 hover:border-black dark:hover:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium rounded-xl transition-colors flex items-center justify-center">
                         Ver Características
                       </a>
-                      <a href="#classroom" className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900/60 border border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium rounded-xl transition-colors flex items-center justify-center">
+                      <a href="#classroom" className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900/60 border border-black dark:border-slate-800 hover:border-black dark:hover:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium rounded-xl transition-colors flex items-center justify-center">
                         Aula Virtual
                       </a>
                     </>
@@ -171,8 +171,8 @@ export default function LandingPage() {
 
               {/* CONSOLA INTERACTIVA */}
               <div className="lg:col-span-5 w-full">
-                <div className="bg-white dark:bg-slate-950 rounded-2xl border border-slate-300 dark:border-slate-800 shadow-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] dark:shadow-[0_0_20px_rgba(56,189,248,0.15)]">
-                  <div className="bg-slate-100 dark:bg-slate-900 px-4 py-3 flex items-center justify-between border-b border-slate-300 dark:border-slate-800/80">
+                <div className="bg-white dark:bg-slate-950 rounded-2xl border border-black dark:border-slate-800 shadow-2xl overflow-hidden shadow-[0_4px_20px_rgba(15,23,42,0.05)] dark:shadow-[0_0_20px_rgba(56,189,248,0.15)]">
+                  <div className="bg-slate-100 dark:bg-slate-900 px-4 py-3 flex items-center justify-between border-b border-black dark:border-slate-800/80">
                     <div className="flex items-center space-x-2">
                       <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
                       <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
@@ -184,7 +184,7 @@ export default function LandingPage() {
                     <div className="text-xs text-slate-500 font-mono">PyLearn Interpreter</div>
                   </div>
 
-                  <div className="bg-slate-50 dark:bg-slate-900/40 px-4 py-2 flex items-center space-x-2 overflow-x-auto border-b border-slate-300 dark:border-slate-900 text-xs">
+                  <div className="bg-slate-50 dark:bg-slate-900/40 px-4 py-2 flex items-center space-x-2 overflow-x-auto border-b border-black dark:border-slate-900 text-xs">
                     <span className="text-slate-400 whitespace-nowrap">Ejemplos:</span>
                     {["hola", "bucle", "clase"].map(key => (
                       <button
@@ -199,7 +199,7 @@ export default function LandingPage() {
 
                   <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto h-52 bg-slate-50/50 dark:bg-slate-950/70 text-slate-800 dark:text-slate-200" dangerouslySetInnerHTML={{ __html: formatCodeHTML(examples[activeCode]) }} />
 
-                  <div className="bg-slate-100 dark:bg-slate-900 border-t border-slate-300 dark:border-slate-800 p-4">
+                  <div className="bg-slate-100 dark:bg-slate-900 border-t border-black dark:border-slate-800 p-4">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
                         <Terminal className="w-4 h-4 text-emerald-500" /> Consola de Salida
@@ -209,7 +209,7 @@ export default function LandingPage() {
                         <span>Ejecutar Código</span>
                       </button>
                     </div>
-                    <div className="bg-white dark:bg-slate-950 rounded-lg p-3 h-24 font-mono text-xs overflow-y-auto border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+                    <div className="bg-white dark:bg-slate-950 rounded-lg p-3 h-24 font-mono text-xs overflow-y-auto border border-black dark:border-slate-800 text-slate-700 dark:text-slate-300">
                       {consoleOutput.split('\n').map((line, i) => <div key={i}>{line}</div>)}
                     </div>
                   </div>
@@ -240,7 +240,7 @@ export default function LandingPage() {
                   </Link>
                 </div>
 
-                <div className="bg-slate-50 dark:bg-slate-950/50 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-inner">
+                <div className="bg-slate-50 dark:bg-slate-950/50 rounded-2xl border border-black dark:border-slate-800 p-6 shadow-inner">
                   <h3 className="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
                     <Star className="w-4 h-4 text-yellow-500" /> Top 5 Estudiantes
                   </h3>
@@ -255,13 +255,13 @@ export default function LandingPage() {
                   ) : (
                     <div className="space-y-3">
                       {topUsers.map((user, index) => (
-                        <div key={user.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+                        <div key={user.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 rounded-xl border border-black dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
                           <div className="flex items-center gap-3">
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
                               index === 0 ? 'bg-yellow-100 text-yellow-700 border border-yellow-300' :
-                              index === 1 ? 'bg-slate-100 text-slate-700 border border-slate-300' :
-                              index === 2 ? 'bg-amber-100 text-amber-700 border border-amber-300' :
-                              'bg-slate-50 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700'
+                              index === 1 ? 'bg-slate-100 text-slate-700 border border-black' :
+                              index === 2 ? 'bg-orange-100 text-orange-700 border border-orange-400' :
+                              'bg-slate-50 dark:bg-slate-800 text-slate-500 border border-black dark:border-slate-700'
                             }`}>
                               {index + 1}
                             </div>
@@ -280,7 +280,7 @@ export default function LandingPage() {
           </section>
 
           {/* FEATURES */}
-          <section id="caracteristicas" className="py-20 border-t border-slate-200 dark:border-slate-900/60 bg-slate-50 dark:bg-slate-950/40">
+          <section id="caracteristicas" className="py-20 border-t border-black dark:border-slate-900/60 bg-slate-50 dark:bg-slate-950/40">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto space-y-4">
                 <h2 className="text-xs font-bold text-sky-600 dark:text-sky-400 tracking-wider uppercase">Un ecosistema completo</h2>
@@ -291,7 +291,7 @@ export default function LandingPage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-300 dark:border-slate-800/80 hover:border-sky-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
+                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-black dark:border-slate-800/80 hover:border-sky-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
                   <div className="w-12 h-12 rounded-xl bg-sky-500/20 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <BookOpen className="w-6 h-6" />
                   </div>
@@ -301,7 +301,7 @@ export default function LandingPage() {
                   </p>
                 </div>
 
-                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-300 dark:border-slate-800/80 hover:border-indigo-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
+                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-black dark:border-slate-800/80 hover:border-indigo-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
                   <div className="w-12 h-12 rounded-xl bg-indigo-500/20 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <Laptop className="w-6 h-6" />
                   </div>
@@ -311,7 +311,7 @@ export default function LandingPage() {
                   </p>
                 </div>
 
-                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-slate-300 dark:border-slate-800/80 hover:border-purple-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
+                <div className="bg-white dark:bg-slate-900/50 p-8 rounded-2xl border border-black dark:border-slate-800/80 hover:border-purple-300 dark:hover:border-slate-700/60 shadow-sm hover:shadow-lg transition-all group">
                   <div className="w-12 h-12 rounded-xl bg-purple-500/20 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <Users className="w-6 h-6" />
                   </div>
@@ -364,7 +364,7 @@ export default function LandingPage() {
                     </div>
 
                     <div className="space-y-4 relative z-10">
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800/80 flex items-center justify-between hover:border-sky-300 dark:hover:border-sky-500/50 transition-colors group">
+                      <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-black dark:border-slate-800/80 flex items-center justify-between hover:border-sky-300 dark:hover:border-sky-500/50 transition-colors group">
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 rounded-lg bg-indigo-500/20 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform">
                             <Code className="w-5 h-5" />
@@ -377,7 +377,7 @@ export default function LandingPage() {
                         <span className="text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-500/20 dark:bg-emerald-500/10 px-3 py-1.5 rounded-md font-bold shadow-sm">Continuar</span>
                       </div>
 
-                      <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800/80 flex items-center justify-between opacity-75">
+                      <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-black dark:border-slate-800/80 flex items-center justify-between opacity-75">
                         <div className="flex items-center space-x-3">
                           <div className="w-10 h-10 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center">
                             <Star className="w-5 h-5" />
@@ -394,14 +394,14 @@ export default function LandingPage() {
                     <div className="mt-6 pt-6 border-t border-black dark:border-white relative z-10">
                       <h4 className="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-3">Tus Logros Recientes</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div className="flex items-center justify-between p-2.5 bg-slate-50/80 dark:bg-slate-950/30 rounded-lg border border-slate-200 dark:border-slate-800/40 text-xs">
+                        <div className="flex items-center justify-between p-2.5 bg-slate-50/80 dark:bg-slate-950/30 rounded-lg border border-black dark:border-slate-800/40 text-xs">
                           <div className="flex items-center space-x-2">
                             <div className="w-6 h-6 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold shadow-sm">🏆</div>
                             <span className="text-slate-700 dark:text-slate-200 font-medium">Primer Código</span>
                           </div>
                           <span className="text-emerald-600 dark:text-emerald-400 font-bold">Desbloqueado</span>
                         </div>
-                        <div className="flex items-center justify-between p-2.5 bg-slate-50/80 dark:bg-slate-950/30 rounded-lg border border-slate-200 dark:border-slate-800/40 text-xs">
+                        <div className="flex items-center justify-between p-2.5 bg-slate-50/80 dark:bg-slate-950/30 rounded-lg border border-black dark:border-slate-800/40 text-xs">
                           <div className="flex items-center space-x-2">
                             <div className="w-6 h-6 rounded-full bg-sky-100 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold shadow-sm">🔥</div>
                             <span className="text-slate-700 dark:text-slate-200 font-medium">Racha de 3 días</span>
@@ -422,3 +422,7 @@ export default function LandingPage() {
     </div>
   );
 }
+
+
+
+

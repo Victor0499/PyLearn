@@ -41,7 +41,7 @@ export default function LeaderboardPage() {
     switch (index) {
       case 0: return "from-yellow-400 to-amber-600 shadow-yellow-500/50 text-white border-yellow-200 dark:border-yellow-700/50"; // Oro
       case 1: return "from-slate-300 to-slate-400 shadow-slate-400/50 text-slate-800 dark:text-slate-900 border-slate-100 dark:border-slate-500/50"; // Plata
-      case 2: return "from-amber-600 to-amber-800 shadow-amber-700/50 text-white border-amber-400 dark:border-amber-900/50"; // Bronce
+      case 2: return "from-orange-400 to-rose-700 shadow-orange-600/50 text-white border-orange-300 dark:border-orange-800/50"; // Cobre
       default: return "";
     }
   };
@@ -49,7 +49,7 @@ export default function LeaderboardPage() {
   const getRankStyle = (index: number) => {
     if (index === 0) return "bg-yellow-50 dark:bg-gradient-to-br dark:from-yellow-900/20 dark:to-amber-900/10 border-black dark:border-yellow-900/50 transform scale-105 z-10 shadow-xl shadow-yellow-500/10";
     if (index === 1) return "bg-slate-100 dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-800/80 border-black dark:border-slate-700 shadow-lg";
-    if (index === 2) return "bg-amber-50 dark:bg-gradient-to-br dark:from-amber-900/20 dark:to-orange-900/10 border-black dark:border-amber-900/40 shadow-lg";
+    if (index === 2) return "bg-orange-50 dark:bg-gradient-to-br dark:from-orange-900/20 dark:to-rose-900/10 border-black dark:border-orange-900/40 shadow-lg shadow-orange-500/10";
     return "bg-white dark:bg-slate-900 border-black dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/80";
   };
 

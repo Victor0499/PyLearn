@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -241,8 +241,9 @@ export default function Dashboard() {
               {user.role === 'profesor' ? 'Profesor' : 'Estudiante'}
             </span>
           </div>
-          <button onClick={() => router.push('/leaderboard')} className="p-2 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-full transition-colors" title="Ranking">
-            <Trophy className="w-5 h-5" />
+          <button onClick={() => router.push('/leaderboard')} className="flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group" title="Ranking">
+            <Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+            <span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span>
           </button>
           <ThemeToggle />
           <button onClick={logout} className="p-2 text-slate-500 dark:text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors" title="Cerrar Sesión">

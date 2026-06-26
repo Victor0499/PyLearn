@@ -159,7 +159,7 @@ export default function ProfesorDashboard() {
             </span>
           </div>
           <div className="flex items-center space-x-4">
-            <button onClick={() => router.push('/leaderboard')} className="p-2 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-full transition-colors" title="Ranking"><Trophy className="w-5 h-5" /></button>
+            <button onClick={() => router.push('/leaderboard')} className="flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group" title="Ranking"><Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" /><span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span></button>
             <ThemeToggle />
           <button
             onClick={logout}
@@ -338,6 +338,7 @@ export default function ProfesorDashboard() {
     </div>
   );
 }
+
 
 
 
