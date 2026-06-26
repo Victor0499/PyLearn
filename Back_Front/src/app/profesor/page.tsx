@@ -98,9 +98,56 @@ export default function ProfesorDashboard() {
   if (loading || !user) return <div className="min-h-screen bg-slate-50 dark:bg-slate-950" />;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col font-sans transition-colors duration-300 relative">
+      {/* Code pattern background (like WhatsApp chat) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* SVG pattern — LIGHT MODE */}
+        <svg className="absolute inset-0 w-full h-full dark:hidden" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="code-pattern-light-prof" x="0" y="0" width="340" height="270" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+              <text x="10" y="30" fontFamily="monospace" fontSize="17" fill="#334155">def saludo():</text>
+              <text x="36" y="54" fontFamily="monospace" fontSize="17" fill="#334155">return &quot;Hola&quot;</text>
+              <text x="185" y="78" fontFamily="monospace" fontSize="17" fill="#334155">if x &gt; 0:</text>
+              <text x="210" y="102" fontFamily="monospace" fontSize="17" fill="#334155">print(x)</text>
+              <text x="5" y="130" fontFamily="monospace" fontSize="17" fill="#334155">class PyLearn:</text>
+              <text x="195" y="152" fontFamily="monospace" fontSize="17" fill="#334155">import os</text>
+              <text x="10" y="176" fontFamily="monospace" fontSize="16" fill="#334155">for i in range(10):</text>
+              <text x="5" y="214" fontFamily="monospace" fontSize="30" fill="#334155" opacity="0.8">{`{}`}</text>
+              <text x="58" y="214" fontFamily="monospace" fontSize="30" fill="#334155" opacity="0.8">{`[]`}</text>
+              <text x="112" y="214" fontFamily="monospace" fontSize="30" fill="#334155" opacity="0.8">{`()`}</text>
+              <text x="185" y="214" fontFamily="monospace" fontSize="17" fill="#334155">lambda x: x*2</text>
+              <text x="10" y="244" fontFamily="monospace" fontSize="16" fill="#334155" opacity="0.6"># comentario</text>
+              <text x="185" y="260" fontFamily="monospace" fontSize="16" fill="#334155">while True:</text>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#code-pattern-light-prof)" opacity="0.50" />
+        </svg>
+
+        {/* SVG pattern — DARK MODE */}
+        <svg className="absolute inset-0 w-full h-full hidden dark:block" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="code-pattern-dark-prof" x="0" y="0" width="340" height="270" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+              <text x="10" y="30" fontFamily="monospace" fontSize="17" fill="#94a3b8">def saludo():</text>
+              <text x="36" y="54" fontFamily="monospace" fontSize="17" fill="#94a3b8">return &quot;Hola&quot;</text>
+              <text x="185" y="78" fontFamily="monospace" fontSize="17" fill="#94a3b8">if x &gt; 0:</text>
+              <text x="210" y="102" fontFamily="monospace" fontSize="17" fill="#94a3b8">print(x)</text>
+              <text x="5" y="130" fontFamily="monospace" fontSize="17" fill="#94a3b8">class PyLearn:</text>
+              <text x="195" y="152" fontFamily="monospace" fontSize="17" fill="#94a3b8">import os</text>
+              <text x="10" y="176" fontFamily="monospace" fontSize="16" fill="#94a3b8">for i in range(10):</text>
+              <text x="5" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`{}`}</text>
+              <text x="58" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`[]`}</text>
+              <text x="112" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`()`}</text>
+              <text x="185" y="214" fontFamily="monospace" fontSize="17" fill="#94a3b8">lambda x: x*2</text>
+              <text x="10" y="244" fontFamily="monospace" fontSize="16" fill="#94a3b8" opacity="0.5"># comentario</text>
+              <text x="185" y="260" fontFamily="monospace" fontSize="16" fill="#94a3b8">while True:</text>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#code-pattern-dark-prof)" opacity="0.18" />
+        </svg>
+      </div>
+
       {/* Navbar / Header */}
-      <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10 transition-colors duration-300">
+      <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 sticky top-0 z-50 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="bg-gradient-to-tr from-sky-500 to-indigo-500 text-white p-1.5 rounded-lg">
@@ -124,11 +171,14 @@ export default function ProfesorDashboard() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 lg:px-10 py-10 flex-1 w-full">
+      <main className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-10 flex-1 w-full">
         {/* Banner de bienvenida */}
-        <div className="relative rounded-2xl bg-gradient-to-br from-indigo-900/40 to-purple-900/30 border border-indigo-500/20 p-8 mb-10 overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-          <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div className="relative rounded-2xl border border-black dark:border-indigo-500/20 overflow-hidden mb-10 shadow-xl">
+          <div className="absolute inset-0 bg-white dark:bg-slate-900 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 to-purple-900/30 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+          
+          <div className="relative z-10 p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
                 Bienvenido, <span className="text-indigo-400">{user.username}</span>
@@ -143,7 +193,9 @@ export default function ProfesorDashboard() {
                 </div>
                 <div className="w-px bg-slate-200 dark:bg-slate-700" />
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">{'totalStudents'}</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                    {classes.reduce((sum, cls) => sum + (cls.student_count || 0), 0)}
+                  </p>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Estudiantes totales</p>
                 </div>
               </div>
@@ -170,7 +222,7 @@ export default function ProfesorDashboard() {
               <Loader2 className="w-8 h-8 text-indigo-400 animate-spin" />
             </div>
           ) : classes.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/40 p-16 text-center">
+            <div className="rounded-2xl border border-dashed border-black dark:border-slate-700 bg-white dark:bg-slate-900/40 p-16 text-center">
               <School className="w-12 h-12 text-slate-600 mx-auto mb-4" />
               <p className="text-slate-500 dark:text-slate-400 font-medium mb-1">Aún no has creado ninguna clase</p>
               <p className="text-slate-500 dark:text-slate-500 text-sm">Haz clic en &quot;Nueva Clase&quot; para empezar.</p>
@@ -180,7 +232,7 @@ export default function ProfesorDashboard() {
               {classes.map((cls) => (
                 <div
                   key={cls.id}
-                  className="group bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-0.5"
+                  className="group bg-white dark:bg-slate-900 border border-black dark:border-slate-800 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-0.5"
                 >
                   {/* Nombre */}
                   <div className="flex items-start justify-between mb-5">
@@ -219,7 +271,7 @@ export default function ProfesorDashboard() {
                   {/* Botón ver clase */}
                   <button
                     onClick={() => router.push(`/profesor/clase/${cls.id}`)}
-                    className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 py-2.5 rounded-xl transition-all duration-200 group-hover:bg-indigo-600/20 group-hover:text-indigo-300 group-hover:border-indigo-500/30 border border-slate-300 dark:border-slate-700"
+                    className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 py-2.5 rounded-xl transition-all duration-200 group-hover:bg-indigo-600/20 group-hover:text-indigo-300 group-hover:border-indigo-500/30 border border-black dark:border-slate-700"
                   >
                     Ver progreso de la clase
                     <ChevronRight className="w-4 h-4" />
@@ -234,7 +286,7 @@ export default function ProfesorDashboard() {
       {/* Modal Nueva Clase */}
       {showModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-8 w-full max-w-md shadow-2xl">
+          <div className="bg-white dark:bg-slate-900 border border-black dark:border-slate-700 rounded-2xl p-8 w-full max-w-md shadow-2xl">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-slate-900 dark:text-white">Nueva Clase</h3>
               <button
@@ -253,7 +305,7 @@ export default function ProfesorDashboard() {
               onChange={(e) => setNewClassName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleCreateClass()}
               placeholder="Ej. Programación I – Sección A"
-              className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors mb-2"
+              className="w-full bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors mb-2"
               autoFocus
             />
             {createError && (
@@ -265,7 +317,7 @@ export default function ProfesorDashboard() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:bg-slate-800 transition-colors font-medium"
+                className="flex-1 py-3 rounded-xl border border-black dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:bg-slate-100 dark:bg-slate-800 transition-colors font-medium"
               >
                 Cancelar
               </button>
@@ -285,3 +337,4 @@ export default function ProfesorDashboard() {
     </div>
   );
 }
+

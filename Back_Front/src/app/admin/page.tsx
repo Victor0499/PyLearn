@@ -64,7 +64,7 @@ function ConfirmModal({ msg, onConfirm, onCancel }: { msg: string; onConfirm: ()
           <p className="text-slate-900 dark:text-slate-200 text-sm">{msg}</p>
         </div>
         <div className="flex gap-3">
-          <button onClick={onCancel} className="flex-1 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:border-slate-500 transition-colors text-sm">Cancelar</button>
+          <button onClick={onCancel} className="flex-1 py-2 rounded-xl border border-black dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white hover:border-slate-500 transition-colors text-sm">Cancelar</button>
           <button onClick={onConfirm} className="flex-1 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold transition-colors text-sm">Confirmar</button>
         </div>
       </div>
@@ -142,7 +142,7 @@ function UsersTab({ token }: { token: string }) {
       <input
         value={search} onChange={e => setSearch(e.target.value)}
         placeholder="Buscar por nombre, email o rol..."
-        className="w-full mb-4 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:border-red-500/50 transition-colors"
+        className="w-full mb-4 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 text-sm focus:outline-none focus:border-red-500/50 transition-colors"
       />
 
       {loading ? (
@@ -150,8 +150,8 @@ function UsersTab({ token }: { token: string }) {
       ) : (
         <div className="space-y-2">
           {filtered.map(u => (
-            <div key={u.id} className={`flex items-center gap-4 p-4 rounded-xl border transition-all ${u.is_active ? "bg-white dark:bg-slate-900/60 border-slate-300 dark:border-slate-800" : "bg-red-950/20 border-red-900/40 opacity-70"}`}>
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-sm font-bold text-slate-900 dark:text-white shrink-0">
+            <div key={u.id} className={`flex items-center gap-4 p-4 rounded-xl border transition-all ${u.is_active ? "bg-white dark:bg-slate-900/60 border-black dark:border-slate-800" : "bg-red-950/20 border-red-900/40 opacity-70"}`}>
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-sm font-bold text-white shrink-0">
                 {u.username[0].toUpperCase()}
               </div>
               <div className="flex-1 min-w-0">
@@ -268,7 +268,7 @@ function CatalogTab({ token }: { token: string }) {
             <input
               value={editingLesson.title}
               onChange={e => setEditingLesson({ ...editingLesson, title: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-lg font-bold focus:outline-none focus:border-red-500/50 transition-colors"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 text-slate-900 dark:text-white text-lg font-bold focus:outline-none focus:border-red-500/50 transition-colors"
             />
           </div>
           <button onClick={saveLesson} disabled={saving} className="mt-6 flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-500 disabled:opacity-50 text-white font-semibold rounded-xl text-sm transition-all shrink-0">
@@ -282,7 +282,7 @@ function CatalogTab({ token }: { token: string }) {
             value={editingLesson.theory}
             onChange={e => setEditingLesson({ ...editingLesson, theory: e.target.value })}
             rows={10}
-            className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-200 text-sm font-mono focus:outline-none focus:border-red-500/50 transition-colors resize-y"
+            className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 text-slate-900 dark:text-slate-200 text-sm font-mono focus:outline-none focus:border-red-500/50 transition-colors resize-y"
           />
         </div>
 
@@ -314,7 +314,7 @@ function CatalogTab({ token }: { token: string }) {
           </div>
           Módulo {expandedModule}: {mod?.title}
         </h2>
-        <div className="border border-slate-300 dark:border-slate-800 rounded-xl divide-y divide-slate-800/50 bg-white dark:bg-slate-900/40 overflow-hidden">
+        <div className="border border-black dark:border-slate-800 rounded-xl divide-y divide-slate-800/50 bg-white dark:bg-slate-900/40 overflow-hidden">
           {lessons.filter(l => l.module_id === expandedModule).map(l => (
             <button key={l.id} onClick={() => openLesson(l.id)}
               className="w-full flex items-center gap-3 px-6 py-4 hover:bg-slate-100 dark:bg-slate-800/60 transition-colors text-left group"
@@ -337,7 +337,7 @@ function CatalogTab({ token }: { token: string }) {
           <div
             key={m.id}
             onClick={() => loadLessons(m.id)}
-            className="relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 cursor-pointer"
+            className="relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-white dark:bg-slate-900 border-black dark:border-slate-700 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 cursor-pointer"
           >
             <div className={`h-28 bg-gradient-to-br ${m.color_gradient} flex items-center justify-center relative overflow-hidden`}>
               <div className="absolute inset-0 bg-black/20"></div>
@@ -366,7 +366,7 @@ function ExerciseCard({ exercise, idx, onSave, onChange, saving }: {
 }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-xl border border-slate-300 dark:border-slate-800 overflow-hidden">
+    <div className="rounded-xl border border-black dark:border-slate-800 overflow-hidden">
       <button onClick={() => setOpen(!open)} className="w-full flex items-center gap-3 p-4 bg-white dark:bg-slate-900/60 hover:bg-slate-100 dark:bg-slate-800/60 transition-colors text-left">
         {open ? <ChevronDown className="w-4 h-4 text-slate-500 dark:text-slate-500 shrink-0" /> : <ChevronRight className="w-4 h-4 text-slate-500 dark:text-slate-500 shrink-0" />}
         <span className="text-xs text-slate-500 dark:text-slate-500 font-mono shrink-0">{idx + 1}.</span>
@@ -379,7 +379,7 @@ function ExerciseCard({ exercise, idx, onSave, onChange, saving }: {
         </span>
       </button>
       {open && (
-        <div className="border-t border-slate-300 dark:border-slate-800 p-5 space-y-4 bg-slate-50 dark:bg-slate-950/40">
+        <div className="border-t border-black dark:border-slate-800 p-5 space-y-4 bg-slate-50 dark:bg-slate-950/40">
           <Field label="Título" value={exercise.title} onChange={v => onChange({ ...exercise, title: v })} />
           <Field label="Instrucciones" value={exercise.instructions} onChange={v => onChange({ ...exercise, instructions: v })} multiline />
           <Field label="Código Inicial" value={exercise.initial_code} onChange={v => onChange({ ...exercise, initial_code: v })} multiline mono />
@@ -403,10 +403,10 @@ function Field({ label, value, onChange, multiline, mono }: { label: string; val
       <label className="text-xs text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-1 block">{label}</label>
       {multiline ? (
         <textarea value={value} onChange={e => onChange(e.target.value)} rows={4}
-          className={`w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-200 text-sm focus:outline-none focus:border-red-500/50 transition-colors resize-y ${mono ? "font-mono" : ""}`} />
+          className={`w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 text-slate-900 dark:text-slate-200 text-sm focus:outline-none focus:border-red-500/50 transition-colors resize-y ${mono ? "font-mono" : ""}`} />
       ) : (
         <input value={value} onChange={e => onChange(e.target.value)}
-          className="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-200 text-sm focus:outline-none focus:border-red-500/50 transition-colors" />
+          className="w-full px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 text-slate-900 dark:text-slate-200 text-sm focus:outline-none focus:border-red-500/50 transition-colors" />
       )}
     </div>
   );
@@ -436,7 +436,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans">
       {/* Header */}
-      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-300 dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50 shrink-0">
+      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50 shrink-0">
         <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => router.push('/')}>
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
             <span className="font-bold text-white text-lg leading-none">Py</span>
@@ -447,7 +447,7 @@ export default function AdminDashboard() {
           </span>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-950 px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700/50">
+          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-950 px-3 py-1.5 rounded-full border border-black dark:border-slate-700/50">
             <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
             <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30 font-bold">Admin</span>
           </div>
@@ -472,7 +472,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-8 border-b border-slate-300 dark:border-slate-800 pb-0">
+        <div className="flex gap-2 mb-8 border-b border-black dark:border-slate-800 pb-0">
           {tabs.map(t => (
             <button
               key={t.id}
@@ -496,3 +496,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+

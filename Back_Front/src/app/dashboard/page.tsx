@@ -175,8 +175,55 @@ export default function Dashboard() {
   }));
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans">
-      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-300 dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50 shrink-0">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans relative">
+      {/* Code pattern background (like WhatsApp chat) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* SVG pattern — LIGHT MODE */}
+        <svg className="absolute inset-0 w-full h-full dark:hidden" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="code-pattern-light-student" x="0" y="0" width="340" height="270" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+              <text x="10" y="30" fontFamily="monospace" fontSize="17" fill="#334155">def saludo():</text>
+              <text x="36" y="54" fontFamily="monospace" fontSize="17" fill="#334155">return &quot;Hola&quot;</text>
+              <text x="185" y="78" fontFamily="monospace" fontSize="17" fill="#334155">if x &gt; 0:</text>
+              <text x="210" y="102" fontFamily="monospace" fontSize="17" fill="#334155">print(x)</text>
+              <text x="5" y="130" fontFamily="monospace" fontSize="17" fill="#334155">class PyLearn:</text>
+              <text x="195" y="152" fontFamily="monospace" fontSize="17" fill="#334155">import os</text>
+              <text x="10" y="176" fontFamily="monospace" fontSize="16" fill="#334155">for i in range(10):</text>
+              <text x="5" y="214" fontFamily="monospace" fontSize="30" fill="#334155" opacity="0.8">{`{}`}</text>
+              <text x="58" y="214" fontFamily="monospace" fontSize="30" fill="#334155" opacity="0.8">{`[]`}</text>
+              <text x="112" y="214" fontFamily="monospace" fontSize="30" fill="#334155" opacity="0.8">{`()`}</text>
+              <text x="185" y="214" fontFamily="monospace" fontSize="17" fill="#334155">lambda x: x*2</text>
+              <text x="10" y="244" fontFamily="monospace" fontSize="16" fill="#334155" opacity="0.6"># comentario</text>
+              <text x="185" y="260" fontFamily="monospace" fontSize="16" fill="#334155">while True:</text>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#code-pattern-light-student)" opacity="0.50" />
+        </svg>
+
+        {/* SVG pattern — DARK MODE */}
+        <svg className="absolute inset-0 w-full h-full hidden dark:block" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="code-pattern-dark-student" x="0" y="0" width="340" height="270" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+              <text x="10" y="30" fontFamily="monospace" fontSize="17" fill="#94a3b8">def saludo():</text>
+              <text x="36" y="54" fontFamily="monospace" fontSize="17" fill="#94a3b8">return &quot;Hola&quot;</text>
+              <text x="185" y="78" fontFamily="monospace" fontSize="17" fill="#94a3b8">if x &gt; 0:</text>
+              <text x="210" y="102" fontFamily="monospace" fontSize="17" fill="#94a3b8">print(x)</text>
+              <text x="5" y="130" fontFamily="monospace" fontSize="17" fill="#94a3b8">class PyLearn:</text>
+              <text x="195" y="152" fontFamily="monospace" fontSize="17" fill="#94a3b8">import os</text>
+              <text x="10" y="176" fontFamily="monospace" fontSize="16" fill="#94a3b8">for i in range(10):</text>
+              <text x="5" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`{}`}</text>
+              <text x="58" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`[]`}</text>
+              <text x="112" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`()`}</text>
+              <text x="185" y="214" fontFamily="monospace" fontSize="17" fill="#94a3b8">lambda x: x*2</text>
+              <text x="10" y="244" fontFamily="monospace" fontSize="16" fill="#94a3b8" opacity="0.5"># comentario</text>
+              <text x="185" y="260" fontFamily="monospace" fontSize="16" fill="#94a3b8">while True:</text>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#code-pattern-dark-student)" opacity="0.18" />
+        </svg>
+      </div>
+
+      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50 shrink-0">
         <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => router.push('/')}>
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
             <span className="font-bold text-white text-lg leading-none">Py</span>
@@ -187,7 +234,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-700/50">
+          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-black dark:border-slate-700/50">
             {user.role === 'profesor' ? <School className="w-4 h-4 text-indigo-400" /> : <GraduationCap className="w-4 h-4 text-blue-400" />}
             <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
             <span className={user.role === 'profesor' ? "text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-indigo-500/20 text-indigo-400 border-indigo-500/30" : "text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30"}>
@@ -201,9 +248,9 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 lg:px-10 py-8 lg:py-12 flex-1 w-full">
+      <main className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-8 lg:py-12 flex-1 w-full">
         <section className="mb-16">
-          <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-8 lg:p-12 shadow-2xl">
+          <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900 border border-black dark:border-slate-800 p-8 lg:p-12 shadow-2xl">
             <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -221,7 +268,7 @@ export default function Dashboard() {
                     const activeMod = modules.find(m => !m.locked && m.progress < 100)?.id || 1;
                     router.push('/learn?moduleId=' + activeMod);
                   }}
-                  className="group flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-lg border border-slate-300 dark:border-transparent hover:bg-blue-50 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20 hover:border-blue-300 dark:hover:border-transparent transition-all duration-300"
+                  className="group flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-xl font-bold text-lg border border-black dark:border-transparent hover:bg-blue-50 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20 hover:border-blue-300 dark:hover:border-transparent transition-all duration-300"
                 >
                   <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Play className="w-4 h-4 text-slate-900 dark:text-white fill-white" />
@@ -238,7 +285,7 @@ export default function Dashboard() {
                   <img
                     src="/noodle.jpg"
                     alt="Noodle, la mascota de PyLearn"
-                    className="w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-slate-300 dark:border-slate-800 transform rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 relative z-10"
+                    className="w-full h-full object-cover rounded-3xl shadow-2xl border-4 border-black dark:border-slate-800 transform rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-300 relative z-10"
                   />
                 </div>
 
@@ -302,7 +349,7 @@ export default function Dashboard() {
             )}
 
             {/* Unirse a clase */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-2xl p-6 mb-5">
+            <div className="bg-white dark:bg-slate-900 border border-black dark:border-slate-800 rounded-2xl p-6 mb-5">
               <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3">Ingresa el código de invitación de tu profesor</p>
               <div className="flex gap-3">
                 <input
@@ -312,7 +359,7 @@ export default function Dashboard() {
                   onKeyDown={(e) => e.key === 'Enter' && handleJoinClass()}
                   placeholder="Ej. PY4A2Z"
                   maxLength={6}
-                  className="flex-1 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 font-mono tracking-widest uppercase focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors text-lg"
+                  className="flex-1 bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 font-mono tracking-widest uppercase focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors text-lg"
                 />
                 <button
                   onClick={handleJoinClass}
@@ -334,7 +381,7 @@ export default function Dashboard() {
             {myClasses.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {myClasses.map((cls) => (
-                  <div key={cls.id} className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 hover:border-blue-500/40 rounded-2xl p-5 transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/10">
+                  <div key={cls.id} className="bg-white dark:bg-slate-900 border border-black dark:border-slate-800 hover:border-blue-500/40 rounded-2xl p-5 transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/10">
                     <h4 className="text-base font-bold text-slate-900 dark:text-white mb-1 truncate">{cls.name}</h4>
                     {cls.teacher_username && (
                       <p className="text-xs text-slate-500 dark:text-slate-500 mb-3 flex items-center gap-1">
@@ -361,9 +408,16 @@ export default function Dashboard() {
               <div
                 key={mod.id}
                 onClick={() => !mod.locked && router.push('/learn?moduleId=' + mod.id)}
-                className={mod.locked ? "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-white dark:bg-slate-900/50 border-slate-300 dark:border-slate-800/50 cursor-not-allowed opacity-75" : "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 cursor-pointer"}
+                className={mod.locked ? "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-white dark:bg-slate-900 border-black dark:border-slate-800 cursor-not-allowed" : "relative group rounded-2xl border transition-all duration-300 overflow-hidden bg-white dark:bg-slate-900 border-black dark:border-slate-700 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1 cursor-pointer"}
               >
-                <div className="h-32 flex items-center justify-center relative overflow-hidden" style={{ background: mod.color }}>
+                {/* Overlay to wash out locked cards without making them transparent to the page background */}
+                {mod.locked && <div className="absolute inset-0 bg-white/50 dark:bg-slate-900/60 z-20 pointer-events-none"></div>}
+
+                <div className="h-32 flex items-center justify-center relative overflow-hidden">
+                  {/* Solid background to prevent page background from showing through the transparent mod.color */}
+                  <div className="absolute inset-0 bg-white dark:bg-slate-900"></div>
+                  {/* Transparent gradient color over the solid background */}
+                  <div className="absolute inset-0" style={{ background: mod.color }}></div>
                   <div className="absolute inset-0 bg-black/20"></div>
                   <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
                     {mod.locked ? <Lock className="w-12 h-12 text-slate-900 dark:text-white/50" /> : mod.icon}
@@ -402,3 +456,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

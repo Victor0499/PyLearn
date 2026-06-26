@@ -501,7 +501,7 @@ flowchart TB
 
 Para documentar adecuadamente el desarrollo del sistema en tu trabajo de grado o informe técnico, es crucial destacar los componentes que demuestran la arquitectura, seguridad, interactividad y lógica de negocio. A continuación, se detallan las 15 partes más importantes del código fuente que deberías incluir:
 
-### 1. Configuración de Conexión a la Base de Datos (Supabase Client)
+###  
 **Archivo:** [`src/lib/supabase.ts`](./src/lib/supabase.ts)
 **Importancia:** Es la piedra angular de la persistencia de datos. Demuestra cómo la aplicación Next.js se conecta de manera segura con el backend (PostgreSQL vía Supabase) utilizando variables de entorno.
 

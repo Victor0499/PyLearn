@@ -27,9 +27,10 @@ Back_Front/
 │   │   ├── register/
 │   │   │   └── page.tsx        # Interfaz de Registro de Usuarios
 │   │   ├── layout.tsx          # Plantilla principal, fuentes e inyección de Pyodide
+│   │   ├── dashboard/
+│   │   │   └── page.tsx        # Panel principal del Estudiante (Ruta de aprendizaje)
 │   │   ├── globals.css         # Estilos base y directivas de Tailwind CSS
-│   │   └── page.tsx            # Dashboard del Estudiante (Ruta de aprendizaje)
-│   │
+│   │   └── page.tsx            # Landing Page de la plataforma
 │   ├── components/             # Componentes de Interfaz (UI) reutilizables
 │   │   ├── CodeEditor.js       # Envoltorio e inicialización de Monaco Editor
 │   │   ├── Footer.tsx          # Pie de página dinámico y responsivo
