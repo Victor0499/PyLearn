@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { usePyodide } from "@/hooks/usePyodide";
@@ -221,8 +221,8 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 bg-white dark:bg-slate-900 border-r border-slate-300 dark:border-slate-800 flex flex-col shrink-0 transform transition-all duration-300 lg:static lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} ${isDesktopSidebarOpen ? 'lg:w-72' : 'lg:w-0 lg:border-r-0 lg:overflow-hidden'} w-72`}>
-        <div className="p-5 border-b border-slate-300 dark:border-slate-800 relative flex items-center justify-between min-w-[288px]">
+      <div className={`fixed inset-y-0 left-0 z-50 bg-white dark:bg-slate-900 border-r border-black dark:border-slate-800 flex flex-col shrink-0 transform transition-all duration-300 lg:static lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} ${isDesktopSidebarOpen ? 'lg:w-72' : 'lg:w-0 lg:border-r-0 lg:overflow-hidden'} w-72`}>
+        <div className="p-5 border-b border-black dark:border-slate-800 relative flex items-center justify-between min-w-[288px]">
           <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
             <h1 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center gap-2">
               <ArrowLeft className="w-4 h-4 text-blue-400" /> Dashboard
@@ -280,7 +280,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             })}
           </div>
         </div>
-        <div className="p-4 border-t border-slate-300 dark:border-slate-800">
+        <div className="p-4 border-t border-black dark:border-slate-800">
           <div className="flex justify-between text-xs text-slate-500 dark:text-slate-500 mb-2">
             <span>Progreso lección</span>
             <span className="text-blue-400 font-medium">{completedCount}/{exercises.length}</span>
@@ -294,7 +294,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="py-2.5 lg:py-0 lg:h-14 bg-white dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between px-4 lg:px-6 shrink-0 gap-2.5 lg:gap-0">
+        <header className="py-2.5 lg:py-0 lg:h-14 bg-white dark:bg-slate-900 border-b border-black dark:border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between px-4 lg:px-6 shrink-0 gap-2.5 lg:gap-0">
           <div className="flex items-center gap-3 overflow-hidden">
             <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white shrink-0">
               <Menu className="w-5 h-5" />
@@ -334,7 +334,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
         </header>
 
         {/* Mobile View Tabs */}
-        <div className="flex lg:hidden border-b border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 shrink-0">
+        <div className="flex lg:hidden border-b border-black dark:border-slate-800 bg-white dark:bg-slate-900 shrink-0">
           <button
             onClick={() => setMobileView('theory')}
             className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${mobileView === 'theory' ? 'border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-900/10' : 'border-transparent text-slate-500 dark:text-slate-400'}`}>
@@ -350,8 +350,8 @@ function LearnContent({ lessons }: { lessons: any[] }) {
         {/* Workspace */}
         <div className="flex-1 flex overflow-hidden relative">
           {/* Theory */}
-          <div className={`${mobileView === 'theory' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static flex-col border-r border-slate-300 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 overflow-hidden shrink-0 z-10 lg:z-0 transition-all duration-300 ${isDesktopSidebarOpen ? 'lg:w-[42%]' : 'lg:w-1/2'}`}>
-            <div className="flex items-center px-6 py-3 border-b border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900/60">
+          <div className={`${mobileView === 'theory' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static flex-col border-r border-black dark:border-slate-800 bg-slate-50 dark:bg-slate-950 overflow-hidden shrink-0 z-10 lg:z-0 transition-all duration-300 ${isDesktopSidebarOpen ? 'lg:w-[42%]' : 'lg:w-1/2'}`}>
+            <div className="flex items-center px-6 py-3 border-b border-black dark:border-slate-800 bg-white dark:bg-slate-900/60">
               <BookOpen className="w-4 h-4 mr-2 text-blue-400" />
               <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">Teoría</span>
             </div>
@@ -366,7 +366,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
           <div className={`${mobileView === 'exercises' ? 'flex' : 'hidden'} lg:flex absolute inset-0 lg:static lg:flex-1 flex-col bg-slate-50 dark:bg-slate-950 overflow-y-auto z-10 lg:z-0`}>
             {/* Tabs */}
             <div className="relative">
-              <div ref={tabsRef} className="flex border-b border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900/60 shrink-0 overflow-x-auto"
+              <div ref={tabsRef} className="flex border-b border-black dark:border-slate-800 bg-white dark:bg-slate-900/60 shrink-0 overflow-x-auto"
                 onWheel={(e) => {
                   e.preventDefault();
                   e.currentTarget.scrollLeft += e.deltaY;
@@ -397,7 +397,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             </div>
 
             {/* Instructions */}
-            <div className="px-5 py-3 bg-white dark:bg-slate-900/40 border-b border-slate-300 dark:border-slate-800 shrink-0 overflow-y-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[35vh] custom-scrollbar">
+            <div className="px-5 py-3 bg-white dark:bg-slate-900/40 border-b border-black dark:border-slate-800 shrink-0 overflow-y-auto max-h-[30vh] md:max-h-[40vh] lg:max-h-[35vh] custom-scrollbar">
               <div className="flex items-center justify-between mb-1.5">
                 <span className="text-sm font-semibold text-slate-900 dark:text-white">{currentEx.title}</span>
                 <DifficultyBadge color={currentEx.difficultyColor} label={currentEx.difficulty} />
@@ -415,7 +415,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             </div>
 
             {/* Editor toolbar */}
-            <div className="flex items-center justify-end px-4 py-2 bg-white dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 shrink-0">
+            <div className="flex items-center justify-end px-4 py-2 bg-white dark:bg-slate-900 border-b border-black dark:border-slate-800 shrink-0">
               <button onClick={handleRun} disabled={!isReady || running}
                 className="flex items-center px-4 py-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-medium rounded-lg shadow-lg shadow-blue-500/20 disabled:opacity-50 transition-all">
                 {running ? <div className="w-3.5 h-3.5 mr-1.5 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Play className="w-3.5 h-3.5 mr-1.5" />}
@@ -430,7 +430,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             </div>
 
             {/* Terminal */}
-            <div className="h-28 lg:h-36 bg-slate-900 dark:bg-black border-t border-slate-300 dark:border-slate-800 p-3 font-mono text-xs overflow-y-auto shrink-0">
+            <div className="h-28 lg:h-36 bg-slate-900 dark:bg-black border-t border-black dark:border-slate-800 p-3 font-mono text-xs overflow-y-auto shrink-0">
               <div className="flex items-center text-slate-400 mb-1.5">
                 <Terminal className="w-3.5 h-3.5 mr-1.5" /><span>Salida de Consola</span>
               </div>
@@ -454,12 +454,12 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               <XCircle className="w-7 h-7 text-red-400" />
             </div>
             <h3 className="text-lg font-bold text-slate-900 dark:text-white text-center mb-3">{errorModal.title}</h3>
-            <div className="bg-slate-100 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 rounded-xl p-4 mb-5">
+            <div className="bg-slate-100 dark:bg-slate-800/80 border border-black dark:border-slate-700 rounded-xl p-4 mb-5">
               <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-wrap font-mono">{errorModal.message}</p>
             </div>
             <p className="text-slate-500 dark:text-slate-500 text-xs text-center mb-5">💡 Usa el botón <span className="text-amber-600 dark:text-yellow-400">"Ver pista"</span> si necesitas ayuda.</p>
             <button onClick={() => setErrorModal(null)}
-              className="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
+              className="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-black dark:border-slate-600 text-slate-900 dark:text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
               <X className="w-4 h-4" />Cerrar e Intentar de Nuevo
             </button>
           </div>
@@ -469,7 +469,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       {/* Completion Modal */}
       {completedCount === exercises.length && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-2xl">
+          <div className="bg-white dark:bg-slate-900 border border-black dark:border-slate-700 rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-2xl">
             <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/30">
               <Trophy className="w-8 h-8 text-slate-900 dark:text-white" />
             </div>
@@ -519,3 +519,4 @@ export default function Home() {
     </Suspense>
   );
 }
+
