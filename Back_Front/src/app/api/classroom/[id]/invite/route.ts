@@ -18,9 +18,9 @@ export async function POST(
   }
 
   try {
-    const { email } = await req.json();
-    if (!email || !email.trim()) {
-      return NextResponse.json({ error: 'El correo electrónico es requerido' }, { status: 400 });
+    const { identifier } = await req.json();
+    if (!identifier || !identifier.trim()) {
+      return NextResponse.json({ error: 'El nombre de usuario o correo es requerido' }, { status: 400 });
     }
 
     // 1. Verificar que el profesor sea el dueño de la clase
@@ -38,19 +38,34 @@ export async function POST(
       return NextResponse.json({ error: 'No eres el profesor de esta clase' }, { status: 403 });
     }
 
-    // 2. Buscar al estudiante por correo
-    const { data: student, error: studentError } = await supabaseAdmin
+    // 2. Buscar al estudiante por correo o username
+    const searchTerm = identifier.trim();
+    const isEmail = searchTerm.includes('@');
+    
+    let query = supabaseAdmin
       .from('auth_user')
-      .select('id, role')
-      .eq('email', email.trim().toLowerCase())
-      .single();
+      .select('id, email, username, api_userprofile!inner(role)');
 
-    if (studentError || !student) {
-      return NextResponse.json({ error: 'No se encontró ningún usuario con este correo' }, { status: 404 });
+    if (isEmail) {
+      query = query.eq('email', searchTerm.toLowerCase());
+    } else {
+      // Búsqueda case-insensitive y parcial para evitar problemas de espacios al final
+      query = query.ilike('username', `%${searchTerm}%`);
     }
 
-    if (student.role !== 'estudiante') {
-      return NextResponse.json({ error: 'El usuario con este correo no es un estudiante' }, { status: 400 });
+    const { data: students, error: studentError } = await query.limit(1);
+    const student = students?.[0];
+
+    if (studentError || !student) {
+      return NextResponse.json({ error: 'No se encontró ningún estudiante con ese dato' }, { status: 404 });
+    }
+
+    const isStudent = Array.isArray(student.api_userprofile) 
+      ? student.api_userprofile[0]?.role === 'estudiante'
+      : student.api_userprofile?.role === 'estudiante';
+
+    if (!isStudent) {
+      return NextResponse.json({ error: 'El usuario encontrado no es un estudiante' }, { status: 400 });
     }
 
     // 3. Verificar si el estudiante ya es miembro de la clase

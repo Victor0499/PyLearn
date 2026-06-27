@@ -83,7 +83,7 @@ export default function ClassroomDetail() {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ email: inviteEmail })
+        body: JSON.stringify({ identifier: inviteEmail })
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || 'Error al invitar al estudiante');
@@ -189,10 +189,10 @@ export default function ClassroomDetail() {
                 <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Invitar Estudiante</h3>
                 <div className="flex gap-2">
                   <input
-                    type="email"
+                    type="text"
                     value={inviteEmail}
                     onChange={(e) => setInviteEmail(e.target.value)}
-                    placeholder="correo@estudiante.com"
+                    placeholder="Usuario o correo"
                     className="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 w-full"
                   />
                   <button
