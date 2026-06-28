@@ -327,15 +327,15 @@ export default function Dashboard() {
                 </h4>
                 <div className="flex flex-col gap-3">
                   {invitations.map((inv) => (
-                    <div key={inv.id} className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div key={inv.id} className="bg-white dark:bg-slate-900 border border-blue-500/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div>
-                        <p className="text-slate-900 dark:text-white font-medium">Te han invitado a unirte a <span className="font-bold text-blue-400">{inv.classroom_name}</span></p>
+                        <p className="text-slate-900 dark:text-white font-medium">Te han invitado a unirte a <span className="font-bold text-blue-500 dark:text-blue-400">{inv.classroom_name}</span></p>
                         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Prof. {inv.teacher_username}</p>
                       </div>
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleRespondInvitation(inv.id, 'reject')}
-                          className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-sm font-medium transition-colors"
+                          className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 dark:hover:text-white rounded-lg text-sm font-medium transition-colors border border-transparent dark:border-slate-700"
                         >
                           Rechazar
                         </button>

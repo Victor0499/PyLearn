@@ -9,8 +9,8 @@ export async function POST(
   const exerciseId = parseInt(resolvedParams.id);
 
   const { data: exercise, error } = await supabaseAdmin
-    .from('api_exercise')
-    .select('id, title')
+    .from('exercises')
+    .select('id, title, test_code')
     .eq('id', exerciseId)
     .single();
 
@@ -18,16 +18,8 @@ export async function POST(
     return NextResponse.json({ error: 'Ejercicio no encontrado.' }, { status: 404 });
   }
 
-  
-  const { data: testCase } = await supabaseAdmin
-    .from('api_exercisetest')
-    .select('test_code')
-    .eq('exercise_id', exerciseId)
-    .single();
-
   return NextResponse.json({
     status: 'success',
-    test_code: testCase?.test_code || '',
+    test_code: exercise.test_code || '',
   });
 }
-

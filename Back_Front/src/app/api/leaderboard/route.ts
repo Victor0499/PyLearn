@@ -36,7 +36,7 @@ export async function GET(req: Request) {
     });
 
     // Ordenar de mayor a menor score, en caso de empate ordenar alfabeticamente
-    rankedUsers.sort((a, b) => {
+    rankedUsers.sort((a: any, b: any) => {
       if (b.score !== a.score) {
         return b.score - a.score;
       }
