@@ -1,0 +1,4 @@
+[build]
+  base = "Back_Front"
+  command = "npm run build"
+  publish = ".next"
