@@ -137,9 +137,17 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
-                Usuario
-              </label>
+              <div className="flex justify-between items-center mb-1.5">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                  Usuario
+                </label>
+                <Link
+                  href="/auth/forgot-username"
+                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  ¿Olvidaste tu usuario?
+                </Link>
+              </div>
               <input
                 type="text"
                 value={username}
