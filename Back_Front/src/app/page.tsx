@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -84,11 +84,11 @@ export default function LandingPage() {
         {/* HEADER */}
         <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 transition-all duration-300">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div className="flex items-center space-x-3 group cursor-pointer">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
-                <span className="font-bold text-white text-xl leading-none">Py</span>
+            <div className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer min-w-0 shrink-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                <span className="font-bold text-white text-lg sm:text-xl leading-none">Py</span>
               </div>
-              <span className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-slate-700 to-sky-600 dark:from-white dark:via-slate-200 dark:to-sky-400 bg-clip-text text-transparent">
+              <span className="hidden sm:block text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-slate-700 to-sky-600 dark:from-white dark:via-slate-200 dark:to-sky-400 bg-clip-text text-transparent">
                 Py<span className="text-sky-500 dark:text-sky-400 drop-shadow-[0_0_8px_rgba(14,165,233,0.2)] dark:drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]">Learn</span>
               </span>
             </div>
@@ -104,7 +104,7 @@ export default function LandingPage() {
                 </button>
               ) : (
                 <>
-                  <Link href="/login?from=landing" className="px-4 py-2.5 text-sm font-bold bg-gradient-to-r from-sky-500 to-indigo-600 text-white rounded-lg transition-all transform hover:-translate-y-0.5 shadow-md hover:shadow-lg hover:shadow-sky-500/20">
+                  <Link href="/login?from=landing" className="px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm font-bold bg-[#FFD43B] dark:bg-blue-600 text-black dark:text-white border border-black dark:border-transparent rounded-lg transition-all transform hover:-translate-y-0.5 hover:bg-[#FFCA2C] dark:hover:bg-blue-500 shadow-md whitespace-nowrap shrink-0">
                     Comenzar Gratis
                   </Link>
                 </>
@@ -255,9 +255,9 @@ export default function LandingPage() {
                   ) : (
                     <div className="space-y-3">
                       {topUsers.map((user, index) => (
-                        <div key={user.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 rounded-xl border border-black dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                        <div key={user.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 rounded-xl border border-black dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow gap-2">
+                          <div className="flex items-center gap-3 min-w-0">
+                            <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center font-bold text-sm ${
                               index === 0 ? 'bg-yellow-100 text-yellow-700 border border-yellow-300' :
                               index === 1 ? 'bg-slate-100 text-slate-700 border border-black' :
                               index === 2 ? 'bg-orange-100 text-orange-700 border border-orange-400' :
@@ -265,9 +265,9 @@ export default function LandingPage() {
                             }`}>
                               {index + 1}
                             </div>
-                            <span className="font-semibold text-slate-800 dark:text-slate-200">{user.username}</span>
+                            <span className="font-semibold text-slate-800 dark:text-slate-200 truncate">{user.username}</span>
                           </div>
-                          <div className="font-mono text-sky-600 dark:text-sky-400 font-bold bg-sky-50 dark:bg-sky-900/20 px-2.5 py-1 rounded-md text-sm border border-sky-100 dark:border-sky-800/50">
+                          <div className="font-mono text-sky-600 dark:text-sky-400 font-bold bg-sky-50 dark:bg-sky-900/20 px-2.5 py-1 rounded-md text-sm border border-sky-100 dark:border-sky-800/50 whitespace-nowrap shrink-0">
                             {user.score} pts
                           </div>
                         </div>

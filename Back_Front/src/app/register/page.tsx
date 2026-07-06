@@ -39,7 +39,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 pt-24 sm:pt-4 relative">
 
       {/* SVG Code Pattern Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -69,22 +69,22 @@ export default function RegisterPage() {
         <svg className="absolute inset-0 w-full h-full hidden dark:block" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="code-pattern-dark-register" x="0" y="0" width="340" height="270" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-              <text x="10" y="30" fontFamily="monospace" fontSize="17" fill="#94a3b8">def saludo():</text>
-              <text x="36" y="54" fontFamily="monospace" fontSize="17" fill="#94a3b8">return &quot;Hola&quot;</text>
-              <text x="185" y="78" fontFamily="monospace" fontSize="17" fill="#94a3b8">if x &gt; 0:</text>
-              <text x="210" y="102" fontFamily="monospace" fontSize="17" fill="#94a3b8">print(x)</text>
-              <text x="5" y="130" fontFamily="monospace" fontSize="17" fill="#94a3b8">class PyLearn:</text>
-              <text x="195" y="152" fontFamily="monospace" fontSize="17" fill="#94a3b8">import os</text>
-              <text x="10" y="176" fontFamily="monospace" fontSize="16" fill="#94a3b8">for i in range(10):</text>
-              <text x="5" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`{}`}</text>
-              <text x="58" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`[]`}</text>
-              <text x="112" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`()`}</text>
-              <text x="185" y="214" fontFamily="monospace" fontSize="17" fill="#94a3b8">lambda x: x*2</text>
-              <text x="10" y="244" fontFamily="monospace" fontSize="16" fill="#94a3b8" opacity="0.5"># comentario</text>
-              <text x="185" y="260" fontFamily="monospace" fontSize="16" fill="#94a3b8">while True:</text>
+              <text x="10" y="30" fontFamily="monospace" fontSize="17" fill="#cbd5e1">def saludo():</text>
+              <text x="36" y="54" fontFamily="monospace" fontSize="17" fill="#cbd5e1">return &quot;Hola&quot;</text>
+              <text x="185" y="78" fontFamily="monospace" fontSize="17" fill="#cbd5e1">if x &gt; 0:</text>
+              <text x="210" y="102" fontFamily="monospace" fontSize="17" fill="#cbd5e1">print(x)</text>
+              <text x="5" y="130" fontFamily="monospace" fontSize="17" fill="#cbd5e1">class PyLearn:</text>
+              <text x="195" y="152" fontFamily="monospace" fontSize="17" fill="#cbd5e1">import os</text>
+              <text x="10" y="176" fontFamily="monospace" fontSize="16" fill="#cbd5e1">for i in range(10):</text>
+              <text x="5" y="214" fontFamily="monospace" fontSize="30" fill="#cbd5e1" opacity="0.8">{`{}`}</text>
+              <text x="58" y="214" fontFamily="monospace" fontSize="30" fill="#cbd5e1" opacity="0.8">{`[]`}</text>
+              <text x="112" y="214" fontFamily="monospace" fontSize="30" fill="#cbd5e1" opacity="0.8">{`()`}</text>
+              <text x="185" y="214" fontFamily="monospace" fontSize="17" fill="#cbd5e1">lambda x: x*2</text>
+              <text x="10" y="244" fontFamily="monospace" fontSize="16" fill="#cbd5e1" opacity="0.65"># comentario</text>
+              <text x="185" y="260" fontFamily="monospace" fontSize="16" fill="#cbd5e1">while True:</text>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#code-pattern-dark-register)" opacity="0.18" />
+          <rect width="100%" height="100%" fill="url(#code-pattern-dark-register)" opacity="0.30" />
         </svg>
 
         {/* Glow accent */}

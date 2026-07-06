@@ -46,12 +46,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 pt-24 sm:pt-4 relative">
       {/* Back Button */}
       {showBackBtn && (
         <Link 
           href="/" 
-          className="absolute top-6 left-6 p-2 bg-white dark:bg-slate-900 border border-black dark:border-slate-800 rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm transition-all z-50 flex items-center gap-2 pr-4 group"
+          className="absolute top-4 left-4 sm:top-6 sm:left-6 p-2 bg-white dark:bg-slate-900 border border-black dark:border-slate-800 rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm transition-all z-50 flex items-center gap-2 pr-4 group"
         >
           <div className="bg-slate-200 dark:bg-slate-800 p-1.5 rounded-full group-hover:bg-slate-300 dark:group-hover:bg-slate-700 transition-colors">
             <ArrowLeft className="w-4 h-4" />
@@ -91,22 +91,22 @@ export default function LoginPage() {
         <svg className="absolute inset-0 w-full h-full hidden dark:block" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="code-pattern-dark" x="0" y="0" width="340" height="270" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-              <text x="10" y="30" fontFamily="monospace" fontSize="17" fill="#94a3b8">def saludo():</text>
-              <text x="36" y="54" fontFamily="monospace" fontSize="17" fill="#94a3b8">return &quot;Hola&quot;</text>
-              <text x="185" y="78" fontFamily="monospace" fontSize="17" fill="#94a3b8">if x &gt; 0:</text>
-              <text x="210" y="102" fontFamily="monospace" fontSize="17" fill="#94a3b8">print(x)</text>
-              <text x="5" y="130" fontFamily="monospace" fontSize="17" fill="#94a3b8">class PyLearn:</text>
-              <text x="195" y="152" fontFamily="monospace" fontSize="17" fill="#94a3b8">import os</text>
-              <text x="10" y="176" fontFamily="monospace" fontSize="16" fill="#94a3b8">for i in range(10):</text>
-              <text x="5" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`{}`}</text>
-              <text x="58" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`[]`}</text>
-              <text x="112" y="214" fontFamily="monospace" fontSize="30" fill="#94a3b8" opacity="0.7">{`()`}</text>
-              <text x="185" y="214" fontFamily="monospace" fontSize="17" fill="#94a3b8">lambda x: x*2</text>
-              <text x="10" y="244" fontFamily="monospace" fontSize="16" fill="#94a3b8" opacity="0.5"># comentario</text>
-              <text x="185" y="260" fontFamily="monospace" fontSize="16" fill="#94a3b8">while True:</text>
+              <text x="10" y="30" fontFamily="monospace" fontSize="17" fill="#cbd5e1">def saludo():</text>
+              <text x="36" y="54" fontFamily="monospace" fontSize="17" fill="#cbd5e1">return &quot;Hola&quot;</text>
+              <text x="185" y="78" fontFamily="monospace" fontSize="17" fill="#cbd5e1">if x &gt; 0:</text>
+              <text x="210" y="102" fontFamily="monospace" fontSize="17" fill="#cbd5e1">print(x)</text>
+              <text x="5" y="130" fontFamily="monospace" fontSize="17" fill="#cbd5e1">class PyLearn:</text>
+              <text x="195" y="152" fontFamily="monospace" fontSize="17" fill="#cbd5e1">import os</text>
+              <text x="10" y="176" fontFamily="monospace" fontSize="16" fill="#cbd5e1">for i in range(10):</text>
+              <text x="5" y="214" fontFamily="monospace" fontSize="30" fill="#cbd5e1" opacity="0.8">{`{}`}</text>
+              <text x="58" y="214" fontFamily="monospace" fontSize="30" fill="#cbd5e1" opacity="0.8">{`[]`}</text>
+              <text x="112" y="214" fontFamily="monospace" fontSize="30" fill="#cbd5e1" opacity="0.8">{`()`}</text>
+              <text x="185" y="214" fontFamily="monospace" fontSize="17" fill="#cbd5e1">lambda x: x*2</text>
+              <text x="10" y="244" fontFamily="monospace" fontSize="16" fill="#cbd5e1" opacity="0.65"># comentario</text>
+              <text x="185" y="260" fontFamily="monospace" fontSize="16" fill="#cbd5e1">while True:</text>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#code-pattern-dark)" opacity="0.18" />
+          <rect width="100%" height="100%" fill="url(#code-pattern-dark)" opacity="0.30" />
         </svg>
       </div>
 
@@ -137,13 +137,13 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <div className="flex justify-between items-center mb-1.5">
+              <div className="flex flex-wrap justify-between items-baseline mb-1.5 gap-x-2">
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Usuario
                 </label>
                 <Link
                   href="/auth/forgot-username"
-                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors whitespace-nowrap"
                 >
                   ¿Olvidaste tu usuario?
                 </Link>
@@ -159,13 +159,13 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <div className="flex justify-between items-center mb-1.5">
+              <div className="flex flex-wrap justify-between items-baseline mb-1.5 gap-x-2">
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Contraseña
                 </label>
                 <Link
                   href="/auth/forgot-password"
-                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors whitespace-nowrap"
                 >
                   ¿Olvidaste tu contraseña?
                 </Link>
