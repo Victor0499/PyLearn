@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { usePyodide } from "@/hooks/usePyodide";
@@ -318,10 +318,10 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               <span className="sm:hidden text-[10px] text-slate-700 dark:text-slate-300">{isReady ? 'Listo' : 'Cargando'}</span>
             </div>
             <div className="h-3 w-px bg-slate-200 dark:bg-slate-700" />
-            <div className="flex items-center space-x-1.5 sm:space-x-2">
-              {user.role === 'profesor' ? <School className="w-3.5 h-3.5 text-indigo-400 hidden sm:block" /> : <GraduationCap className="w-3.5 h-3.5 text-blue-400 hidden sm:block" />}
-              <span className="text-[11px] sm:text-sm text-slate-700 dark:text-slate-300 font-medium truncate max-w-[80px] sm:max-w-none">{user.username}</span>
-              <span className={`text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full border ${user.role === 'profesor' ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30' : 'bg-blue-500/20 text-blue-400 border-blue-500/30'}`}>
+            <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+              {user.role === 'profesor' ? <School className="w-3.5 h-3.5 text-indigo-400 hidden sm:block shrink-0" /> : <GraduationCap className="w-3.5 h-3.5 text-blue-400 hidden sm:block shrink-0" />}
+              <span className="text-[11px] sm:text-sm text-slate-700 dark:text-slate-300 font-medium truncate max-w-[60px] sm:max-w-[120px] shrink">{user.username}</span>
+              <span className={`hidden sm:inline-block text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full border ${user.role === 'profesor' ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30' : 'bg-blue-500/20 text-blue-400 border-blue-500/30'}`}>
                 {user.role === 'profesor' ? 'Profesor' : 'Estudiante'}
               </span>
             </div>

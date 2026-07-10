@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -436,9 +436,9 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans">
       {/* Header */}
-      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50 shrink-0">
-        <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => router.push('/')}>
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 flex items-center justify-between px-4 sm:px-6 lg:px-10 sticky top-0 z-50 shrink-0 gap-2">
+        <div className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer shrink-0" onClick={() => router.push('/')}>
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
             <span className="font-bold text-white text-lg leading-none">Py</span>
           </div>
           <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-slate-700 to-sky-600 dark:from-white dark:via-slate-200 dark:to-sky-400 bg-clip-text text-transparent hidden sm:block group-hover:brightness-110 transition-all">
@@ -446,12 +446,12 @@ export default function AdminDashboard() {
             <span className="text-xs font-medium ml-2 text-slate-400 dark:text-slate-500 uppercase tracking-wider">Admin</span>
           </span>
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-950 px-3 py-1.5 rounded-full border border-black dark:border-slate-700/50">
-            <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
-            <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30 font-bold">Admin</span>
+        <div className="flex items-center space-x-2 sm:space-x-4 min-w-0">
+          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-950 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-black dark:border-slate-700/50 min-w-0">
+            <span className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium truncate">{user.username}</span>
+            <span className="hidden sm:inline-block text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30 font-bold">Admin</span>
           </div>
-          <button onClick={() => router.push('/leaderboard')} className="flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group" title="Ranking"><Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" /><span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span></button>
+          <button onClick={() => router.push('/leaderboard')} className="hidden sm:flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group shrink-0" title="Ranking"><Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" /><span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span></button>
           <ThemeToggle />
           <button onClick={logout} className="p-2 text-slate-500 dark:text-slate-500 hover:text-yellow-400 hover:bg-yellow-500/10 rounded-full transition-colors" title="Cerrar Sesión">
             <LogOut className="w-5 h-5" />

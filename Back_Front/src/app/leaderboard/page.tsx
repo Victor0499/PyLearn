@@ -202,20 +202,20 @@ export default function LeaderboardPage() {
               <div className="bg-white dark:bg-slate-900 border border-black dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl">
                 <div className="divide-y divide-black dark:divide-slate-800">
                   {rankedUsers.slice(3).map((user, index) => (
-                    <div key={user.id} className="flex items-center justify-between p-4 sm:px-6 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                      <div className="flex items-center gap-4">
-                        <span className="w-8 text-center text-slate-400 dark:text-slate-500 font-bold text-lg">
+                    <div key={user.id} className="flex items-center justify-between p-3 sm:p-4 sm:px-6 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors gap-2">
+                      <div className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
+                        <span className="w-6 sm:w-8 text-center text-slate-400 dark:text-slate-500 font-bold text-base sm:text-lg shrink-0">
                           #{index + 4}
                         </span>
-                        <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 flex items-center justify-center text-sm font-bold text-slate-600 dark:text-slate-300">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 flex items-center justify-center text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-300">
                           {user.username[0].toUpperCase()}
                         </div>
-                        <span className="font-semibold text-slate-900 dark:text-white">
+                        <span className="font-semibold text-sm sm:text-base text-slate-900 dark:text-white truncate">
                           {user.username}
                         </span>
                       </div>
-                      <div className="text-right">
-                        <span className="font-mono font-bold text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-500/10 border border-sky-200 dark:border-sky-500/20 px-3 py-1 rounded-lg">
+                      <div className="text-right shrink-0">
+                        <span className="font-mono font-bold text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-500/10 border border-sky-200 dark:border-sky-500/20 px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg text-xs sm:text-base whitespace-nowrap">
                           {user.score} pts
                         </span>
                       </div>

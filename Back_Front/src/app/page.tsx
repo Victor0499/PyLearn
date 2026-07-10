@@ -255,9 +255,9 @@ export default function LandingPage() {
                   ) : (
                     <div className="space-y-3">
                       {topUsers.map((user, index) => (
-                        <div key={user.id} className="flex items-center justify-between p-3 bg-white dark:bg-slate-900 rounded-xl border border-black dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow gap-2">
-                          <div className="flex items-center gap-3 min-w-0">
-                            <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center font-bold text-sm ${
+                        <div key={user.id} className="flex items-center justify-between p-2 sm:p-3 bg-white dark:bg-slate-900 rounded-xl border border-black dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow gap-2">
+                          <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                            <div className={`w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm ${
                               index === 0 ? 'bg-yellow-100 text-yellow-700 border border-yellow-300' :
                               index === 1 ? 'bg-slate-100 text-slate-700 border border-black' :
                               index === 2 ? 'bg-orange-100 text-orange-700 border border-orange-400' :
@@ -265,9 +265,9 @@ export default function LandingPage() {
                             }`}>
                               {index + 1}
                             </div>
-                            <span className="font-semibold text-slate-800 dark:text-slate-200 truncate">{user.username}</span>
+                            <span className="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 truncate">{user.username}</span>
                           </div>
-                          <div className="font-mono text-sky-600 dark:text-sky-400 font-bold bg-sky-50 dark:bg-sky-900/20 px-2.5 py-1 rounded-md text-sm border border-sky-100 dark:border-sky-800/50 whitespace-nowrap shrink-0">
+                          <div className="font-mono text-sky-600 dark:text-sky-400 font-bold bg-sky-50 dark:bg-sky-900/20 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-xs sm:text-sm border border-sky-100 dark:border-sky-800/50 whitespace-nowrap shrink-0">
                             {user.score} pts
                           </div>
                         </div>

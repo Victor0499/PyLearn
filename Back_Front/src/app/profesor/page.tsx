@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -148,18 +148,18 @@ export default function ProfesorDashboard() {
 
       {/* Navbar / Header */}
       <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 sticky top-0 z-50 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="bg-gradient-to-tr from-sky-500 to-indigo-500 text-white p-1.5 rounded-lg">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 h-16 flex items-center justify-between gap-2">
+          <div className="flex items-center space-x-2 shrink-0 min-w-0">
+            <div className="bg-gradient-to-tr from-sky-500 to-indigo-500 text-white p-1.5 rounded-lg shrink-0">
               <BookOpen className="w-5 h-5" />
             </div>
-            <span className="font-bold text-xl text-slate-800 dark:text-white tracking-tight">PyLearn</span>
-            <span className="px-2 py-0.5 ml-2 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-semibold">
+            <span className="hidden sm:block font-bold text-xl text-slate-800 dark:text-white tracking-tight">PyLearn</span>
+            <span className="px-2 py-0.5 ml-2 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[10px] sm:text-xs font-semibold truncate">
               Profesor
             </span>
           </div>
-          <div className="flex items-center space-x-4">
-            <button onClick={() => router.push('/leaderboard')} className="flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group" title="Ranking"><Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" /><span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span></button>
+          <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 shrink-0">
+            <button onClick={() => router.push('/leaderboard')} className="hidden sm:flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group shrink-0" title="Ranking"><Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" /><span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span></button>
             <ThemeToggle />
           <button
             onClick={logout}

@@ -223,9 +223,9 @@ export default function Dashboard() {
         </svg>
       </div>
 
-      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 flex items-center justify-between px-6 lg:px-10 sticky top-0 z-50 shrink-0">
-        <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => router.push('/')}>
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+      <header className="h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-black dark:border-slate-800 flex items-center justify-between px-4 sm:px-6 lg:px-10 sticky top-0 z-50 shrink-0 gap-2">
+        <div className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer shrink-0" onClick={() => router.push('/')}>
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
             <span className="font-bold text-white text-lg leading-none">Py</span>
           </div>
           <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-slate-700 to-sky-600 dark:from-white dark:via-slate-200 dark:to-sky-400 bg-clip-text text-transparent hidden sm:block group-hover:brightness-110 transition-all">
@@ -233,15 +233,15 @@ export default function Dashboard() {
           </span>
         </div>
 
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-black dark:border-slate-700/50">
-            {user.role === 'profesor' ? <School className="w-4 h-4 text-indigo-400" /> : <GraduationCap className="w-4 h-4 text-blue-400" />}
-            <span className="text-sm text-slate-700 dark:text-slate-300 font-medium">{user.username}</span>
-            <span className={user.role === 'profesor' ? "text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-indigo-500/20 text-indigo-400 border-indigo-500/30" : "text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30"}>
+        <div className="flex items-center space-x-2 sm:space-x-4 min-w-0">
+          <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/50 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-black dark:border-slate-700/50 min-w-0">
+            {user.role === 'profesor' ? <School className="w-4 h-4 text-indigo-400 shrink-0" /> : <GraduationCap className="w-4 h-4 text-blue-400 shrink-0" />}
+            <span className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium truncate">{user.username}</span>
+            <span className={user.role === 'profesor' ? "hidden sm:inline-block text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-indigo-500/20 text-indigo-400 border-indigo-500/30" : "hidden sm:inline-block text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border bg-blue-500/20 text-blue-400 border-blue-500/30"}>
               {user.role === 'profesor' ? 'Profesor' : 'Estudiante'}
             </span>
           </div>
-          <button onClick={() => router.push('/leaderboard')} className="flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group" title="Ranking">
+          <button onClick={() => router.push('/leaderboard')} className="hidden sm:flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group shrink-0" title="Ranking">
             <Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
             <span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span>
           </button>
