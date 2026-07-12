@@ -10,8 +10,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Código de autorización no proporcionado.' }, { status: 400 });
     }
 
-    const origin = req.nextUrl.origin;
-    const redirectUri = `${origin}/auth/callback`;
+    const redirectUri = process.env.NEXT_PUBLIC_APP_URL
+      ? `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`
+      : 'http://localhost:3000/auth/callback';
 
     
     const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
