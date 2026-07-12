@@ -137,13 +137,13 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <div className="flex flex-wrap justify-between items-baseline mb-1.5 gap-x-2">
+              <div className="flex justify-between items-baseline mb-1.5">
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Usuario
                 </label>
                 <Link
                   href="/auth/forgot-username"
-                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors whitespace-nowrap"
+                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors whitespace-nowrap ml-2"
                 >
                   ¿Olvidaste tu usuario?
                 </Link>
@@ -159,13 +159,13 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <div className="flex flex-wrap justify-between items-baseline mb-1.5 gap-x-2">
+              <div className="flex justify-between items-baseline mb-1.5">
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Contraseña
                 </label>
                 <Link
                   href="/auth/forgot-password"
-                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors whitespace-nowrap"
+                  className="text-xs text-blue-400 hover:text-blue-300 transition-colors whitespace-nowrap ml-2"
                 >
                   ¿Olvidaste tu contraseña?
                 </Link>
