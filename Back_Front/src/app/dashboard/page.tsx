@@ -355,7 +355,7 @@ export default function Dashboard() {
             {/* Unirse a clase */}
             <div className="bg-white dark:bg-slate-900 border border-black dark:border-slate-800 rounded-2xl p-6 mb-5">
               <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3">Ingresa el código de invitación de tu profesor</p>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="text"
                   value={joinCode}
@@ -363,12 +363,12 @@ export default function Dashboard() {
                   onKeyDown={(e) => e.key === 'Enter' && handleJoinClass()}
                   placeholder="Ej. PY4A2Z"
                   maxLength={6}
-                  className="flex-1 bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 font-mono tracking-widest uppercase focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors text-lg"
+                  className="flex-1 bg-slate-100 dark:bg-slate-800 border border-black dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 font-mono tracking-widest uppercase focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors text-base sm:text-lg w-full"
                 />
                 <button
                   onClick={handleJoinClass}
                   disabled={joining || !joinCode.trim()}
-                  className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-blue-500/20"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-blue-500/20 w-full sm:w-auto"
                 >
                   {joining ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
                   Unirse
