@@ -223,7 +223,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       {/* Sidebar */}
       <div className={`fixed inset-y-0 left-0 z-50 bg-white dark:bg-slate-900 border-r border-black dark:border-slate-800 flex flex-col shrink-0 transform transition-all duration-300 lg:static lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} ${isDesktopSidebarOpen ? 'lg:w-72' : 'lg:w-0 lg:border-r-0 lg:overflow-hidden'} w-72`}>
         <div className="p-5 border-b border-black dark:border-slate-800 relative flex items-center justify-between min-w-[288px]">
-          <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
+          <Link href={user?.role === 'admin' ? '/admin' : user?.role === 'profesor' ? '/profesor' : '/dashboard'} className="inline-block hover:opacity-80 transition-opacity">
             <h1 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center gap-2">
               <ArrowLeft className="w-4 h-4 text-blue-400" /> Dashboard
             </h1>

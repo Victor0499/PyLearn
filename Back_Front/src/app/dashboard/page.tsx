@@ -174,6 +174,8 @@ export default function Dashboard() {
     locked: (user.role === 'admin' || user.role === 'tester') ? false : (m.is_locked || (idx > 0 && (moduleProgress[dynamicModules[idx - 1].id] || 0) < 100))
   }));
 
+  const hasStarted = modules.some(m => m.progress > 0);
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 font-sans relative">
       {/* Code pattern background (like WhatsApp chat) */}
@@ -261,10 +263,12 @@ export default function Dashboard() {
             <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
               <div className="max-w-2xl flex-1">
                 <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
-                  ¡Hola de nuevo, <span className="text-blue-400">{user.username}</span>!
+                  {hasStarted ? '¡Hola de nuevo' : '¡Bienvenido'}, <span className="text-blue-400">{user.username}</span>!
                 </h2>
                 <p className="text-slate-500 dark:text-slate-400 text-lg mb-8 leading-relaxed pr-0 lg:pr-8">
-                  Tu entorno interactivo está listo. Continúa justo donde te quedaste y sigue construyendo tus habilidades de programación.
+                  {hasStarted 
+                    ? 'Tu entorno interactivo está listo. Continúa justo donde te quedaste y sigue construyendo tus habilidades de programación.'
+                    : 'Tu entorno interactivo está listo. Comienza tu primera lección y da el primer paso en el mundo de la programación con Python.'}
                 </p>
 
                 <button
@@ -277,7 +281,7 @@ export default function Dashboard() {
                   <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Play className="w-4 h-4 text-slate-900 dark:text-white fill-white" />
                   </div>
-                  Continuar Aprendiendo
+                  {hasStarted ? 'Continuar Aprendiendo' : 'Comenzar a Aprender'}
                 </button>
               </div>
 
