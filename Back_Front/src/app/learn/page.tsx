@@ -228,10 +228,10 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               <ArrowLeft className="w-4 h-4 text-blue-400" /> Dashboard
             </h1>
           </Link>
-          {/* Desktop sidebar collapse button */}
+          {/* Sidebar collapse button (mobile & desktop) */}
           <button
-            onClick={() => setIsDesktopSidebarOpen(false)}
-            className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 dark:bg-slate-300 dark:hover:bg-slate-200 transition-colors"
+            onClick={() => { setIsDesktopSidebarOpen(false); setIsSidebarOpen(false); }}
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 dark:bg-slate-300 dark:hover:bg-slate-200 transition-colors"
             title="Ocultar panel"
           >
             <ChevronsLeft className="w-4 h-4 text-slate-200 dark:text-slate-800" />
