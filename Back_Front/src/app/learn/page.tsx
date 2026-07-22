@@ -5,7 +5,7 @@ import { usePyodide } from "@/hooks/usePyodide";
 import CodeEditor from "@/components/CodeEditor";
 import { useAuth } from "@/context/AuthContext";
 import { useProgress } from "@/hooks/useProgress";
-import { Play, CheckCircle, Circle, Terminal, BookOpen, AlertCircle, LogOut, GraduationCap, School, Lock, Trophy, XCircle, X, Menu, ArrowLeft, ChevronRight, ChevronsRight, ChevronsLeft } from "lucide-react";
+import { Play, CheckCircle, Circle, Terminal, BookOpen, AlertCircle, LogOut, GraduationCap, School, Lock, Trophy, XCircle, X, Menu, ArrowLeft, ArrowRight, ChevronRight, ChevronsRight, ChevronsLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 import ReactMarkdown from 'react-markdown';
