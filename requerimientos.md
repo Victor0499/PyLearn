@@ -8,22 +8,27 @@ Fecha de inicio del seguimiento: 03/05/2026
 ## Lo Implementado
 
 ### Autenticación
-- [✔] Registro de usuario con roles (Estudiante / Profesor)
-- [✔] Login con JWT
+- [✔] Registro de usuario con roles (Estudiante / Profesor / Admin)
+- [✔] Login con JWT y correo/contraseña
+- [✔] Login con Google (OAuth2)
+- [✔] Recuperación de contraseña y nombre de usuario
 - [✔] Endpoint `/api/auth/me/` para obtener datos del usuario
 - [✔] Logout en frontend
 - [✔] Contexto de autenticación (`AuthContext`) en frontend
-- [✔] Redirección protegida: si no hay usuario autenticado, redirige a `/login`
+- [✔] Redirección protegida por roles: si no hay usuario, a `/login`. Si hay usuario, a su dashboard correspondiente.
 
-### Frontend - Dashboard
+### Frontend - Dashboard y Roles
 - [✔] Header con logo "PyLearn", nombre de usuario, rol y botón de logout
-- [✔] Banner de bienvenida con mascota "Noodle"
+- [✔] Banner de bienvenida con mascota "Noodle" y textos dinámicos según el progreso
 - [✔] Ruta de aprendizaje con módulos (tarjetas interactivas)
 - [✔] 4 módulos definidos: Conceptos Básicos, Estructuras de Control, Funciones Modulares, Estructuras de Datos
 - [✔] Progreso visual por módulo (barra de progreso)
 - [✔] Módulos bloqueados/desbloqueados
 - [✔] Progreso porcentual real obtenido desde la base de datos
 - [✔] Desbloqueo de módulo 2 al completar módulo 1 al 100%
+- [✔] Panel de Administración (`/admin`)
+- [✔] Panel de Profesor (`/profesor`)
+- [✔] Leaderboard / Ranking de estudiantes (`/leaderboard`)
 
 ### Frontend - Aprendizaje (Lecciones)
 - [✔] Sidebar con lista de lecciones y progreso
@@ -41,7 +46,7 @@ Fecha de inicio del seguimiento: 03/05/2026
 - [✔] Modal de felicitación al completar una lección
 - [✔] Sistema de pistas por ejercicio
 - [✔] Tabs para ejercicios
-- [✔] Diseño responsive con tabs de Teoría/Ejercicios en móvil
+- [✔] Diseño 100% responsive (Mobile-first) en todas las pantallas (botones, menús, sidebar)
 
 ### Backend (Django)
 - [✔] Modelos creados:
@@ -76,14 +81,14 @@ Fecha de inicio del seguimiento: 03/05/2026
 - [ ] Conectar las lecciones del frontend con los modelos del backend (actualmente están hardcodeadas)
 
 ### Funcionalidades
-- [ ] Panel de administración para profesores
+- [✔] Panel de administración para profesores
 - [✔] Guardar progreso del usuario en la base de datos
 - [✔] Desbloqueo de módulos según progreso
 - [ ] CRUD de contenido desde el backend (admin panel de Django)
 - [✔] Persistencia del código escrito por el usuario
-- [ ] Estadísticas de progreso del estudiante
+- [ ] Estadísticas de progreso del estudiante detalladas
 - [ ] Sistema de logros / badges
-- [ ] Sistema de puntuación
+- [✔] Sistema de puntuación / Leaderboard
 
 ### Mejoras
 - [ ] Tests unitarios (backend y frontend)
@@ -92,13 +97,5 @@ Fecha de inicio del seguimiento: 03/05/2026
 - [ ] Mejorar la carga inicial de Pyodide (indicador de progreso)
 - [ ] Soporte offline
 
----
 
-## Historial de Cambios
 
-| Fecha | Cambio |
-|-------|--------|
-| 03/05/2026 | Creación del documento de requerimientos |
-| 03/05/2026 | Lección 3 "Palabras Reservadas" agregada |
-| 03/05/2026 | Progreso persistente: guardado y restauración al recargar/reiniciar sesión |
-| 03/05/2026 | Dashboard con progreso porcentual real por módulo |

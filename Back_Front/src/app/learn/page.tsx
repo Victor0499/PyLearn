@@ -46,6 +46,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
   const [running, setRunning] = useState(false);
   const [showHint, setShowHint] = useState(() => lessons.map((l: any) => l.exercises.map(() => false)));
   const [errorModal, setErrorModal] = useState<{ title: string; message: string } | null>(null);
+  const [successModal, setSuccessModal] = useState<{ title: string; message: string } | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
   const [mobileView, setMobileView] = useState<'theory' | 'exercises'>('theory');
@@ -169,6 +170,13 @@ function LearnContent({ lessons }: { lessons: any[] }) {
     updateLessonState(setAllOutputs, a => { a[activeExercise] = result.output || ""; return a; });
     updateLessonState(setAllErrors, a => { a[activeExercise] = result.error || ""; return a; });
 
+    const checkExerciseCompletion = () => {
+      const willComplete = successes.filter((s, i) => i === activeExercise ? true : s).length === exercises.length;
+      if (!willComplete) {
+        setSuccessModal({ title: "¡Excelente!", message: "Has completado este ejercicio correctamente. Sigue así." });
+      }
+    };
+
     if (result.error) {
       const raw = result.error;
       let title = "¡Ups! Algo salió mal", message = raw;
@@ -188,6 +196,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       if (out === currentEx.outputCheck) {
         updateLessonState(setAllSuccesses, a => { a[activeExercise] = true; return a; });
         saveProgress(lesson.id, currentEx.id, codes[activeExercise]);
+        checkExerciseCompletion();
       } else {
         setErrorModal({ title: "❌ El mensaje no coincide", message: `Esperado:\n'${currentEx.outputCheck}'\n\nObtenido:\n'${out}'\n\nRevisa mayúsculas y espacios.` });
         updateLessonState(setAllSuccesses, a => { a[activeExercise] = false; return a; });
@@ -195,6 +204,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
     } else {
       updateLessonState(setAllSuccesses, a => { a[activeExercise] = true; return a; });
       saveProgress(lesson.id, currentEx.id, codes[activeExercise]);
+      checkExerciseCompletion();
     }
     setRunning(false);
   };
@@ -466,6 +476,25 @@ function LearnContent({ lessons }: { lessons: any[] }) {
         </div>
       )}
 
+      {/* Success Modal */}
+      {successModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 border border-green-500/30 rounded-2xl p-8 max-w-md w-full shadow-2xl">
+            <div className="w-14 h-14 bg-green-500/10 border border-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
+              <CheckCircle className="w-7 h-7 text-green-400" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white text-center mb-3">{successModal.title}</h3>
+            <div className="bg-slate-100 dark:bg-slate-800/80 border border-black dark:border-slate-700 rounded-xl p-4 mb-5">
+              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-wrap font-medium text-center">{successModal.message}</p>
+            </div>
+            <button onClick={() => setSuccessModal(null)}
+              className="w-full py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
+              <ArrowRight className="w-4 h-4" />Continuar
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Completion Modal */}
       {completedCount === exercises.length && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
@@ -473,11 +502,17 @@ function LearnContent({ lessons }: { lessons: any[] }) {
             <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/30">
               <Trophy className="w-8 h-8 text-slate-900 dark:text-white" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">¡Felicidades!</h3>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">¡Lección completada!</h3>
             <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Completaste todos los ejercicios de <strong className="text-slate-900 dark:text-white">"{lesson.title}"</strong>.</p>
-            <button onClick={() => updateLessonState(setAllSuccesses, a => a.map(() => false))}
-              className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium rounded-xl transition-all">
-              Seguir Practicando
+            <button onClick={() => {
+                if (activeLessonIdx < lessons.length - 1) {
+                  switchLesson(activeLessonIdx + 1);
+                } else {
+                  router.push(user?.role === 'admin' ? '/admin' : user?.role === 'profesor' ? '/profesor' : '/dashboard');
+                }
+              }}
+              className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
+              {activeLessonIdx < lessons.length - 1 ? 'Ir a la siguiente lección' : 'Volver al Dashboard'} <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
