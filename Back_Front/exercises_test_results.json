@@ -1,0 +1,1275 @@
+{
+  "failures": [
+    {
+      "id": 704,
+      "lesson_id": 7,
+      "title": "Ejercicio 4: El input() anidado",
+      "error": "TIMEOUT",
+      "solution_code": "cantidad = int(input('Dime una cantidad: '))\nprint(cantidad)",
+      "test_code": "assert 'cantidad' in locals(), \"Falta 'cantidad'\""
+    },
+    {
+      "id": 801,
+      "lesson_id": 8,
+      "title": "Ejercicio 1: Tu primer if",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'edad' is not defined",
+      "solution_code": "if edad >= 18:\n    print('Eres mayor de edad')",
+      "test_code": "assert 'edad' in locals(), \"Falta 'edad'\"\nassert edad == 18, \"'edad' debe ser 18\""
+    },
+    {
+      "id": 901,
+      "lesson_id": 9,
+      "title": "Ejercicio 1: Concepto de if-else",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'edad' is not defined",
+      "solution_code": "if edad >= 18:\n    print('Acceso')\nelse:\n    print('Denegado')",
+      "test_code": "assert 'edad' in locals(), \"Falta 'edad'\"\nassert edad == 15, \"'edad' debe ser 15\""
+    },
+    {
+      "id": 903,
+      "lesson_id": 9,
+      "title": "Ejercicio 3: Función round()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numero_largo' is not defined",
+      "solution_code": "numero_corto = round(numero_largo, 2)\nprint(numero_corto)",
+      "test_code": "assert 'numero_corto' in locals(), \"Falta 'numero_corto'\"\nassert numero_corto == 8.12, \"El valor debe ser redondeado a 8.12\""
+    },
+    {
+      "id": 1001,
+      "lesson_id": 10,
+      "title": "Ejercicio 1: Concepto de Múltiples Caminos",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'semaforo' is not defined",
+      "solution_code": "if semaforo == 'Verde':\n    print('Avanzar')\nelif semaforo == 'Amarillo':\n    print('Precaución')\nelif semaforo == 'Rojo':\n    print('Detenerse')",
+      "test_code": "assert 'semaforo' in locals(), \"Falta 'semaforo'\"\nassert semaforo == 'Amarillo', \"'semaforo' debe ser 'Amarillo'\""
+    },
+    {
+      "id": 1002,
+      "lesson_id": 10,
+      "title": "Ejercicio 2: Uso del elif",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'dia' is not defined. Did you mean: 'dir'?",
+      "solution_code": "if dia == 1:\n    print('Lunes')\nelif dia == 2:\n    print('Martes')\nelif dia == 3:\n    print('Miércoles')",
+      "test_code": "assert 'dia' in locals(), \"Falta 'dia'\"\nassert dia == 3, \"'dia' debe ser 3\""
+    },
+    {
+      "id": 1004,
+      "lesson_id": 10,
+      "title": "Ejercicio 4: Convertidor Práctico",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'num' is not defined. Did you mean: 'sum'?",
+      "solution_code": "if num == 1:\n    print('Uno')\nelif num == 2:\n    print('Dos')\nelif num == 3:\n    print('Tres')\nelif num == 4:\n    print('Cuatro')\nelif num == 5:\n    print('Cinco')\nelse:\n    print('No soportado')",
+      "test_code": "assert 'num' in locals()"
+    },
+    {
+      "id": 1102,
+      "lesson_id": 11,
+      "title": "Ejercicio 2: Uso de .lower()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'entrada' is not defined",
+      "solution_code": "salida = entrada.lower()\nprint(salida)",
+      "test_code": "assert 'salida' in locals(), \"Falta 'salida'\"\nassert salida == 'python', \"Debe ser 'python' en minúsculas\""
+    },
+    {
+      "id": 1103,
+      "lesson_id": 11,
+      "title": "Ejercicio 3: Anidación Simple",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'usuario' is not defined",
+      "solution_code": "if usuario == 'admin':\n    if clave == 123:\n        print('Acceso Total')",
+      "test_code": "assert 'usuario' in locals() and 'clave' in locals()"
+    },
+    {
+      "id": 1104,
+      "lesson_id": 11,
+      "title": "Ejercicio 4: El Mini Conversor Doble",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'menu' is not defined",
+      "solution_code": "if menu == 2:\n    texto = texto.lower()\n    if texto == 'uno':\n        print('El número es 1')",
+      "test_code": "assert 'menu' in locals()"
+    },
+    {
+      "id": 1201,
+      "lesson_id": 12,
+      "title": "Ejercicio 1: Comparaciones Básicas",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'num1' is not defined",
+      "solution_code": "son_iguales = (num1 == num2)\nson_diferentes = (num1 != num2)\nprint(son_iguales, son_diferentes)",
+      "test_code": "assert 'num1' in locals() and 'num2' in locals(), \"Faltan las variables num1 y num2\"\nassert 'son_iguales' in locals() and 'son_diferentes' in locals(), \"Faltan las variables de comparación\"\nassert son_iguales == False, \"son_iguales debe ser False\"\nassert son_diferentes == True, \"son_diferentes debe ser True\""
+    },
+    {
+      "id": 1202,
+      "lesson_id": 12,
+      "title": "Ejercicio 2: Captura con int(input())",
+      "error": "TIMEOUT",
+      "solution_code": "numero1 = int(input())\nnumero2 = int(input())\nprint('Los números son:', numero1, 'y', numero2)",
+      "test_code": "assert 'numero1' in locals() and 'numero2' in locals(), \"Falta definir 'numero1' y 'numero2'\"\nassert isinstance(numero1, int) and isinstance(numero2, int), \"Debes usar int(input()) para convertirlos a enteros\""
+    },
+    {
+      "id": 1203,
+      "lesson_id": 12,
+      "title": "Ejercicio 3: Las 6 Comparaciones Relacionales",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'num1' is not defined",
+      "solution_code": "if num1 < num2:\n    print('num1 es menor que num2')\nif num1 > num2:\n    print('num1 es mayor que num2')\nif num1 == num2:\n    print('num1 es igual a num2')\nif num1 != num2:\n    print('num1 es diferente de num2')\nif num1 <= num2:\n    print('num1 es menor o igual a num2')\nif num1 >= num2:\n    print('num1 es mayor o igual a num2')",
+      "test_code": "assert 'num1' in locals() and 'num2' in locals(), \"No debes borrar las variables num1 y num2\""
+    },
+    {
+      "id": 1204,
+      "lesson_id": 12,
+      "title": "Ejercicio 4: La Desigualdad",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'password' is not defined",
+      "solution_code": "if password != '1234':\n    print('Contraseña segura')",
+      "test_code": "assert 'password' in locals()"
+    },
+    {
+      "id": 1303,
+      "lesson_id": 13,
+      "title": "Ejercicio 3: Operador not",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'activo' is not defined",
+      "solution_code": "if not activo:\n    print('Sistema apagado')",
+      "test_code": "assert 'activo' in locals(), \"No definiste la variable activo\"\nassert not activo, \"activo debe ser False\""
+    },
+    {
+      "id": 3103,
+      "lesson_id": 31,
+      "title": "Ejercicio 3: Comprendiendo la indentación",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'texto' is not defined. Did you mean: 'next'?",
+      "solution_code": "for numero in texto:\n    print(numero)\nprint(\"Terminado\")",
+      "test_code": "assert 'texto' in locals()"
+    },
+    {
+      "id": 3601,
+      "lesson_id": 36,
+      "title": "Ejercicio 1: Reasignación individual",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "colores[0] = \"naranja\"\ncolores[-1] = \"morado\"\nprint(colores)",
+      "test_code": "assert 'colores' in locals(), \"Falta la variable 'colores'\"\nassert colores[0] == 'naranja', \"El primer elemento debe ser 'naranja'\"\nassert colores[-1] == 'morado', \"El último elemento debe ser 'morado'\"\nassert colores[1] == 'verde', \"El elemento del medio no debe cambiar\""
+    },
+    {
+      "id": 3602,
+      "lesson_id": 36,
+      "title": "Ejercicio 2: Slicing – Mismo tamaño",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numeros' is not defined",
+      "solution_code": "numeros[1:3] = [20, 30]\nprint(numeros)",
+      "test_code": "assert 'numeros' in locals(), \"Falta la variable 'numeros'\"\nassert numeros == [1, 20, 30, 4, 5], f\"La lista debe ser [1, 20, 30, 4, 5], obtuviste: {numeros}\""
+    },
+    {
+      "id": 3603,
+      "lesson_id": 36,
+      "title": "Ejercicio 3: Slicing con distinto tamaño",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'letras' is not defined",
+      "solution_code": "letras[0:2] = [\"x\", \"y\", \"z\"]\nprint(letras)",
+      "test_code": "assert 'letras' in locals(), \"Falta la variable 'letras'\"\nassert letras == ['x', 'y', 'z', 'c', 'd', 'e'], f\"La lista debe ser ['x', 'y', 'z', 'c', 'd', 'e'], obtuviste: {letras}\""
+    },
+    {
+      "id": 3701,
+      "lesson_id": 37,
+      "title": "Ejercicio 1: append() básico",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'animales' is not defined",
+      "solution_code": "animales.append(\"conejo\")\nprint(animales)",
+      "test_code": "assert 'animales' in locals(), \"Falta la variable 'animales'\"\nassert animales[-1] == 'conejo', \"El último elemento debe ser 'conejo'\"\nassert len(animales) == 4, \"La lista debe tener 4 elementos\""
+    },
+    {
+      "id": 3702,
+      "lesson_id": 37,
+      "title": "Ejercicio 2: Inserción múltiple secuencial",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numeros' is not defined",
+      "solution_code": "numeros.append(4)\nnumeros.append(5)\nnumeros.append(6)\nprint(numeros)",
+      "test_code": "assert 'numeros' in locals(), \"Falta la variable 'numeros'\"\nassert numeros == [1, 2, 3, 4, 5, 6], f\"La lista debe ser [1, 2, 3, 4, 5, 6], obtuviste: {numeros}\""
+    },
+    {
+      "id": 3703,
+      "lesson_id": 37,
+      "title": "Ejercicio 3: Lista heterogénea con append()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'datos' is not defined",
+      "solution_code": "datos.append(2026)\ndatos.append(3.14)\ndatos.append(True)\nprint(datos)",
+      "test_code": "assert 'datos' in locals(), \"Falta la variable 'datos'\"\nassert datos == ['Python', 'es', 'genial', 2026, 3.14, True], f\"La lista no es correcta, obtuviste: {datos}\""
+    },
+    {
+      "id": 3801,
+      "lesson_id": 38,
+      "title": "Ejercicio 1: Inserción al inicio",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numeros' is not defined",
+      "solution_code": "numeros.insert(0, 1)\nprint(numeros)",
+      "test_code": "assert 'numeros' in locals(), \"Falta la variable 'numeros'\"\nassert numeros == [1, 2, 3, 4, 5], f\"La lista debe ser [1, 2, 3, 4, 5], obtuviste: {numeros}\""
+    },
+    {
+      "id": 3802,
+      "lesson_id": 38,
+      "title": "Ejercicio 2: Inserción en posición intermedia",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'letras' is not defined",
+      "solution_code": "letras.insert(2, \"c\")\nprint(letras)",
+      "test_code": "assert 'letras' in locals(), \"Falta la variable 'letras'\"\nassert letras == ['a', 'b', 'c', 'd', 'e'], f\"La lista debe ser ['a', 'b', 'c', 'd', 'e'], obtuviste: {letras}\""
+    },
+    {
+      "id": 3803,
+      "lesson_id": 38,
+      "title": "Ejercicio 3: Índice fuera de rango",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'planetas' is not defined",
+      "solution_code": "planetas.insert(999, \"Marte\")\nplanetas.insert(1, \"Fausto\")\nprint(planetas)",
+      "test_code": "assert 'planetas' in locals(), \"Falta la variable 'planetas'\"\nassert planetas == ['Mercurio', 'Fausto', 'Venus', 'Tierra', 'Marte'], f\"La lista no es correcta, obtuviste: {planetas}\""
+    },
+    {
+      "id": 3901,
+      "lesson_id": 39,
+      "title": "Ejercicio 1: pop() sin argumento",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "eliminado = colores.pop()\nprint(eliminado)\nprint(colores)",
+      "test_code": "assert 'eliminado' in locals(), \"Falta la variable 'eliminado'\"\nassert eliminado == 'amarillo', \"'eliminado' debe ser 'amarillo'\"\nassert colores == ['rojo', 'verde', 'azul'], f\"La lista debe ser ['rojo', 'verde', 'azul'], obtuviste: {colores}\""
+    },
+    {
+      "id": 3902,
+      "lesson_id": 39,
+      "title": "Ejercicio 2: pop() con índice positivo y negativo",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'letras' is not defined",
+      "solution_code": "primero = letras.pop(1)\nsegundo = letras.pop(-1)\nprint(primero)\nprint(segundo)\nprint(letras)",
+      "test_code": "assert 'primero' in locals() and 'segundo' in locals(), \"Faltan las variables 'primero' o 'segundo'\"\nassert primero == 'b', \"'primero' debe ser 'b'\"\nassert segundo == 'e', \"'segundo' debe ser 'e'\"\nassert letras == ['a', 'c', 'd'], f\"La lista debe ser ['a', 'c', 'd'], obtuviste: {letras}\""
+    },
+    {
+      "id": 3903,
+      "lesson_id": 39,
+      "title": "Ejercicio 3: Evitando el IndexError",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numeros' is not defined",
+      "solution_code": "a = numeros.pop(4)\nb = numeros.pop(-2)\nprint(a)\nprint(b)\nprint(numeros)",
+      "test_code": "assert 'a' in locals() and 'b' in locals(), \"Faltan las variables 'a' o 'b'\"\nassert a == 50, \"'a' debe ser 50\"\nassert b == 30, \"'b' debe ser 30\"\nassert numeros == [10, 20, 40], f\"La lista debe ser [10, 20, 40], obtuviste: {numeros}\""
+    },
+    {
+      "id": 4001,
+      "lesson_id": 40,
+      "title": "Ejercicio 1: Eliminación estándar",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'animales' is not defined",
+      "solution_code": "animales.remove(\"loro\")\nprint(animales)",
+      "test_code": "assert 'animales' in locals(), \"Falta la variable 'animales'\"\nassert animales == ['perro', 'gato', 'pez'], f\"La lista debe ser ['perro', 'gato', 'pez'], obtuviste: {animales}\""
+    },
+    {
+      "id": 4002,
+      "lesson_id": 40,
+      "title": "Ejercicio 2: Elementos duplicados",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numeros' is not defined",
+      "solution_code": "numeros.remove(20)\nprint(numeros)",
+      "test_code": "assert 'numeros' in locals(), \"Falta la variable 'numeros'\"\nassert numeros == [10, 30, 20, 40], f\"La lista debe ser [10, 30, 20, 40], obtuviste: {numeros}\""
+    },
+    {
+      "id": 4003,
+      "lesson_id": 40,
+      "title": "Ejercicio 3: Case-sensitive y valores numéricos",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'datos' is not defined",
+      "solution_code": "datos.remove(\"Python\")\ndatos.remove(100)\nprint(datos)",
+      "test_code": "assert 'datos' in locals(), \"Falta la variable 'datos'\"\nassert datos == ['python', '100'], f\"La lista debe ser ['python', '100'], obtuviste: {datos}\""
+    },
+    {
+      "id": 4101,
+      "lesson_id": 41,
+      "title": "Ejercicio 1: Eliminar un elemento",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'animales' is not defined",
+      "solution_code": "del animales[2]\nprint(animales)",
+      "test_code": "assert 'animales' in locals(), \"Falta la variable 'animales'\"\nassert animales == ['perro', 'gato', 'pájaro'], f\"La lista debe ser ['perro', 'gato', 'pájaro'], obtuviste: {animales}\""
+    },
+    {
+      "id": 4102,
+      "lesson_id": 41,
+      "title": "Ejercicio 2: Eliminar un rango (Slicing)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numeros' is not defined",
+      "solution_code": "del numeros[0:3]\nprint(numeros)",
+      "test_code": "assert 'numeros' in locals(), \"Falta la variable 'numeros'\"\nassert numeros == [40, 50], f\"La lista debe ser [40, 50], obtuviste: {numeros}\""
+    },
+    {
+      "id": 4103,
+      "lesson_id": 41,
+      "title": "Ejercicio 3: Vaciar la lista",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'datos' is not defined",
+      "solution_code": "del datos[:]\nprint(datos)",
+      "test_code": "assert 'datos' in locals(), \"Falta la variable 'datos'\"\nassert datos == [], f\"La lista debe estar vacía [], obtuviste: {datos}\""
+    },
+    {
+      "id": 4201,
+      "lesson_id": 42,
+      "title": "Ejercicio 1: Orden Ascendente (Números)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'edades' is not defined",
+      "solution_code": "edades.sort()\nprint(edades)",
+      "test_code": "assert 'edades' in locals(), \"Falta la variable 'edades'\"\nassert edades == [15, 18, 25, 32, 40], f\"La lista debe ser [15, 18, 25, 32, 40], obtuviste: {edades}\""
+    },
+    {
+      "id": 4202,
+      "lesson_id": 42,
+      "title": "Ejercicio 2: Orden Descendente (Números)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'puntajes' is not defined",
+      "solution_code": "puntajes.sort(reverse=True)\nprint(puntajes)",
+      "test_code": "assert 'puntajes' in locals(), \"Falta la variable 'puntajes'\"\nassert puntajes == [200, 100, 75, 50, 10], f\"La lista debe ser [200, 100, 75, 50, 10], obtuviste: {puntajes}\""
+    },
+    {
+      "id": 4203,
+      "lesson_id": 42,
+      "title": "Ejercicio 3: Orden Descendente (Strings)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'nombres' is not defined",
+      "solution_code": "nombres.sort(reverse=True)\nprint(nombres)",
+      "test_code": "assert 'nombres' in locals(), \"Falta la variable 'nombres'\"\nassert nombres == ['Zoe', 'Carlos', 'Beatriz', 'Ana'], f\"La lista debe ser ['Zoe', 'Carlos', 'Beatriz', 'Ana'], obtuviste: {nombres}\""
+    },
+    {
+      "id": 4301,
+      "lesson_id": 43,
+      "title": "Ejercicio 1: Búsqueda simple",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "posicion = colores.index(\"azul\")\nprint(posicion)",
+      "test_code": "assert 'posicion' in locals(), \"Falta la variable 'posicion'\"\nassert posicion == 2, \"La posición de 'azul' debe ser 2\""
+    },
+    {
+      "id": 4302,
+      "lesson_id": 43,
+      "title": "Ejercicio 2: Búsqueda con inicio",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numeros' is not defined",
+      "solution_code": "posicion = numeros.index(10, 2)\nprint(posicion)",
+      "test_code": "assert 'posicion' in locals(), \"Falta la variable 'posicion'\"\nassert posicion == 3, \"La posición del segundo 10 debe ser 3\""
+    },
+    {
+      "id": 4303,
+      "lesson_id": 43,
+      "title": "Ejercicio 3: Búsqueda con rango y validación",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'letras' is not defined",
+      "solution_code": "posicion = letras.index(\"d\", 1, 5)\nprint(posicion)",
+      "test_code": "assert 'posicion' in locals(), \"Falta la variable 'posicion'\"\nassert posicion == 3, \"La posición de 'd' debe ser 3\""
+    },
+    {
+      "id": 4401,
+      "lesson_id": 44,
+      "title": "Ejercicio 1: Concatenar dos listas",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'equipo1' is not defined",
+      "solution_code": "equipo1.extend(equipo2)\nprint(equipo1)",
+      "test_code": "assert 'equipo1' in locals(), \"Falta la variable 'equipo1'\"\nassert equipo1 == ['Ana', 'Luis', 'Marta', 'Pedro'], f\"La lista debe ser ['Ana', 'Luis', 'Marta', 'Pedro'], obtuviste: {equipo1}\""
+    },
+    {
+      "id": 4402,
+      "lesson_id": 44,
+      "title": "Ejercicio 2: Extender con range()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'impares' is not defined",
+      "solution_code": "impares.extend(range(5, 11, 2))\nprint(impares)",
+      "test_code": "assert 'impares' in locals(), \"Falta la variable 'impares'\"\nassert impares == [1, 3, 5, 7, 9], f\"La lista debe ser [1, 3, 5, 7, 9], obtuviste: {impares}\""
+    },
+    {
+      "id": 4403,
+      "lesson_id": 44,
+      "title": "Ejercicio 3: Múltiples extensiones",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'coleccion' is not defined",
+      "solution_code": "coleccion.extend([1, 2, 3])\ncoleccion.extend(range(4, 7))\nprint(coleccion)",
+      "test_code": "assert 'coleccion' in locals(), \"Falta la variable 'coleccion'\"\nassert coleccion == [0, 1, 2, 3, 4, 5, 6], f\"La lista debe ser [0, 1, 2, 3, 4, 5, 6], obtuviste: {coleccion}\""
+    },
+    {
+      "id": 4502,
+      "lesson_id": 45,
+      "title": "Ejercicio 2: String a Lista",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'palabra' is not defined",
+      "solution_code": "letras = list(palabra)\nprint(letras)",
+      "test_code": "assert 'letras' in locals(), \"Falta la variable 'letras'\"\nassert letras == ['P', 'y', 't', 'h', 'o', 'n'], f\"La lista debe ser ['P', 'y', 't', 'h', 'o', 'n'], obtuviste: {letras}\""
+    },
+    {
+      "id": 4503,
+      "lesson_id": 45,
+      "title": "Ejercicio 3: Inversión de Lista",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'caracteres' is not defined",
+      "solution_code": "invertida = caracteres[::-1]\nprint(invertida)",
+      "test_code": "assert 'invertida' in locals(), \"Falta la variable 'invertida'\"\nassert invertida == ['a', 'l', 'o', 'H'], f\"La lista debe ser ['a', 'l', 'o', 'H'], obtuviste: {invertida}\""
+    },
+    {
+      "id": 4601,
+      "lesson_id": 46,
+      "title": "Ejercicio 1: Extracción Básica (Nivel 2)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'datos' is not defined",
+      "solution_code": "extraido = datos[2][1]\nprint(extraido)",
+      "test_code": "assert 'extraido' in locals(), \"Falta la variable 'extraido'\"\nassert extraido == 40, \"El valor extraído debe ser 40\""
+    },
+    {
+      "id": 4602,
+      "lesson_id": 46,
+      "title": "Ejercicio 2: Extracción Profunda (Nivel 3)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'matriz' is not defined",
+      "solution_code": "seis = matriz[1][2][1]\nprint(seis)",
+      "test_code": "assert 'seis' in locals(), \"Falta la variable 'seis'\"\nassert seis == 6, \"El valor extraído debe ser 6\""
+    },
+    {
+      "id": 4603,
+      "lesson_id": 46,
+      "title": "Ejercicio 3: Modificación en Lista Anidada",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'info' is not defined",
+      "solution_code": "info[1][1] = 26\nprint(info)",
+      "test_code": "assert 'info' in locals(), \"Falta la variable 'info'\"\nassert info == ['Ana', ['Edad', 26]], f\"La lista debe ser ['Ana', ['Edad', 26]], obtuviste: {info}\""
+    },
+    {
+      "id": 4701,
+      "lesson_id": 47,
+      "title": "Ejercicio 1: Extracción Básica",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'matriz' is not defined",
+      "solution_code": "valor = matriz[1][2]\nprint(valor)",
+      "test_code": "assert 'valor' in locals(), \"Falta la variable 'valor'\"\nassert valor == 60, \"El valor extraído debe ser 60\""
+    },
+    {
+      "id": 4702,
+      "lesson_id": 47,
+      "title": "Ejercicio 2: Extracción Múltiple",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'matrix' is not defined",
+      "solution_code": "a = matrix[1][0]\nb = matrix[2][1]\nprint(a)\nprint(b)",
+      "test_code": "assert 'a' in locals() and 'b' in locals(), \"Faltan las variables 'a' o 'b'\"\nassert a == 4, \"'a' debe ser 4\"\nassert b == 8, \"'b' debe ser 8\""
+    },
+    {
+      "id": 4703,
+      "lesson_id": 47,
+      "title": "Ejercicio 3: Modificar una Matriz",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'tablero' is not defined",
+      "solution_code": "tablero[1][1] = \"X\"\nprint(tablero)",
+      "test_code": "assert 'tablero' in locals(), \"Falta la variable 'tablero'\"\nassert tablero[1][1] == 'X', \"La celda vacía debe ser ahora una 'X'\""
+    },
+    {
+      "id": 4801,
+      "lesson_id": 48,
+      "title": "Ejercicio 1: Impresión fila por fila",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'matriz' is not defined",
+      "solution_code": "for fila in matriz:\n    print(fila)",
+      "test_code": "assert 'matriz' in locals(), \"Falta la variable 'matriz'\""
+    },
+    {
+      "id": 4802,
+      "lesson_id": 48,
+      "title": "Ejercicio 2: Desestructuración completa",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'matriz' is not defined",
+      "solution_code": "for fila in matriz:\n    for numero in fila:\n        print(numero)",
+      "test_code": "assert 'matriz' in locals(), \"Falta la variable 'matriz'\""
+    },
+    {
+      "id": 4803,
+      "lesson_id": 48,
+      "title": "Ejercicio 3: Formato Tabular Limpio",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'matriz' is not defined",
+      "solution_code": "for fila in matriz:\n    for num in fila:\n        print(num, end=\" \")\n    print()",
+      "test_code": "assert 'matriz' in locals(), \"Falta la variable 'matriz'\""
+    },
+    {
+      "id": 4901,
+      "lesson_id": 49,
+      "title": "Ejercicio 1: Suma Manual de Vectores Fila",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'fila_suma' is not defined",
+      "solution_code": "fila_suma.append(A[0][0] + B[0][0])\nfila_suma.append(A[0][1] + B[0][1])\nC.append(fila_suma)\nprint(C)",
+      "test_code": "assert 'C' in locals(), \"Falta la matriz resultante 'C'\"\nassert C == [[3, 7]], \"La matriz 'C' no tiene el resultado correcto\""
+    },
+    {
+      "id": 4902,
+      "lesson_id": 49,
+      "title": "Ejercicio 2: Uso dinámico de len()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'M' is not defined",
+      "solution_code": "print(len(M))\nprint(len(M[0]))",
+      "test_code": "pass"
+    },
+    {
+      "id": 4903,
+      "lesson_id": 49,
+      "title": "Ejercicio 3: Suma de Matrices 2x2",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'A' is not defined",
+      "solution_code": "for row in range(len(A)):\n    new_row = []\n    for col in range(len(A[0])):\n        new_row.append(A[row][col] + B[row][col])\n    C.append(new_row)\nprint(C)",
+      "test_code": "assert 'C' in locals(), \"Falta la variable 'C'\"\nassert C == [[6, 6], [6, 6]], \"El resultado de la suma es incorrecto\""
+    },
+    {
+      "id": 5002,
+      "lesson_id": 50,
+      "title": "Ejercicio 2: Claves repetidas",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'letras' is not defined",
+      "solution_code": "print(letras)",
+      "test_code": "pass"
+    },
+    {
+      "id": 5101,
+      "lesson_id": 51,
+      "title": "Ejercicio 1: Acceso básico",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'persona' is not defined",
+      "solution_code": "su_edad = persona[\"edad\"]\nprint(su_edad)",
+      "test_code": "assert 'su_edad' in locals(), \"Falta la variable 'su_edad'\"\nassert su_edad == 25, \"El valor de 'su_edad' no es correcto\""
+    },
+    {
+      "id": 5102,
+      "lesson_id": 51,
+      "title": "Ejercicio 2: Evitando el KeyError",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'persona' is not defined",
+      "solution_code": "print(persona[\"nombre\"])",
+      "test_code": "pass"
+    },
+    {
+      "id": 5103,
+      "lesson_id": 51,
+      "title": "Ejercicio 3: Rutas complejas",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'escuela' is not defined",
+      "solution_code": "grado_medio = escuela[\"grados\"][1]\nprint(grado_medio)",
+      "test_code": "assert 'grado_medio' in locals(), \"Falta la variable 'grado_medio'\"\nassert grado_medio == 10, \"No extrajiste el valor correcto (debe ser 10)\""
+    },
+    {
+      "id": 5201,
+      "lesson_id": 52,
+      "title": "Ejercicio 1: Visualizar items",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "print(colores.items())",
+      "test_code": "pass"
+    },
+    {
+      "id": 5202,
+      "lesson_id": 52,
+      "title": "Ejercicio 2: Conversión a lista",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "lista_colores = list(colores.items())\nprint(lista_colores)",
+      "test_code": "assert 'lista_colores' in locals(), \"Falta la variable 'lista_colores'\"\nassert isinstance(lista_colores, list), \"'lista_colores' debe ser una lista\"\nassert lista_colores == [('rojo', 1), ('verde', 2), ('azul', 3)], \"La lista no contiene los items correctos\""
+    },
+    {
+      "id": 5203,
+      "lesson_id": 52,
+      "title": "Ejercicio 3: Acceso por índice",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "lista_colores = list(colores.items())\nprint(lista_colores[2])",
+      "test_code": "pass"
+    },
+    {
+      "id": 5301,
+      "lesson_id": 53,
+      "title": "Ejercicio 1: Extraer las claves",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'usuario' is not defined",
+      "solution_code": "print(usuario.keys())",
+      "test_code": "pass"
+    },
+    {
+      "id": 5302,
+      "lesson_id": 53,
+      "title": "Ejercicio 2: Conversión a lista regular",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'usuario' is not defined",
+      "solution_code": "claves = list(usuario.keys())\nprint(claves)",
+      "test_code": "assert 'claves' in locals(), \"Falta la variable 'claves'\"\nassert isinstance(claves, list), \"La variable 'claves' debe ser una lista regular\"\nassert claves == ['nombre', 'edad', 'pais'], \"Los elementos de la lista no son correctos\""
+    },
+    {
+      "id": 5303,
+      "lesson_id": 53,
+      "title": "Ejercicio 3: Acceso indexado",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'usuario' is not defined",
+      "solution_code": "claves = list(usuario.keys())\nprint(claves[-1])",
+      "test_code": "pass"
+    },
+    {
+      "id": 5401,
+      "lesson_id": 54,
+      "title": "Ejercicio 1: Extraer los valores",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'calificaciones' is not defined",
+      "solution_code": "print(calificaciones.values())",
+      "test_code": "pass"
+    },
+    {
+      "id": 5402,
+      "lesson_id": 54,
+      "title": "Ejercicio 2: Conversión a lista pura",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'calificaciones' is not defined",
+      "solution_code": "lista_notas = list(calificaciones.values())\nprint(lista_notas)",
+      "test_code": "assert 'lista_notas' in locals(), \"Falta la variable 'lista_notas'\"\nassert isinstance(lista_notas, list), \"La variable 'lista_notas' debe ser una lista\"\nassert lista_notas == [9, 8, 10], \"Los elementos de la lista no son correctos\""
+    },
+    {
+      "id": 5403,
+      "lesson_id": 54,
+      "title": "Ejercicio 3: Promedio de notas",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'calificaciones' is not defined",
+      "solution_code": "lista_notas = list(calificaciones.values())\npromedio = (lista_notas[0] + lista_notas[1] + lista_notas[2]) / 3\nprint(promedio)",
+      "test_code": "assert 'promedio' in locals(), \"Falta la variable 'promedio'\"\nassert promedio == 9.0, \"El promedio calculado no es correcto\""
+    },
+    {
+      "id": 5501,
+      "lesson_id": 55,
+      "title": "Ejercicio 1: Vaciar un diccionario",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'carrito' is not defined",
+      "solution_code": "carrito.clear()\nprint(carrito)",
+      "test_code": "assert 'carrito' in locals(), \"Falta la variable 'carrito'\"\nassert isinstance(carrito, dict), \"La variable 'carrito' debe seguir siendo un diccionario\"\nassert carrito == {}, \"El diccionario no está vacío\""
+    },
+    {
+      "id": 5502,
+      "lesson_id": 55,
+      "title": "Ejercicio 2: Comprobar la longitud",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'configuracion' is not defined",
+      "solution_code": "configuracion.clear()\nprint(len(configuracion))",
+      "test_code": "pass"
+    },
+    {
+      "id": 5503,
+      "lesson_id": 55,
+      "title": "Ejercicio 3: Mutabilidad en la misma variable",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'datos' is not defined",
+      "solution_code": "datos.clear()\ndatos[\"activo\"] = True\nprint(datos)",
+      "test_code": "assert 'datos' in locals(), \"Falta la variable 'datos'\"\nassert datos == {'activo': True}, \"El contenido final no es el esperado\""
+    },
+    {
+      "id": 5601,
+      "lesson_id": 56,
+      "title": "Ejercicio 1: Modificar un valor",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'libro' is not defined",
+      "solution_code": "libro[\"paginas\"] = 350\nprint(libro)",
+      "test_code": "assert 'libro' in locals(), \"Falta la variable 'libro'\"\nassert libro['paginas'] == 350, \"El valor de 'paginas' no fue modificado correctamente\""
+    },
+    {
+      "id": 5602,
+      "lesson_id": 56,
+      "title": "Ejercicio 2: Agregar una nueva clave",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'libro' is not defined",
+      "solution_code": "libro[\"autor\"] = \"Carlos\"\nprint(libro)",
+      "test_code": "assert 'libro' in locals(), \"Falta la variable 'libro'\"\nassert 'autor' in libro, \"La clave 'autor' no fue agregada\"\nassert libro['autor'] == 'Carlos', \"El valor de 'autor' no es correcto\""
+    },
+    {
+      "id": 5603,
+      "lesson_id": 56,
+      "title": "Ejercicio 3: Modificar y agregar",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'producto' is not defined",
+      "solution_code": "producto[\"precio\"] = 999\nproducto[\"descuento\"] = True\nprint(producto)",
+      "test_code": "assert 'producto' in locals(), \"Falta la variable 'producto'\"\nassert producto['precio'] == 999, \"El precio no fue modificado correctamente\"\nassert producto.get('descuento') == True, \"La clave 'descuento' no fue agregada o su valor es incorrecto\""
+    },
+    {
+      "id": 5701,
+      "lesson_id": 57,
+      "title": "Ejercicio 1: Demostrar la referencia",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'a' is not defined",
+      "solution_code": "b = a\nb[\"x\"] = 99\nprint(a)",
+      "test_code": "pass"
+    },
+    {
+      "id": 5702,
+      "lesson_id": 57,
+      "title": "Ejercicio 2: Copia real con copy()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'a' is not defined",
+      "solution_code": "b = a.copy()\nb[\"x\"] = 99\nprint(b)\nprint(a)",
+      "test_code": "assert 'a' in locals() and 'b' in locals(), \"Faltan las variables 'a' o 'b'\"\nassert a == {'x': 1, 'y': 2}, \"El diccionario original 'a' fue modificado, usa .copy()\"\nassert b == {'x': 99, 'y': 2}, \"El clon 'b' no tiene el valor correcto\""
+    },
+    {
+      "id": 5703,
+      "lesson_id": 57,
+      "title": "Ejercicio 3: Respaldo antes de limpiar",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'inventario' is not defined",
+      "solution_code": "respaldo = inventario.copy()\ninventario.clear()\nprint(respaldo)\nprint(inventario)",
+      "test_code": "assert 'respaldo' in locals(), \"Falta la variable 'respaldo'\"\nassert respaldo == {'sillas': 10, 'mesas': 5}, \"El respaldo no conservó los datos originales\"\nassert inventario == {}, \"El inventario no fue vaciado correctamente\""
+    },
+    {
+      "id": 5801,
+      "lesson_id": 58,
+      "title": "Ejercicio 1: Inicializar con None",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'campos' is not defined",
+      "solution_code": "perfil = dict.fromkeys(campos)\nprint(perfil)",
+      "test_code": "assert 'perfil' in locals(), \"Falta la variable 'perfil'\"\nassert isinstance(perfil, dict), \"'perfil' debe ser un diccionario\"\nassert list(perfil.keys()) == ['nombre', 'email', 'ciudad'], \"Las claves no son correctas\"\nassert all(v is None for v in perfil.values()), \"Los valores deben ser None\""
+    },
+    {
+      "id": 5802,
+      "lesson_id": 58,
+      "title": "Ejercicio 2: Inicializar con valor por defecto",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'jugadores' is not defined",
+      "solution_code": "marcador = dict.fromkeys(jugadores, 0)\nprint(marcador)",
+      "test_code": "assert 'marcador' in locals(), \"Falta la variable 'marcador'\"\nassert isinstance(marcador, dict), \"'marcador' debe ser un diccionario\"\nassert marcador == {'Ana': 0, 'Luis': 0, 'Marta': 0}, \"El diccionario no tiene los valores correctos\""
+    },
+    {
+      "id": 5901,
+      "lesson_id": 59,
+      "title": "Ejercicio 1: Búsqueda segura",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'sensores' is not defined",
+      "solution_code": "temp = sensores.get(\"temperatura\")\nprint(temp)",
+      "test_code": "assert 'temp' in locals(), \"Falta la variable 'temp'\"\nassert temp == 22, \"El valor obtenido no es correcto\""
+    },
+    {
+      "id": 5902,
+      "lesson_id": 59,
+      "title": "Ejercicio 2: Clave inexistente",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'sensores' is not defined",
+      "solution_code": "vel = sensores.get(\"velocidad\")\nprint(vel)",
+      "test_code": "assert 'vel' in locals(), \"Falta la variable 'vel'\"\nassert vel is None, \"El resultado debe ser None cuando la clave no existe\""
+    },
+    {
+      "id": 5903,
+      "lesson_id": 59,
+      "title": "Ejercicio 3: Valor por defecto personalizado",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'dispositivo' is not defined",
+      "solution_code": "estado = dispositivo.get(\"bateria\", \"Sin datos\")\nprint(estado)",
+      "test_code": "assert 'estado' in locals(), \"Falta la variable 'estado'\"\nassert estado == 'Sin datos', \"El valor por defecto no es el correcto\""
+    },
+    {
+      "id": 6001,
+      "lesson_id": 60,
+      "title": "Ejercicio 1: Extraer el último elemento",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "extraido = colores.popitem()\nprint(extraido)",
+      "test_code": "assert 'extraido' in locals(), \"Falta la variable 'extraido'\"\nassert extraido == ('azul', 3), \"El item extraído no es correcto\""
+    },
+    {
+      "id": 6002,
+      "lesson_id": 60,
+      "title": "Ejercicio 2: Diccionario tras la extracción",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "colores.popitem()\nprint(colores)",
+      "test_code": "assert 'colores' in locals(), \"Falta la variable 'colores'\"\nassert colores == {'rojo': 1, 'verde': 2}, \"El diccionario no quedó como se esperaba\""
+    },
+    {
+      "id": 6003,
+      "lesson_id": 60,
+      "title": "Ejercicio 3: Vaciar con popitem()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'agenda' is not defined",
+      "solution_code": "while agenda:\n    print(agenda.popitem())\nprint(agenda)",
+      "test_code": "assert 'agenda' in locals(), \"Falta la variable 'agenda'\"\nassert agenda == {}, \"El diccionario no fue vaciado completamente\""
+    },
+    {
+      "id": 6101,
+      "lesson_id": 61,
+      "title": "Ejercicio 1: Eliminación básica",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'materias' is not defined",
+      "solution_code": "nota = materias.pop(\"historia\")\nprint(nota)",
+      "test_code": "assert 'nota' in locals(), \"Falta la variable 'nota'\"\nassert nota == 8, \"El valor extraído no es correcto\"\nassert 'historia' not in materias, \"La clave 'historia' no fue eliminada\""
+    },
+    {
+      "id": 6102,
+      "lesson_id": 61,
+      "title": "Ejercicio 2: Búsqueda blindada",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'materias' is not defined",
+      "solution_code": "resultado = materias.pop(\"arte\", \"Sin registro\")\nprint(resultado)",
+      "test_code": "assert 'resultado' in locals(), \"Falta la variable 'resultado'\"\nassert resultado == 'Sin registro', \"El valor de respaldo no es correcto\""
+    },
+    {
+      "id": 6103,
+      "lesson_id": 61,
+      "title": "Ejercicio 3: Valor extraído vs. Diccionario resultante",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'usuarios' is not defined",
+      "solution_code": "valor = usuarios.pop(\"admin\")\nprint(valor)\nprint(usuarios)",
+      "test_code": "assert 'usuarios' in locals(), \"Falta la variable 'usuarios'\"\nassert 'admin' not in usuarios, \"La clave 'admin' no fue eliminada del diccionario\""
+    },
+    {
+      "id": 6201,
+      "lesson_id": 62,
+      "title": "Ejercicio 1: Clave existente",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'config' is not defined",
+      "solution_code": "resultado = config.setdefault(\"tema\", \"claro\")\nprint(resultado)\nprint(config)",
+      "test_code": "assert 'resultado' in locals(), \"Falta la variable 'resultado'\"\nassert resultado == 'oscuro', \"El resultado retornado no es correcto\"\nassert config['tema'] == 'oscuro', \"El diccionario no debió modificarse\""
+    },
+    {
+      "id": 6202,
+      "lesson_id": 62,
+      "title": "Ejercicio 2: Clave nueva sin valor",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'config' is not defined",
+      "solution_code": "config.setdefault(\"idioma\")\nprint(config)",
+      "test_code": "assert 'config' in locals(), \"Falta la variable 'config'\"\nassert 'idioma' in config and config['idioma'] is None, \"No se agregó la clave con valor None\""
+    },
+    {
+      "id": 6203,
+      "lesson_id": 62,
+      "title": "Ejercicio 3: Expansión segura",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'config' is not defined",
+      "solution_code": "retorno = config.setdefault(\"notificaciones\", True)\nprint(retorno)\nprint(config)",
+      "test_code": "assert 'config' in locals(), \"Falta la variable 'config'\"\nassert config.get('notificaciones') == True, \"La clave no se agregó correctamente\""
+    },
+    {
+      "id": 6301,
+      "lesson_id": 63,
+      "title": "Ejercicio 1: Agregar nuevos datos",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'perfil' is not defined",
+      "solution_code": "perfil.update(contacto)\nprint(perfil)",
+      "test_code": "assert 'perfil' in locals(), \"Falta la variable 'perfil'\"\nassert perfil == {'nombre': 'Ana', 'email': 'ana@mail.com', 'telefono': 1234}, \"El diccionario no fue actualizado correctamente\""
+    },
+    {
+      "id": 6302,
+      "lesson_id": 63,
+      "title": "Ejercicio 2: Sobrescribir datos",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'ventas' is not defined",
+      "solution_code": "ventas.update(correcciones)\nprint(ventas)",
+      "test_code": "assert 'ventas' in locals(), \"Falta la variable 'ventas'\"\nassert ventas == {'lunes': 120, 'martes': 65}, \"Los valores no se sobrescribieron correctamente\""
+    },
+    {
+      "id": 6303,
+      "lesson_id": 63,
+      "title": "Ejercicio 3: Fusión mixta",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 2, in <module>\nNameError: name 'inventario' is not defined",
+      "solution_code": "ajustes = {\"laptops\": 10, \"tablets\": 5}\ninventario.update(ajustes)\nprint(inventario)",
+      "test_code": "assert 'inventario' in locals(), \"Falta la variable 'inventario'\"\nassert 'ajustes' in locals(), \"Debes crear el diccionario secundario 'ajustes'\"\nassert inventario == {'laptops': 10, 'smartphones': 20, 'tablets': 5}, \"La fusión mixta no fue exitosa\""
+    },
+    {
+      "id": 6401,
+      "lesson_id": 64,
+      "title": "Ejercicio 1: Recorrido estándar",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'edades' is not defined",
+      "solution_code": "for nombre in edades:\n    print(nombre, edades[nombre])",
+      "test_code": "assert 'edades' in locals()\n# Se evalúa la salida por consola"
+    },
+    {
+      "id": 6402,
+      "lesson_id": 64,
+      "title": "Ejercicio 2: Recorrido con .items()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'edades' is not defined",
+      "solution_code": "for k, v in edades.items():\n    print(f\"{k} - {v}\")",
+      "test_code": "assert 'edades' in locals()\n# Se evalúa la salida por consola"
+    },
+    {
+      "id": 6403,
+      "lesson_id": 64,
+      "title": "Ejercicio 3: Filtrar durante el recorrido",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'calificaciones' is not defined",
+      "solution_code": "for alumno, nota in calificaciones.items():\n    if nota >= 9:\n        print(alumno)",
+      "test_code": "assert 'calificaciones' in locals()\n# Se evalúa la salida por consola"
+    },
+    {
+      "id": 6501,
+      "lesson_id": 65,
+      "title": "Ejercicio 1: Consulta Básica",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'fruits' is not defined",
+      "solution_code": "cantidad = fruits.get(\"manzanas\")\nprint(cantidad)",
+      "test_code": "assert 'cantidad' in locals()\nassert cantidad == 5, \"Usa el método get() para obtener 5\""
+    },
+    {
+      "id": 6502,
+      "lesson_id": 65,
+      "title": "Ejercicio 2: Inserción Simultánea",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'fruits' is not defined",
+      "solution_code": "fruits.update({\"bananas\": 5, \"mangos\": 6, \"uvas\": 3})\nprint(fruits)",
+      "test_code": "assert 'fruits' in locals()\nassert len(fruits) == 6, \"El diccionario debe tener 6 elementos\""
+    },
+    {
+      "id": 6503,
+      "lesson_id": 65,
+      "title": "Ejercicio 3: Baja de Inventario",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'fruits' is not defined",
+      "solution_code": "bajas = fruits.pop(\"peras\")\nprint(bajas)\nprint(fruits)",
+      "test_code": "assert 'bajas' in locals()\nassert bajas == 2\nassert 'peras' not in fruits"
+    },
+    {
+      "id": 6504,
+      "lesson_id": 65,
+      "title": "Ejercicio 4: Catálogo a Lista",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'fruits' is not defined",
+      "solution_code": "catalogo = list(fruits.keys())\nprint(catalogo)",
+      "test_code": "assert 'catalogo' in locals()\nassert isinstance(catalogo, list)\nassert len(catalogo) == 3"
+    },
+    {
+      "id": 6505,
+      "lesson_id": 65,
+      "title": "Ejercicio 5: Cierre de jornada",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'fruits' is not defined",
+      "solution_code": "fruits.clear()\nprint(fruits)",
+      "test_code": "assert 'fruits' in locals()\nassert fruits == {}, \"El diccionario no fue vaciado correctamente\""
+    },
+    {
+      "id": 6603,
+      "lesson_id": 66,
+      "title": "Ejercicio 3: Conjunto de Comprensión",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'palabra' is not defined",
+      "solution_code": "vocales = {letra for letra in palabra if letra in \"aeiou\"}\nprint(vocales)",
+      "test_code": "assert 'vocales' in locals()\nassert type(vocales) == set\nassert vocales == {'o', 'a', 'i'}\nassert '{' in __source__ and 'for' in __source__"
+    },
+    {
+      "id": 6604,
+      "lesson_id": 66,
+      "title": "Ejercicio 4: Diccionario de Comprensión",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'personas' is not defined",
+      "solution_code": "mayores = {nombre: edad for nombre, edad in personas if edad >= 30}\nprint(mayores)",
+      "test_code": "assert 'mayores' in locals()\nassert type(mayores) == dict\nassert mayores == {'Carlos': 30, 'María': 35}\nassert '{' in __source__ and 'for' in __source__ and 'if' in __source__"
+    },
+    {
+      "id": 6701,
+      "lesson_id": 67,
+      "title": "Ejercicio 1: Tu primer enumerate",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "for item in enumerate(colores):\n    print(item)",
+      "test_code": "assert 'enumerate' in __source__\nassert 'for' in __source__"
+    },
+    {
+      "id": 6702,
+      "lesson_id": 67,
+      "title": "Ejercicio 2: Desempaquetado correcto",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'colores' is not defined",
+      "solution_code": "for indice, color in enumerate(colores):\n    print(indice, color)",
+      "test_code": "assert 'enumerate' in __source__\nassert 'for' in __source__ and ',' in __source__"
+    },
+    {
+      "id": 6703,
+      "lesson_id": 67,
+      "title": "Ejercicio 3: Alterando el inicio",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'equipos' is not defined",
+      "solution_code": "for posicion, equipo in enumerate(equipos, start=1):\n    print(f\"{posicion}. {equipo}\")",
+      "test_code": "assert 'enumerate' in __source__ and 'start=1' in __source__.replace(' ', '')\nassert 'f\"' in __source__ or \"f'\" in __source__"
+    },
+    {
+      "id": 6704,
+      "lesson_id": 67,
+      "title": "Ejercicio 4: Convertir a lista de tuplas",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'nombres' is not defined",
+      "solution_code": "lista_enumerada = list(enumerate(nombres, start=10))\nprint(lista_enumerada)",
+      "test_code": "assert 'lista_enumerada' in locals()\nassert type(lista_enumerada) == list\nassert lista_enumerada == [(10, 'Ana'), (11, 'Luis'), (12, 'Marta')]\nassert 'list(' in __source__ and 'enumerate(' in __source__"
+    },
+    {
+      "id": 8101,
+      "lesson_id": 81,
+      "title": "Ejercicio 1: Leer todo el contenido (read())",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: 'mensaje.txt'",
+      "solution_code": "archivo = open(\"mensaje.txt\", \"r\")\ncontenido = archivo.read()\narchivo.close()\nprint(contenido)",
+      "test_code": "assert 'open(' in __source__, 'Debes usar la función open()'\nassert '.read()' in __source__, 'Debes usar el método .read()'\nassert '.close()' in __source__, 'Debes cerrar el archivo con .close()'"
+    },
+    {
+      "id": 8102,
+      "lesson_id": 81,
+      "title": "Ejercicio 2: La forma correcta (with open)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: 'poema.txt'",
+      "solution_code": "with open(\"poema.txt\", \"r\") as f:\n    texto = f.read()\nprint(texto)",
+      "test_code": "assert 'with open(' in __source__, 'Debes usar el bloque with open()'\nassert '\"r\"' in __source__ or \"'r'\" in __source__, 'Debes abrir en modo lectura r'\nassert '.read()' in __source__, 'Usa f.read() para leer el contenido'"
+    },
+    {
+      "id": 8103,
+      "lesson_id": 81,
+      "title": "Ejercicio 3: Leer línea por línea (readlines())",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: 'lista_compras.txt'",
+      "solution_code": "with open(\"lista_compras.txt\", \"r\") as f:\n    lineas = f.readlines()\nprint(len(lineas))",
+      "test_code": "assert '.readlines()' in __source__, 'Debes usar el método .readlines()'\nassert 'len(' in __source__, 'Debes usar len() para contar las líneas'\nassert 'lineas' in locals(), 'Guarda las líneas en la variable lineas'"
+    },
+    {
+      "id": 8104,
+      "lesson_id": 81,
+      "title": "Ejercicio 4: Procesando líneas (Reto)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: 'calificaciones.txt'",
+      "solution_code": "with open(\"calificaciones.txt\", \"r\") as f:\n    lineas = f.readlines()\nfor linea in lineas:\n    total = total + int(linea.strip())\nprint(round(total / len(lineas), 1))",
+      "test_code": "assert '.readlines()' in __source__ or 'for' in __source__, 'Debes leer y recorrer las líneas'\nassert 'total' in locals(), 'Usa la variable total para acumular'\nassert 'strip()' in __source__ or 'int(' in __source__, 'Convierte cada línea a entero con int()'"
+    },
+    {
+      "id": 8202,
+      "lesson_id": 82,
+      "title": "Ejercicio 2: El modo 'w' sobreescribe todo",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 8, in <module>\nAssertionError: Debes abrir el archivo en modo w una segunda vez para sobreescribir",
+      "solution_code": "with open(\"agenda.txt\", \"w\") as f:\n    f.write(\"Martes: Descanso\")\nwith open(\"agenda.txt\", \"r\") as f:\n    print(f.read())",
+      "test_code": "assert __source__.count(\"'w'\") >= 2 or __source__.count('\"w\"') >= 2 or (__source__.count(\"'w'\") + __source__.count('\"w\"')) >= 2, 'Debes abrir el archivo en modo w una segunda vez para sobreescribir'\nassert 'Martes: Descanso' in __source__, 'Escribe el texto Martes: Descanso'"
+    },
+    {
+      "id": 8204,
+      "lesson_id": 82,
+      "title": "Ejercicio 4: Lista de tareas con writelines() (Reto)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 2, in <module>\nNameError: name 'tareas' is not defined",
+      "solution_code": "with open(\"mis_tareas.txt\", \"w\") as f:\n    f.writelines(tareas)\nwith open(\"mis_tareas.txt\", \"r\") as f:\n    print(f.read())",
+      "test_code": "assert 'writelines(' in __source__, 'Debes usar f.writelines() para escribir la lista'\nassert 'mis_tareas.txt' in __source__, 'Escribe en el archivo mis_tareas.txt'"
+    },
+    {
+      "id": 8302,
+      "lesson_id": 83,
+      "title": "Ejercicio 2: JSON a Diccionario (loads)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'json' is not defined. Did you forget to import 'json'?",
+      "solution_code": "datos = json.loads(datos_json)\nprint(datos[\"ciudad\"])",
+      "test_code": "assert 'json.loads(' in __source__, 'Usa json.loads() para convertir el string'\nassert 'datos' in locals(), 'Guarda el resultado en la variable datos'\nassert datos['ciudad'] == 'Lima', 'El diccionario no tiene el valor correcto'"
+    },
+    {
+      "id": 8303,
+      "lesson_id": 83,
+      "title": "Ejercicio 3: JSON legible (indent)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'json' is not defined. Did you forget to import 'json'?",
+      "solution_code": "bonito = json.dumps(config, indent=4)\nprint(bonito)",
+      "test_code": "assert 'indent' in __source__, 'Usa el parámetro indent en json.dumps()'\nassert 'indent=4' in __source__ or 'indent = 4' in __source__, 'El valor del indent debe ser 4'\nassert 'bonito' in locals(), 'Guarda el resultado en la variable bonito'"
+    },
+    {
+      "id": 8304,
+      "lesson_id": 83,
+      "title": "Ejercicio 4: Ida y vuelta (Reto)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'json' is not defined. Did you forget to import 'json'?",
+      "solution_code": "en_json = json.dumps(jugador)\nrecuperado = json.loads(en_json)\nprint(recuperado[\"nombre\"])",
+      "test_code": "assert 'json.dumps(' in __source__, 'Paso 1: usa json.dumps()'\nassert 'json.loads(' in __source__, 'Paso 2: usa json.loads()'\nassert 'recuperado' in locals(), 'Guarda el resultado de loads() en recuperado'\nassert recuperado['nombre'] == 'Cloud', 'El nombre recuperado debe ser Cloud'"
+    },
+    {
+      "id": 8401,
+      "lesson_id": 84,
+      "title": "Ejercicio 1: Guardar configuraciones (dump)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 2, in <module>\nNameError: name 'json' is not defined. Did you forget to import 'json'?",
+      "solution_code": "with open(\"config.json\", \"w\") as f:\n    json.dump(config, f)",
+      "test_code": "assert 'open(' in __source__ and '\"w\"' in __source__ or \"'w'\" in __source__, 'Debes abrir el archivo en modo w'\nassert 'json.dump(config' in __source__, 'Usa json.dump() pasando config y f'"
+    },
+    {
+      "id": 8402,
+      "lesson_id": 84,
+      "title": "Ejercicio 2: Cargar un archivo (load)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: 'inventario.json'",
+      "solution_code": "with open(\"inventario.json\", \"r\") as f:\n    inventario = json.load(f)\nprint(inventario[\"Pociones\"])",
+      "test_code": "assert 'json.load(' in __source__, 'Usa json.load(f) para cargar el archivo'\nassert 'inventario[\"Pociones\"]' in __source__ or \"inventario['Pociones']\" in __source__, 'Imprime el valor de Pociones del diccionario cargado'"
+    },
+    {
+      "id": 8403,
+      "lesson_id": 84,
+      "title": "Ejercicio 3: Modificar un JSON",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'datos' is not defined",
+      "solution_code": "datos[\"edad\"] = 31\nwith open(\"usuario.json\", \"w\") as f:\n    json.dump(datos, f)",
+      "test_code": "assert 'datos[\"edad\"] = 31' in __source__ or \"datos['edad'] = 31\" in __source__, 'Modifica la edad en el diccionario datos'\nassert 'json.dump(datos, f)' in __source__, 'Usa json.dump() para guardar los cambios'"
+    },
+    {
+      "id": 8404,
+      "lesson_id": 84,
+      "title": "Ejercicio 4: Calcular desde un JSON (Reto)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nFileNotFoundError: [Errno 2] No such file or directory: 'ventas.json'",
+      "solution_code": "with open(\"ventas.json\", \"r\") as f:\n    ventas = json.load(f)\nfor venta in ventas:\n    total_ventas += venta[\"monto\"]\nprint(total_ventas)",
+      "test_code": "assert 'json.load(' in __source__, 'Carga el archivo con json.load()'\nassert 'for ' in __source__, 'Usa un bucle for para recorrer la lista de ventas'\nassert 'total_ventas' in locals(), 'Guarda la suma en total_ventas'\nassert total_ventas == 700, 'La suma debe ser 700'"
+    },
+    {
+      "id": 8502,
+      "lesson_id": 85,
+      "title": "Ejercicio 2: Creando un Objeto (Instanciar)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Vehiculo' is not defined",
+      "solution_code": "mi_coche = Vehiculo()\nprint(type(mi_coche))",
+      "test_code": "assert 'mi_coche' in locals(), 'Debes crear la variable mi_coche'\nassert str(type(mi_coche)) == \"<class '__main__.Vehiculo'>\", 'mi_coche debe ser una instancia de Vehiculo'\nassert 'type(mi_coche)' in __source__, 'Imprime el tipo del objeto'"
+    },
+    {
+      "id": 8504,
+      "lesson_id": 85,
+      "title": "Ejercicio 4: Objetos Independientes",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Jugador' is not defined",
+      "solution_code": "jugador1 = Jugador()\njugador1.nombre = \"Mario\"\njugador2 = Jugador()\njugador2.nombre = \"Luigi\"\nprint(jugador1.nombre)\nprint(jugador2.nombre)",
+      "test_code": "assert 'jugador1 = ' in __source__, 'Crea jugador1'\nassert 'jugador2 = ' in __source__, 'Crea jugador2'\nassert getattr(jugador1, 'nombre', None) == 'Mario', 'jugador1.nombre debe ser Mario'\nassert getattr(jugador2, 'nombre', None) == 'Luigi', 'jugador2.nombre debe ser Luigi'"
+    },
+    {
+      "id": 8603,
+      "lesson_id": 86,
+      "title": "Ejercicio 3: Estado Independiente",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Coche' is not defined",
+      "solution_code": "coche1 = Coche(\"Ford\", \"Rojo\")\ncoche2 = Coche(\"Toyota\", \"Azul\")\nprint(coche2.color)",
+      "test_code": "assert getattr(coche1, 'marca', '') == 'Ford', 'coche1 debe ser Ford'\nassert getattr(coche2, 'color', '') == 'Azul', 'El color de coche2 debe ser Azul'\nassert 'print(coche2.color)' in __source__ or 'print (coche2.color)' in __source__, 'Debes imprimir el color de coche2'"
+    },
+    {
+      "id": 9001,
+      "lesson_id": 90,
+      "title": "Ejercicio 1: Heredar un método",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Vehiculo' is not defined",
+      "solution_code": "class Coche(Vehiculo):\n    pass\nmi_coche = Coche()\nmi_coche.encender()",
+      "test_code": "assert 'class Coche(Vehiculo)' in __source__, 'Coche debe heredar de Vehiculo'\nassert 'mi_coche.encender()' in __source__, 'Llama al método heredado encender()'"
+    },
+    {
+      "id": 9002,
+      "lesson_id": 90,
+      "title": "Ejercicio 2: Heredar atributos",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Ave' is not defined",
+      "solution_code": "class Pato(Ave):\n    pass\ndonald = Pato()\nprint(donald.tiene_plumas)",
+      "test_code": "assert 'class Pato(Ave)' in __source__, 'Pato debe heredar de Ave'\nassert 'donald = Pato()' in __source__, 'Crea la instancia de Pato'\nassert 'print(donald.tiene_plumas)' in __source__, 'Imprime el atributo heredado'"
+    },
+    {
+      "id": 9003,
+      "lesson_id": 90,
+      "title": "Ejercicio 3: Comportamiento extra",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Usuario' is not defined",
+      "solution_code": "class Admin(Usuario):\n    def banear(self):\n        print(\"Usuario baneado\")\n\nadmin = Admin()\nadmin.login()\nadmin.banear()",
+      "test_code": "assert 'class Admin(Usuario):' in __source__, 'Admin hereda de Usuario'\nassert 'def banear(self):' in __source__ or 'def banear(self) :' in __source__, 'Crea el método banear'\nassert 'admin.login()' in __source__ and 'admin.banear()' in __source__, 'Llama a ambos métodos'"
+    },
+    {
+      "id": 9004,
+      "lesson_id": 90,
+      "title": "Ejercicio 4: Sobreescritura simple (Reto)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Enemigo' is not defined",
+      "solution_code": "class Jefe(Enemigo):\n    def hablar(self):\n        print(\"¡Te destruiré!\")\n\ne = Enemigo()\ne.hablar()\nj = Jefe()\nj.hablar()",
+      "test_code": "assert 'class Jefe(Enemigo):' in __source__, 'Crea el Jefe'\nassert 'def hablar(self):' in __source__ and __source__.count('def hablar(self):') >= 2, 'Debes sobreescribir hablar'\nassert '¡Te destruiré!' in __source__, 'El jefe debe decir la frase correcta'"
+    },
+    {
+      "id": 9101,
+      "lesson_id": 91,
+      "title": "Ejercicio 1: Extendiendo un método",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Vehiculo' is not defined",
+      "solution_code": "class Coche(Vehiculo):\n    def describir(self):\n        super().describir()\n        print(\"Tiene 4 ruedas\")\n\nmi_coche = Coche()\nmi_coche.describir()",
+      "test_code": "assert 'super().describir()' in __source__, 'Llama a super().describir()'\nassert 'Tiene 4 ruedas' in __source__, 'Imprime el texto extra del Coche'\nassert 'mi_coche.describir()' in __source__, 'Llama a describir()'"
+    },
+    {
+      "id": 9102,
+      "lesson_id": 91,
+      "title": "Ejercicio 2: super().__init__()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Figura' is not defined",
+      "solution_code": "class Circulo(Figura):\n    def __init__(self, color, radio):\n        super().__init__(color)\n        self.radio = radio\n\nc = Circulo(\"Rojo\", 5)\nprint(c.color)\nprint(c.radio)",
+      "test_code": "assert 'def __init__(self, color, radio)' in __source__ or 'def __init__(self,color,radio)' in __source__, 'El init recibe 3 parámetros'\nassert 'super().__init__(color)' in __source__, 'Llama al init del padre'\nassert 'self.radio = radio' in __source__, 'Guarda el radio'\nassert c.color == 'Rojo' and c.radio == 5, 'El círculo debe ser Rojo y de radio 5'"
+    },
+    {
+      "id": 9103,
+      "lesson_id": 91,
+      "title": "Ejercicio 3: Polimorfismo en acción",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'animales' is not defined",
+      "solution_code": "for a in animales:\n    a.sonido()",
+      "test_code": "assert 'for ' in __source__, 'Debes usar un bucle for'\nassert '.sonido()' in __source__, 'Debes llamar al método sonido()'"
+    },
+    {
+      "id": 9104,
+      "lesson_id": 91,
+      "title": "Ejercicio 4: El Mago (Reto)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'Personaje' is not defined",
+      "solution_code": "class Mago(Personaje):\n    def __init__(self, vida, ataque, mana):\n        super().__init__(vida, ataque)\n        self.mana = mana\n\nmerlin = Mago(100, 20, 50)\nprint(merlin.vida)\nprint(merlin.ataque)\nprint(merlin.mana)",
+      "test_code": "assert 'class Mago(Personaje)' in __source__, 'Crea el Mago'\nassert 'super().__init__(vida, ataque)' in __source__ or 'super().__init__(vida,ataque)' in __source__, 'Llama al padre correctamente'\nassert getattr(merlin, 'mana', 0) == 50, 'El mana debe ser 50'\nassert merlin.vida == 100 and merlin.ataque == 20, 'Atributos base incorrectos'"
+    }
+  ],
+  "output_mismatches": [
+    {
+      "id": 204,
+      "lesson_id": 2,
+      "title": "Ejercicio 4: str() - Convertir números a texto",
+      "expected": "'Tengo 25 años'",
+      "got": "'Tengo 25 a�os'",
+      "output_check_raw": "'Tengo 25 años'"
+    },
+    {
+      "id": 1901,
+      "lesson_id": 19,
+      "title": "Ejercicio 1: Orden posicional",
+      "expected": "'La capital de México es Ciudad de México.'",
+      "got": "'La capital de M�xico es Ciudad de M�xico.'",
+      "output_check_raw": "'La capital de México es Ciudad de México.'"
+    },
+    {
+      "id": 1902,
+      "lesson_id": 19,
+      "title": "Ejercicio 2: Posición por índice",
+      "expected": "'El precio de la laptop es de 800 dólares. Repito, 800 dólares.'",
+      "got": "'El precio de la laptop es de 800 d�lares. Repito, 800 d�lares.'",
+      "output_check_raw": "'El precio de la laptop es de 800 dólares. Repito, 800 dólares.'"
+    },
+    {
+      "id": 1903,
+      "lesson_id": 19,
+      "title": "Ejercicio 3: Formato por clave (Keyword)",
+      "expected": "'Curso: Python. Duración: 4 semanas.'",
+      "got": "'Curso: Python. Duraci�n: 4 semanas.'",
+      "output_check_raw": "'Curso: Python. Duración: 4 semanas.'"
+    },
+    {
+      "id": 2001,
+      "lesson_id": 20,
+      "title": "Ejercicio 1: Sintaxis básica",
+      "expected": "'Hola Sofía, bienvenida al curso de Python.'",
+      "got": "'Hola Sof�a, bienvenida al curso de Python.'",
+      "output_check_raw": "'Hola Sofía, bienvenida al curso de Python.'"
+    },
+    {
+      "id": 2002,
+      "lesson_id": 20,
+      "title": "Ejercicio 2: Operación aritmética al vuelo",
+      "expected": "'El área del rectángulo es: 50'",
+      "got": "'El �rea del rect�ngulo es: 50'",
+      "output_check_raw": "'El área del rectángulo es: 50'"
+    },
+    {
+      "id": 2003,
+      "lesson_id": 20,
+      "title": "Ejercicio 3: Múltiples variables y cálculo",
+      "expected": "'Hola Carlos, tu edad estimada es 26 años.'",
+      "got": "'Hola Carlos, tu edad estimada es 26 a�os.'",
+      "output_check_raw": "'Hola Carlos, tu edad estimada es 26 años.'"
+    },
+    {
+      "id": 2301,
+      "lesson_id": 23,
+      "title": "Ejercicio 1: Transformación con title()",
+      "expected": "'Madrid España'",
+      "got": "'Madrid Espa�a'",
+      "output_check_raw": "'Madrid España'"
+    },
+    {
+      "id": 2503,
+      "lesson_id": 25,
+      "title": "Ejercicio 3: Inmutabilidad y reasignación",
+      "expected": "'El BlOqUeO dE mAyUsClAs eS uNa pEsAdIlLa!'",
+      "got": "'El BlOqUeO dE mAyUsCuLaS eS uNa pEsAdIlLa!'",
+      "output_check_raw": "'El BlOqUeO dE mAyUsClAs eS uNa pEsAdIlLa!'"
+    },
+    {
+      "id": 2601,
+      "lesson_id": 26,
+      "title": "Ejercicio 1: Capitalización básica",
+      "expected": "'Python es increíble'",
+      "got": "'Python es incre�ble'",
+      "output_check_raw": "'Python es increíble'"
+    },
+    {
+      "id": 2602,
+      "lesson_id": 26,
+      "title": "Ejercicio 2: Normalizando mayúsculas internas",
+      "expected": "'El programador aprende rápido.'",
+      "got": "'El programador aprende r�pido.'",
+      "output_check_raw": "'El programador aprende rápido.'"
+    },
+    {
+      "id": 2603,
+      "lesson_id": 26,
+      "title": "Ejercicio 3: Índice 0 numérico",
+      "expected": "'3 lenguajes de programación más usados.'",
+      "got": "'3 lenguajes de programaci�n m�s usados.'",
+      "output_check_raw": "'3 lenguajes de programación más usados.'"
+    },
+    {
+      "id": 2801,
+      "lesson_id": 28,
+      "title": "Ejercicio 1: Búsqueda básica",
+      "expected": "'3'",
+      "got": "'2'",
+      "output_check_raw": "'3'"
+    }
+  ],
+  "errors_in_solution": [
+    {
+      "id": 1301,
+      "lesson_id": 13,
+      "title": "Ejercicio 1: Rango con and",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'x' is not defined"
+    },
+    {
+      "id": 1302,
+      "lesson_id": 13,
+      "title": "Ejercicio 2: Aceptar múltiples respuestas con or",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'respuesta' is not defined"
+    },
+    {
+      "id": 1601,
+      "lesson_id": 16,
+      "title": "Ejercicio 1: Contador ascendente",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'contador' is not defined"
+    },
+    {
+      "id": 1603,
+      "lesson_id": 16,
+      "title": "Ejercicio 3: Contador regresivo (despegue)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'cuenta' is not defined"
+    },
+    {
+      "id": 1701,
+      "lesson_id": 17,
+      "title": "Ejercicio 1: Detener un ciclo con break",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 2, in <module>\nNameError: name 'num' is not defined. Did you mean: 'sum'?"
+    },
+    {
+      "id": 1702,
+      "lesson_id": 17,
+      "title": "Ejercicio 2: Saltar iteraciones con continue",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'i' is not defined. Did you mean: 'id'?"
+    },
+    {
+      "id": 1703,
+      "lesson_id": 17,
+      "title": "Ejercicio 3: Bucle con buscador y break",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 2, in <module>\nNameError: name 'num' is not defined. Did you mean: 'sum'?"
+    },
+    {
+      "id": 1704,
+      "lesson_id": 17,
+      "title": "Ejercicio 4: Combinando break y continue",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'x' is not defined"
+    },
+    {
+      "id": 2103,
+      "lesson_id": 21,
+      "title": "Ejercicio 3: Limpieza personalizada múltiple",
+      "error": "File \"<string>\", line 1\n    cadena = \"\t...hola python...\n             ^\nSyntaxError: unterminated string literal (detected at line 1)"
+    },
+    {
+      "id": 2201,
+      "lesson_id": 22,
+      "title": "Ejercicio 1: Limpieza derecha con rstrip()",
+      "error": "File \"<string>\", line 1\n    texto = \"  Python es genial  \n            ^\nSyntaxError: unterminated string literal (detected at line 1)"
+    },
+    {
+      "id": 3101,
+      "lesson_id": 31,
+      "title": "Ejercicio 1: Recorrido básico de un string",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'palabra' is not defined"
+    },
+    {
+      "id": 3102,
+      "lesson_id": 31,
+      "title": "Ejercicio 2: Operaciones dentro del ciclo",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'mensaje' is not defined"
+    },
+    {
+      "id": 3501,
+      "lesson_id": 35,
+      "title": "Ejercicio 1: Acceso por índice positivo",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'frutas' is not defined"
+    },
+    {
+      "id": 3502,
+      "lesson_id": 35,
+      "title": "Ejercicio 2: Índice negativo y len()",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'paises' is not defined"
+    },
+    {
+      "id": 3503,
+      "lesson_id": 35,
+      "title": "Ejercicio 3: Slicing de una lista",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nNameError: name 'numeros' is not defined"
+    }
+  ],
+  "no_validation": []
+}

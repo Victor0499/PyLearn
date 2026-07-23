@@ -199,12 +199,18 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       setErrorModal({ title, message });
       updateLessonState(setAllSuccesses, a => { a[activeExercise] = false; return a; });
     } else if (currentEx.outputCheck) {
-      if (out === currentEx.outputCheck) {
+      // Only strip trailing newlines (added by Python's print() automatically).
+      // We do NOT use .trim() because some exercises intentionally produce output with
+      // leading spaces (e.g. rjust(), ljust(), rstrip() exercises).
+      const cleanOut = out.replace(/\r\n/g, '\n').replace(/\n+$/, '');
+      const cleanExpected = currentEx.outputCheck.replace(/\r\n/g, '\n').replace(/\n+$/, '');
+
+      if (cleanOut === cleanExpected) {
         updateLessonState(setAllSuccesses, a => { a[activeExercise] = true; return a; });
         saveProgress(lesson.id, currentEx.id, codes[activeExercise]);
         checkExerciseCompletion();
       } else {
-        setErrorModal({ title: "❌ El mensaje no coincide", message: `Esperado:\n'${currentEx.outputCheck}'\n\nObtenido:\n'${out}'\n\nRevisa mayúsculas y espacios.` });
+        setErrorModal({ title: "❌ El mensaje no coincide", message: `Esperado:\n'${cleanExpected}'\n\nObtenido:\n'${cleanOut}'\n\nRevisa mayúsculas y espacios.` });
         updateLessonState(setAllSuccesses, a => { a[activeExercise] = false; return a; });
       }
     } else {

@@ -1,0 +1,399 @@
+{
+  "test_failures": [
+    {
+      "id": 704,
+      "lesson_id": 7,
+      "title": "Ejercicio 4: El input() anidado",
+      "error": "TIMEOUT",
+      "solution_code": "cantidad = int(input('Dime una cantidad: '))\nprint(cantidad)",
+      "test_code": "assert 'cantidad' in locals(), \"Falta 'cantidad'\""
+    },
+    {
+      "id": 802,
+      "lesson_id": 8,
+      "title": "Ejercicio 2: El poder de la indentación",
+      "error": "File \"<string>\", line 4\n    print('Acceso concedido al b�nker secreto')\n    ^^^^^\nIndentationError: expected an indented block after 'if' statement on line 3",
+      "solution_code": "clave = 1234\n\nif clave == 1234:\n    print('Acceso concedido al búnker secreto')",
+      "test_code": "assert 'clave' in locals()"
+    },
+    {
+      "id": 902,
+      "lesson_id": 9,
+      "title": "Ejercicio 2: Sintaxis e Indentación",
+      "error": "File \"<string>\", line 5\n    else\n        ^\nIndentationError: unindent does not match any outer indentation level",
+      "solution_code": "llueve = True\n\nif llueve:\n    print('Lleva paraguas')\nelse:\n    print('Usa gafas de sol')",
+      "test_code": "assert 'llueve' in locals()"
+    },
+    {
+      "id": 1003,
+      "lesson_id": 10,
+      "title": "Ejercicio 3: Sintaxis completa (if-elif-else)",
+      "error": "File \"<string>\", line 5\n    ??? opcion == 2:\n    ^\nSyntaxError: invalid syntax",
+      "solution_code": "opcion = 4\n\nif opcion == 1:\n    print('Perfil')\nelif opcion == 2:\n    print('Configuración')\nelse:\n    print('Opción inválida')",
+      "test_code": "assert 'opcion' in locals()"
+    },
+    {
+      "id": 1201,
+      "lesson_id": 12,
+      "title": "Ejercicio 1: Comparaciones Básicas",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 4, in <module>\nNameError: name 'num1' is not defined",
+      "solution_code": "son_iguales = (num1 == num2)\nson_diferentes = (num1 != num2)\nprint(son_iguales, son_diferentes)",
+      "test_code": "assert 'num1' in locals() and 'num2' in locals(), \"Faltan las variables num1 y num2\"\nassert 'son_iguales' in locals() and 'son_diferentes' in locals(), \"Faltan las variables de comparación\"\nassert son_iguales == False, \"son_iguales debe ser False\"\nassert son_diferentes == True, \"son_diferentes debe "
+    },
+    {
+      "id": 1202,
+      "lesson_id": 12,
+      "title": "Ejercicio 2: Captura con int(input())",
+      "error": "TIMEOUT",
+      "solution_code": "numero1 = int(input())\nnumero2 = int(input())\nprint('Los números son:', numero1, 'y', numero2)",
+      "test_code": "assert 'numero1' in locals() and 'numero2' in locals(), \"Falta definir 'numero1' y 'numero2'\"\nassert isinstance(numero1, int) and isinstance(numero2, int), \"Debes usar int(input()) para convertirlos a enteros\""
+    },
+    {
+      "id": 4501,
+      "lesson_id": 45,
+      "title": "Ejercicio 1: Rango a Lista",
+      "error": "File \"<string>\", line 2\n    numeros = \n              ^\nSyntaxError: invalid syntax",
+      "solution_code": "numeros = list(range(1, 6))\nprint(numeros)",
+      "test_code": "assert 'numeros' in locals(), \"Falta la variable 'numeros'\"\nassert numeros == [1, 2, 3, 4, 5], f\"La lista debe ser [1, 2, 3, 4, 5], obtuviste: {numeros}\""
+    },
+    {
+      "id": 4502,
+      "lesson_id": 45,
+      "title": "Ejercicio 2: String a Lista",
+      "error": "File \"<string>\", line 4\n    letras = \n             ^\nSyntaxError: invalid syntax",
+      "solution_code": "letras = list(palabra)\nprint(letras)",
+      "test_code": "assert 'letras' in locals(), \"Falta la variable 'letras'\"\nassert letras == ['P', 'y', 't', 'h', 'o', 'n'], f\"La lista debe ser ['P', 'y', 't', 'h', 'o', 'n'], obtuviste: {letras}\""
+    },
+    {
+      "id": 4503,
+      "lesson_id": 45,
+      "title": "Ejercicio 3: Inversión de Lista",
+      "error": "File \"<string>\", line 4\n    invertida = \n                ^\nSyntaxError: invalid syntax",
+      "solution_code": "invertida = caracteres[::-1]\nprint(invertida)",
+      "test_code": "assert 'invertida' in locals(), \"Falta la variable 'invertida'\"\nassert invertida == ['a', 'l', 'o', 'H'], f\"La lista debe ser ['a', 'l', 'o', 'H'], obtuviste: {invertida}\""
+    },
+    {
+      "id": 4601,
+      "lesson_id": 46,
+      "title": "Ejercicio 1: Extracción Básica (Nivel 2)",
+      "error": "File \"<string>\", line 4\n    extraido = \n               ^\nSyntaxError: invalid syntax",
+      "solution_code": "extraido = datos[2][1]\nprint(extraido)",
+      "test_code": "assert 'extraido' in locals(), \"Falta la variable 'extraido'\"\nassert extraido == 40, \"El valor extraído debe ser 40\""
+    },
+    {
+      "id": 4602,
+      "lesson_id": 46,
+      "title": "Ejercicio 2: Extracción Profunda (Nivel 3)",
+      "error": "File \"<string>\", line 4\n    seis = \n           ^\nSyntaxError: invalid syntax",
+      "solution_code": "seis = matriz[1][2][1]\nprint(seis)",
+      "test_code": "assert 'seis' in locals(), \"Falta la variable 'seis'\"\nassert seis == 6, \"El valor extraído debe ser 6\""
+    },
+    {
+      "id": 4701,
+      "lesson_id": 47,
+      "title": "Ejercicio 1: Extracción Básica",
+      "error": "File \"<string>\", line 7\n    valor = \n            ^\nSyntaxError: invalid syntax",
+      "solution_code": "valor = matriz[1][2]\nprint(valor)",
+      "test_code": "assert 'valor' in locals(), \"Falta la variable 'valor'\"\nassert valor == 60, \"El valor extraído debe ser 60\""
+    },
+    {
+      "id": 5102,
+      "lesson_id": 51,
+      "title": "Ejercicio 2: Evitando el KeyError",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 7, in <module>\nKeyError: 'apellido'",
+      "solution_code": "print(persona[\"nombre\"])",
+      "test_code": "pass"
+    },
+    {
+      "id": 7103,
+      "lesson_id": 71,
+      "title": "Ejercicio 3: El orden de ejecución",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 2, in <module>\nNameError: name 'despedida' is not defined",
+      "solution_code": "def despedida():\n    print(\"¡Hasta pronto!\")\n\ndespedida()",
+      "test_code": "assert 'despedida' in locals(), 'Debes mantener la función despedida()'"
+    },
+    {
+      "id": 7204,
+      "lesson_id": 72,
+      "title": "Ejercicio 4: Arreglando la Máquina",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 4, in <module>\nTypeError: unsupported operand type(s) for -: 'int' and 'NoneType'",
+      "solution_code": "def obtener_descuento():\n    return 20\n\nprecio_final = 100 - obtener_descuento()\nprint(precio_final)",
+      "test_code": "assert 'return 20' in __source__, 'Debes usar return 20'\nassert 'print(20)' not in __source__, 'Debes borrar el print(20) de la función'"
+    },
+    {
+      "id": 7301,
+      "lesson_id": 73,
+      "title": "Ejercicio 1: Un solo parámetro",
+      "error": "File \"<string>\", line 7\n    def doble(numero):\n    ^^^\nIndentationError: expected an indented block after function definition on line 1",
+      "solution_code": "def doble(numero):\n    return numero * 2\n\nprint(doble(5))",
+      "test_code": "assert 'return' in __source__, 'Debes usar return en la función'\nassert 'doble(5)' in __source__, 'Debes llamar a la función con el argumento 5'"
+    },
+    {
+      "id": 7304,
+      "lesson_id": 73,
+      "title": "Ejercicio 4: La Regla de Oro",
+      "error": "File \"<string>\", line 2\n    def registro(rol='Usuario', nombre):\n                                ^^^^^^\nSyntaxError: parameter without a default follows parameter with a default",
+      "solution_code": "def registro(nombre, rol=\"Usuario\"):\n    return f\"Bienvenido {nombre}, tu rol es {rol}\"\n\nprint(registro(\"Ana\"))",
+      "test_code": "assert 'def registro(nombre, rol=\"Usuario\"):' in __source__ or \"def registro(nombre, rol='Usuario'):\" in __source__, 'El orden debe ser primero nombre y luego rol'"
+    },
+    {
+      "id": 7403,
+      "lesson_id": 74,
+      "title": "Ejercicio 3: Perfiles Flexibles (**kwargs)",
+      "error": "File \"<string>\", line 7\n    def crear_ficha(**datos):\n    ^^^\nIndentationError: expected an indented block after function definition on line 1",
+      "solution_code": "def crear_ficha(**datos):\n    for clave, valor in datos.items():\n        print(f\"La clave es {clave} y el valor es {valor}\")\n\ncrear_ficha(nombre=\"Batman\", ciudad=\"Gotica\", vehiculo=\"Batmovil\")",
+      "test_code": "assert 'datos.items()' in __source__, 'Usa .items() para recorrer el diccionario kwargs'\nassert 'Batman' in __source__ and 'Gotica' in __source__, 'Debes llamar a la función con esos datos exactos'"
+    },
+    {
+      "id": 7404,
+      "lesson_id": 74,
+      "title": "Ejercicio 4: Combinando Todo (Reto)",
+      "error": "File \"<string>\", line 2\n    def construir_robot(**caracteristicas, nombre, *piezas):\n                                           ^^^^^^\nSyntaxError: arguments cannot follow var-keyword argument",
+      "solution_code": "def construir_robot(nombre, *piezas, **caracteristicas):\n    print(f\"Construyendo a {nombre}\")\n    print(f\"Piezas: {piezas}\")\n    print(f\"Extras: {caracteristicas}\")\n\nconstruir_robot(\"Optimus\", \"Láser",
+      "test_code": "assert 'def construir_robot(nombre, *piezas, **caracteristicas):' in __source__ or 'def construir_robot(nombre,*piezas,**caracteristicas):' in __source__, 'El orden debe ser: nombre, *piezas, **caracteristicas'"
+    },
+    {
+      "id": 7501,
+      "lesson_id": 75,
+      "title": "Ejercicio 1: El muro local (NameError)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\nNameError: name 'oro' is not defined. Did you mean: 'ord'?",
+      "solution_code": "def minar():\n    oro = 50\n    return oro\n\nprint(minar())",
+      "test_code": "assert 'return oro' in __source__, 'Debes retornar oro'\nassert 'print(oro)' not in __source__, 'Borra la línea print(oro)'"
+    },
+    {
+      "id": 7504,
+      "lesson_id": 75,
+      "title": "Ejercicio 4: El poder global (Reto)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 8, in <module>\n  File \"<string>\", line 6, in subir_nivel\nUnboundLocalError: cannot access local variable 'nivel' where it is not associated with a value",
+      "solution_code": "nivel = 5\n\ndef subir_nivel():\n    global nivel\n    nivel = nivel + 1\n\nsubir_nivel()\nprint(nivel)",
+      "test_code": "assert 'global nivel' in __source__, 'Debes usar global nivel dentro de la función'"
+    },
+    {
+      "id": 8602,
+      "lesson_id": 86,
+      "title": "Ejercicio 2: Constructor con Parámetros",
+      "error": "File \"<string>\", line 12\n    class Libro:\n    ^^^^^\nIndentationError: expected an indented block after class definition on line 1",
+      "solution_code": "class Libro:\n    def __init__(self, titulo, autor):\n        self.titulo = titulo\n        self.autor = autor\n\nmi_libro = Libro(\"1984\", \"Orwell\")\nprint(mi_libro.titulo)",
+      "test_code": "assert 'def __init__(self, titulo, autor):' in __source__ or 'def __init__(self,titulo,autor):' in __source__, 'El constructor debe recibir self, titulo y autor'\nassert 'self.titulo = titulo' in __source__, 'Debes asignar self.titulo'\nassert getattr(mi_libro, 'titulo', '') == '1984', 'El titulo del "
+    },
+    {
+      "id": 8701,
+      "lesson_id": 87,
+      "title": "Ejercicio 1: Tu primer método",
+      "error": "File \"<string>\", line 5\n    r1 = Robot()\n    ^^\nIndentationError: expected an indented block after class definition on line 1",
+      "solution_code": "class Robot:\n    def saludar(self):\n        print(\"Hola, humano\")\n\nr1 = Robot()\nr1.saludar()",
+      "test_code": "assert 'def saludar(self)' in __source__ or 'def saludar(self):' in __source__, 'Define el método saludar(self)'\nassert 'r1.saludar()' in __source__, 'Debes llamar al método desde la instancia'"
+    },
+    {
+      "id": 8801,
+      "lesson_id": 88,
+      "title": "Ejercicio 1: Tu primer atributo privado",
+      "error": "File \"<string>\", line 10\n    class Diario:\n    ^^^^^\nIndentationError: expected an indented block after class definition on line 1",
+      "solution_code": "class Diario:\n    def __init__(self):\n        self.__secreto = \"Amo Python\"\n    def leer(self):\n        print(self.__secreto)\n\nmi_diario = Diario()\nmi_diario.leer()",
+      "test_code": "assert 'self.__secreto' in __source__, 'Debes crear el atributo privado __secreto'\nassert 'def leer(self):' in __source__ or 'def leer(self) :' in __source__, 'Debes crear el método leer'\nassert 'mi_diario.leer()' in __source__, 'Debes instanciar y llamar a leer()'"
+    },
+    {
+      "id": 8804,
+      "lesson_id": 88,
+      "title": "Ejercicio 4: Sistema de Login (Reto)",
+      "error": "File \"<string>\", line 7\n    pc = Sistema()\n    ^^\nIndentationError: expected an indented block after class definition on line 1",
+      "solution_code": "class Sistema:\n    def __init__(self):\n        self.__password = \"root\"\n    def login(self, intento):\n        if intento == self.__password:\n            print(\"Acceso concedido\")\n        else:\n       ",
+      "test_code": "assert 'self.__password' in __source__, 'Usa self.__password en el constructor'\nassert 'def login(self, intento):' in __source__ or 'def login(self,intento):' in __source__, 'Crea el método login'\nassert 'Acceso concedido' in __source__ and 'Acceso denegado' in __source__, 'Maneja ambos casos con if"
+    },
+    {
+      "id": 8901,
+      "lesson_id": 89,
+      "title": "Ejercicio 1: Atributo de Clase",
+      "error": "File \"<string>\", line 11\n    class Contador:\n    ^^^^^\nIndentationError: expected an indented block after class definition on line 1",
+      "solution_code": "class Contador:\n    cuenta = 0\n    def __init__(self):\n        Contador.cuenta += 1\n\nc1 = Contador()\nc2 = Contador()\nprint(Contador.cuenta)",
+      "test_code": "assert 'cuenta = 0' in __source__, 'Debes crear el atributo cuenta'\nassert 'Contador.cuenta += 1' in __source__ or 'Contador.cuenta = Contador.cuenta + 1' in __source__, 'Suma 1 a Contador.cuenta en el init'\nassert 'print(Contador.cuenta)' in __source__, 'Imprime Contador.cuenta'"
+    },
+    {
+      "id": 8903,
+      "lesson_id": 89,
+      "title": "Ejercicio 3: El Método Estático",
+      "error": "File \"<string>\", line 8\n    class Math:\n    ^^^^^\nIndentationError: expected an indented block after class definition on line 1",
+      "solution_code": "class Math:\n    @staticmethod\n    def restar(a, b):\n        return a - b\n\nprint(Math.restar(20, 5))",
+      "test_code": "assert '@staticmethod' in __source__, 'Usa el decorador @staticmethod'\nassert 'def restar(a, b):' in __source__ or 'def restar(a,b):' in __source__, 'El método NO debe recibir self ni cls'\nassert 'print(Math.restar(20, 5))' in __source__, 'Llama al método estático correctamente'"
+    },
+    {
+      "id": 9004,
+      "lesson_id": 90,
+      "title": "Ejercicio 4: Sobreescritura simple (Reto)",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 26, in <module>\nAssertionError: Debes sobreescribir hablar",
+      "solution_code": "class Jefe(Enemigo):\n    def hablar(self):\n        print(\"¡Te destruiré!\")\n\ne = Enemigo()\ne.hablar()\nj = Jefe()\nj.hablar()",
+      "test_code": "assert 'class Jefe(Enemigo):' in __source__, 'Crea el Jefe'\nassert 'def hablar(self):' in __source__ and __source__.count('def hablar(self):') >= 2, 'Debes sobreescribir hablar'\nassert '¡Te destruiré!' in __source__, 'El jefe debe decir la frase correcta'"
+    },
+    {
+      "id": 9201,
+      "lesson_id": 92,
+      "title": "Ejercicio 1: Corrige la alineación",
+      "error": "File \"<string>\", line 2\n    mensaje = 'Todo en orden'\nIndentationError: unexpected indent",
+      "solution_code": "print('Iniciando programa')\nmensaje = 'Todo en orden'\nprint(mensaje)",
+      "test_code": "assert '  mensaje' not in __source__ and '    print' not in __source__, 'Elimina los espacios al principio de las líneas'"
+    },
+    {
+      "id": 9202,
+      "lesson_id": 92,
+      "title": "Ejercicio 2: Creando un bloque",
+      "error": "File \"<string>\", line 2\n    print('Acceso concedido')\n    ^^^^^\nIndentationError: expected an indented block after 'if' statement on line 1",
+      "solution_code": "if True:\n    print('Acceso concedido')",
+      "test_code": "assert '    print(' in __source__ or '\\tprint(' in __source__, 'Debes indentar el print dentro del if'"
+    },
+    {
+      "id": 9203,
+      "lesson_id": 92,
+      "title": "Ejercicio 3: Bloque múltiple",
+      "error": "File \"<string>\", line 2\n    print('Paso 1')\n    ^^^^^\nIndentationError: expected an indented block after 'if' statement on line 1",
+      "solution_code": "if True:\n    print('Paso 1')\n    print('Paso 2')\n    print('Paso 3')\n\nprint('Fin')",
+      "test_code": "assert __source__.count('    print(\\'Paso') == 3 or __source__.count('\\tprint(\\'Paso') == 3, 'Las 3 instrucciones deben estar indentadas igual'"
+    }
+  ],
+  "output_mismatches": [
+    {
+      "id": 204,
+      "lesson_id": 2,
+      "title": "Ejercicio 4: str() - Convertir números a texto",
+      "expected": "'Tengo 25 años'",
+      "got": "'Tengo 25 a�os'"
+    },
+    {
+      "id": 1302,
+      "lesson_id": 13,
+      "title": "Ejercicio 2: Aceptar múltiples respuestas con or",
+      "expected": "'Aceptado'",
+      "got": "''"
+    },
+    {
+      "id": 1401,
+      "lesson_id": 14,
+      "title": "Ejercicio 1: Suma y asignación",
+      "expected": "'15'",
+      "got": "'10\\n15'"
+    },
+    {
+      "id": 1402,
+      "lesson_id": 14,
+      "title": "Ejercicio 2: Decremento",
+      "expected": "'2'",
+      "got": "'3\\n2'"
+    },
+    {
+      "id": 1603,
+      "lesson_id": 16,
+      "title": "Ejercicio 3: Contador regresivo (despegue)",
+      "expected": "'3\\n2\\n1\\n¡Despegue!'",
+      "got": "'3\\n2\\n1\\n�Despegue!'"
+    },
+    {
+      "id": 1901,
+      "lesson_id": 19,
+      "title": "Ejercicio 1: Orden posicional",
+      "expected": "'La capital de México es Ciudad de México.'",
+      "got": "'La capital de M�xico es Ciudad de M�xico.'"
+    },
+    {
+      "id": 1902,
+      "lesson_id": 19,
+      "title": "Ejercicio 2: Posición por índice",
+      "expected": "'El precio de la laptop es de 800 dólares. Repito, 800 dólares.'",
+      "got": "'El precio de la laptop es de 800 d�lares. Repito, 800 d�lares.'"
+    },
+    {
+      "id": 1903,
+      "lesson_id": 19,
+      "title": "Ejercicio 3: Formato por clave (Keyword)",
+      "expected": "'Curso: Python. Duración: 4 semanas.'",
+      "got": "'Curso: Python. Duraci�n: 4 semanas.'"
+    },
+    {
+      "id": 2001,
+      "lesson_id": 20,
+      "title": "Ejercicio 1: Sintaxis básica",
+      "expected": "'Hola Sofía, bienvenida al curso de Python.'",
+      "got": "'Hola Sof�a, bienvenida al curso de Python.'"
+    },
+    {
+      "id": 2002,
+      "lesson_id": 20,
+      "title": "Ejercicio 2: Operación aritmética al vuelo",
+      "expected": "'El área del rectángulo es: 50'",
+      "got": "'El �rea del rect�ngulo es: 50'"
+    },
+    {
+      "id": 2003,
+      "lesson_id": 20,
+      "title": "Ejercicio 3: Múltiples variables y cálculo",
+      "expected": "'Hola Carlos, tu edad estimada es 26 años.'",
+      "got": "'Hola Carlos, tu edad estimada es 26 a�os.'"
+    },
+    {
+      "id": 2301,
+      "lesson_id": 23,
+      "title": "Ejercicio 1: Transformación con title()",
+      "expected": "'Madrid España'",
+      "got": "'Madrid Espa�a'"
+    },
+    {
+      "id": 2503,
+      "lesson_id": 25,
+      "title": "Ejercicio 3: Inmutabilidad y reasignación",
+      "expected": "'El BlOqUeO dE mAyUsClAs eS uNa pEsAdIlLa!'",
+      "got": "'El BlOqUeO dE mAyUsCuLaS eS uNa pEsAdIlLa!'"
+    },
+    {
+      "id": 2601,
+      "lesson_id": 26,
+      "title": "Ejercicio 1: Capitalización básica",
+      "expected": "'Python es increíble'",
+      "got": "'Python es incre�ble'"
+    },
+    {
+      "id": 2602,
+      "lesson_id": 26,
+      "title": "Ejercicio 2: Normalizando mayúsculas internas",
+      "expected": "'El programador aprende rápido.'",
+      "got": "'El programador aprende r�pido.'"
+    },
+    {
+      "id": 2603,
+      "lesson_id": 26,
+      "title": "Ejercicio 3: Índice 0 numérico",
+      "expected": "'3 lenguajes de programación más usados.'",
+      "got": "'3 lenguajes de programaci�n m�s usados.'"
+    },
+    {
+      "id": 2801,
+      "lesson_id": 28,
+      "title": "Ejercicio 1: Búsqueda básica",
+      "expected": "'3'",
+      "got": "'2'"
+    }
+  ],
+  "solution_errors": [
+    {
+      "id": 1301,
+      "lesson_id": 13,
+      "title": "Ejercicio 1: Rango con and",
+      "error": "Traceback (most recent call last):\n  File \"<string>\", line 6, in <module>\nNameError: name 'x' is not defined"
+    },
+    {
+      "id": 1602,
+      "lesson_id": 16,
+      "title": "Ejercicio 2: Evitando el bucle infinito",
+      "error": "TIMEOUT"
+    },
+    {
+      "id": 2103,
+      "lesson_id": 21,
+      "title": "Ejercicio 3: Limpieza personalizada múltiple",
+      "error": "File \"<string>\", line 5\n    cadena = \"\t...hola python...\n             ^\nSyntaxError: unterminated string literal (detected at line 5)"
+    },
+    {
+      "id": 2201,
+      "lesson_id": 22,
+      "title": "Ejercicio 1: Limpieza derecha con rstrip()",
+      "error": "File \"<string>\", line 5\n    texto = \"  Python es genial  \n            ^\nSyntaxError: unterminated string literal (detected at line 5)"
+    }
+  ]
+}

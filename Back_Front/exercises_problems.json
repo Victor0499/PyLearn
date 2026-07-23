@@ -1,0 +1,202 @@
+[
+  {
+    "id": 6601,
+    "lesson_id": 66,
+    "title": "Ejercicio 1: Tu primera Lista de Comprensión",
+    "issues": [
+      "Rigid quote check in __source__: assert '[' in __source__ and 'for' in __source__"
+    ],
+    "test_code": "assert 'dobles' in locals()\nassert type(dobles) == list\nassert dobles == [0, 2, 4, 6, 8]\nassert '[' in __source__ and 'for' in __source__\nassert 'if' not in __source__",
+    "output_check": "[0, 2, 4, 6, 8]"
+  },
+  {
+    "id": 6602,
+    "lesson_id": 66,
+    "title": "Ejercicio 2: Lista de Comprensión con Filtro",
+    "issues": [
+      "Rigid quote check in __source__: assert '[' in __source__ and 'for' in __source__"
+    ],
+    "test_code": "assert 'pares_cuadrados' in locals()\nassert type(pares_cuadrados) == list\nassert pares_cuadrados == [0, 4, 16, 36, 64]\nassert '[' in __source__ and 'for' in __source__ and 'if' in __source__",
+    "output_check": "[0, 4, 16, 36, 64]"
+  },
+  {
+    "id": 6603,
+    "lesson_id": 66,
+    "title": "Ejercicio 3: Conjunto de Comprensión",
+    "issues": [
+      "Rigid quote check in __source__: assert '{' in __source__ and 'for' in __source__"
+    ],
+    "test_code": "assert 'vocales' in locals()\nassert type(vocales) == set\nassert vocales == {'o', 'a', 'i'}\nassert '{' in __source__ and 'for' in __source__",
+    "output_check": null
+  },
+  {
+    "id": 6604,
+    "lesson_id": 66,
+    "title": "Ejercicio 4: Diccionario de Comprensión",
+    "issues": [
+      "Rigid quote check in __source__: assert '{' in __source__ and 'for' in __source__"
+    ],
+    "test_code": "assert 'mayores' in locals()\nassert type(mayores) == dict\nassert mayores == {'Carlos': 30, 'María': 35}\nassert '{' in __source__ and 'for' in __source__ and 'if' in __source__",
+    "output_check": "{'Carlos': 30, 'María': 35}"
+  },
+  {
+    "id": 6702,
+    "lesson_id": 67,
+    "title": "Ejercicio 2: Desempaquetado correcto",
+    "issues": [
+      "Rigid quote check in __source__: assert 'for' in __source__ and ',' in __source__"
+    ],
+    "test_code": "assert 'enumerate' in __source__\nassert 'for' in __source__ and ',' in __source__",
+    "output_check": null
+  },
+  {
+    "id": 6703,
+    "lesson_id": 67,
+    "title": "Ejercicio 3: Alterando el inicio",
+    "issues": [
+      "Rigid quote check in __source__: assert 'enumerate' in __source__ and 'start=1' in __source__"
+    ],
+    "test_code": "assert 'enumerate' in __source__ and 'start=1' in __source__.replace(' ', '')\nassert 'f\"' in __source__ or \"f'\" in __source__",
+    "output_check": null
+  },
+  {
+    "id": 6704,
+    "lesson_id": 67,
+    "title": "Ejercicio 4: Convertir a lista de tuplas",
+    "issues": [
+      "Rigid quote check in __source__: assert 'list(' in __source__ and 'enumerate(' in __source__"
+    ],
+    "test_code": "assert 'lista_enumerada' in locals()\nassert type(lista_enumerada) == list\nassert lista_enumerada == [(10, 'Ana'), (11, 'Luis'), (12, 'Marta')]\nassert 'list(' in __source__ and 'enumerate(' in __source",
+    "output_check": "[(10, 'Ana'), (11, 'Luis'), (12, 'Marta')]"
+  },
+  {
+    "id": 7303,
+    "lesson_id": 73,
+    "title": "Ejercicio 3: Valores por Defecto",
+    "issues": [
+      "Rigid quote check in __source__: assert 'crear_perfil(\"Juan\")' in __source__"
+    ],
+    "test_code": "assert 'crear_perfil(\"Juan\")' in __source__ or \"crear_perfil('Juan')\" in __source__, 'Llama la función solo con Juan'\nassert 'crear_perfil(\"María\", 25)' in __source__ or \"crear_perfil('María', 25)\" in",
+    "output_check": "Juan tiene 18 años\nMaría tiene 25 años"
+  },
+  {
+    "id": 7304,
+    "lesson_id": 73,
+    "title": "Ejercicio 4: La Regla de Oro",
+    "issues": [
+      "Rigid quote check in __source__: assert 'def registro(nombre, rol=\"Usuario\"):' in __source__"
+    ],
+    "test_code": "assert 'def registro(nombre, rol=\"Usuario\"):' in __source__ or \"def registro(nombre, rol='Usuario'):\" in __source__, 'El orden debe ser primero nombre y luego rol'",
+    "output_check": "Bienvenido Ana, tu rol es Usuario"
+  },
+  {
+    "id": 7403,
+    "lesson_id": 74,
+    "title": "Ejercicio 3: Perfiles Flexibles (**kwargs)",
+    "issues": [
+      "Rigid quote check in __source__: assert 'Batman' in __source__ and 'Gotica' in __source__"
+    ],
+    "test_code": "assert 'datos.items()' in __source__, 'Usa .items() para recorrer el diccionario kwargs'\nassert 'Batman' in __source__ and 'Gotica' in __source__, 'Debes llamar a la función con esos datos exactos'",
+    "output_check": "La clave es nombre y el valor es Batman\nLa clave es ciudad y el valor es Gotica\nLa clave es vehiculo y el valor es Batmovil"
+  },
+  {
+    "id": 8102,
+    "lesson_id": 81,
+    "title": "Ejercicio 2: La forma correcta (with open)",
+    "issues": [
+      "Rigid quote check in __source__: assert '\"r\"' in __source__"
+    ],
+    "test_code": "assert 'with open(' in __source__, 'Debes usar el bloque with open()'\nassert '\"r\"' in __source__ or \"'r'\" in __source__, 'Debes abrir en modo lectura r'\nassert '.read()' in __source__, 'Usa f.read() p",
+    "output_check": "Rosas son rojas\nVioletas son azules\nPython es increíble\n¡Y tú también!"
+  },
+  {
+    "id": 8201,
+    "lesson_id": 82,
+    "title": "Ejercicio 1: Tu primer archivo escrito (modo 'w')",
+    "issues": [
+      "Rigid quote check in __source__: assert '\"w\"' in __source__"
+    ],
+    "test_code": "assert '\"w\"' in __source__ or \"'w'\" in __source__, 'Debes usar el modo w para escribir'\nassert 'f.write(' in __source__, 'Debes usar f.write() para escribir'\nassert '\"r\"' in __source__ or \"'r'\" in __s",
+    "output_check": "Bienvenido a Python!"
+  },
+  {
+    "id": 8401,
+    "lesson_id": 84,
+    "title": "Ejercicio 1: Guardar configuraciones (dump)",
+    "issues": [
+      "Rigid quote check in __source__: assert 'open(' in __source__ and '\"w\"' in __source__"
+    ],
+    "test_code": "assert 'open(' in __source__ and '\"w\"' in __source__ or \"'w'\" in __source__, 'Debes abrir el archivo en modo w'\nassert 'json.dump(config' in __source__, 'Usa json.dump() pasando config y f'",
+    "output_check": "{\"tema\": \"oscuro\", \"volumen\": 80}"
+  },
+  {
+    "id": 8402,
+    "lesson_id": 84,
+    "title": "Ejercicio 2: Cargar un archivo (load)",
+    "issues": [
+      "Rigid quote check in __source__: assert 'inventario[\"Pociones\"]' in __source__"
+    ],
+    "test_code": "assert 'json.load(' in __source__, 'Usa json.load(f) para cargar el archivo'\nassert 'inventario[\"Pociones\"]' in __source__ or \"inventario['Pociones']\" in __source__, 'Imprime el valor de Pociones del ",
+    "output_check": "5"
+  },
+  {
+    "id": 8403,
+    "lesson_id": 84,
+    "title": "Ejercicio 3: Modificar un JSON",
+    "issues": [
+      "Rigid quote check in __source__: assert 'datos[\"edad\"] = 31' in __source__"
+    ],
+    "test_code": "assert 'datos[\"edad\"] = 31' in __source__ or \"datos['edad'] = 31\" in __source__, 'Modifica la edad en el diccionario datos'\nassert 'json.dump(datos, f)' in __source__, 'Usa json.dump() para guardar lo",
+    "output_check": "{\"nombre\": \"Leo\", \"edad\": 31}"
+  },
+  {
+    "id": 8803,
+    "lesson_id": 88,
+    "title": "Ejercicio 3: Validando datos (Setters)",
+    "issues": [
+      "Rigid quote check in __source__: assert 'if ' in __source__ and '10' in __source__"
+    ],
+    "test_code": "assert 'def ajustar(self' in __source__, 'Crea el método ajustar'\nassert 'if ' in __source__ and '10' in __source__ and '30' in __source__, 'Usa un if para validar entre 10 y 30'\nassert 'termostato.aj",
+    "output_check": "20\n25"
+  },
+  {
+    "id": 8804,
+    "lesson_id": 88,
+    "title": "Ejercicio 4: Sistema de Login (Reto)",
+    "issues": [
+      "Rigid quote check in __source__: assert 'Acceso concedido' in __source__ and 'Acceso denegado' in __source__"
+    ],
+    "test_code": "assert 'self.__password' in __source__, 'Usa self.__password en el constructor'\nassert 'def login(self, intento):' in __source__ or 'def login(self,intento):' in __source__, 'Crea el método login'\nass",
+    "output_check": "Acceso denegado\nAcceso concedido"
+  },
+  {
+    "id": 9003,
+    "lesson_id": 90,
+    "title": "Ejercicio 3: Comportamiento extra",
+    "issues": [
+      "Rigid quote check in __source__: assert 'admin.login()' in __source__ and 'admin.banear()' in __source__"
+    ],
+    "test_code": "assert 'class Admin(Usuario):' in __source__, 'Admin hereda de Usuario'\nassert 'def banear(self):' in __source__ or 'def banear(self) :' in __source__, 'Crea el método banear'\nassert 'admin.login()' i",
+    "output_check": "Entrando al sistema\nUsuario baneado"
+  },
+  {
+    "id": 9202,
+    "lesson_id": 92,
+    "title": "Ejercicio 2: Creando un bloque",
+    "issues": [
+      "Checks exact 4-space indentation which may reject tabs"
+    ],
+    "test_code": "assert ('    print(' in __source__ or '\\tprint('' in __source__ or '\\tprint(' in __source__, 'Debes indentar el print dentro del if'",
+    "output_check": "Acceso concedido"
+  },
+  {
+    "id": 9203,
+    "lesson_id": 92,
+    "title": "Ejercicio 3: Bloque múltiple",
+    "issues": [
+      "Checks exact 4-space indentation which may reject tabs"
+    ],
+    "test_code": "assert __source__.count('    print(\\'Paso') == 3 or __source__.count('\\tprint(\\'Paso') == 3, 'Las 3 instrucciones deben estar indentadas igual'",
+    "output_check": "Paso 1\nPaso 2\nPaso 3\nFin"
+  }
+]
