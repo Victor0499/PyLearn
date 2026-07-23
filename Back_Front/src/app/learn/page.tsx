@@ -47,6 +47,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
   const [showHint, setShowHint] = useState(() => lessons.map((l: any) => l.exercises.map(() => false)));
   const [errorModal, setErrorModal] = useState<{ title: string; message: string } | null>(null);
   const [successModal, setSuccessModal] = useState<{ title: string; message: string } | null>(null);
+  const [lessonCompletedModal, setLessonCompletedModal] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
   const [mobileView, setMobileView] = useState<'theory' | 'exercises'>('theory');
@@ -95,7 +96,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
         if (!res.ok) throw new Error("Failed to load progress");
         const data = await res.json();
 
-        const restored = lessons.map(l => l.exercises.map(() => user.role === 'admin'));
+        const restored = lessons.map(l => l.exercises.map(() => false));
         const restoredCodes = lessons.map((l: any) => l.exercises.map((e: any) => (user.role === 'admin' && e.solutionCode) ? e.solutionCode : e.initialCode));
         data.forEach((p: { lesson_id: number; exercise_id: number; completed: boolean; code_snapshot: string }) => {
           for (let li = 0; li < lessons.length; li++) {
@@ -174,6 +175,8 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       const willComplete = successes.filter((s, i) => i === activeExercise ? true : s).length === exercises.length;
       if (!willComplete) {
         setSuccessModal({ title: "¡Excelente!", message: "Has completado este ejercicio correctamente. Sigue así." });
+      } else {
+        setLessonCompletedModal(true);
       }
     };
 
@@ -189,6 +192,9 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       } else if (raw.includes("NameError:")) {
         title = "🔍 Variable no encontrada";
         const m = raw.match(/NameError: (.+)/); message = `${m?.[1] || raw}.\nDefine todas las variables correctamente.`;
+      } else {
+        const lines = raw.trim().split('\n');
+        message = lines[lines.length - 1] || "Error desconocido. Revisa tu código.";
       }
       setErrorModal({ title, message });
       updateLessonState(setAllSuccesses, a => { a[activeExercise] = false; return a; });
@@ -459,15 +465,15 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       {/* Error Modal */}
       {errorModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-slate-900 border border-red-500/30 rounded-2xl p-8 max-w-md w-full shadow-2xl">
-            <div className="w-14 h-14 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <div className="bg-white dark:bg-slate-900 border border-red-500/30 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div className="w-14 h-14 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center mx-auto mb-5 shrink-0">
               <XCircle className="w-7 h-7 text-red-400" />
             </div>
             <h3 className="text-lg font-bold text-slate-900 dark:text-white text-center mb-3">{errorModal.title}</h3>
-            <div className="bg-slate-100 dark:bg-slate-800/80 border border-black dark:border-slate-700 rounded-xl p-4 mb-5">
+            <div className="bg-slate-100 dark:bg-slate-800/80 border border-black dark:border-slate-700 rounded-xl p-4 mb-5 max-h-40 overflow-y-auto custom-scrollbar">
               <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-wrap font-mono">{errorModal.message}</p>
             </div>
-            <p className="text-slate-500 dark:text-slate-500 text-xs text-center mb-5">💡 Usa el botón <span className="text-amber-600 dark:text-yellow-400">"Ver pista"</span> si necesitas ayuda.</p>
+            <p className="text-slate-500 dark:text-slate-500 text-xs text-center mb-5 shrink-0">💡 Usa el botón <span className="text-amber-600 dark:text-yellow-400">"Ver pista"</span> si necesitas ayuda.</p>
             <button onClick={() => setErrorModal(null)}
               className="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-black dark:border-slate-600 text-slate-900 dark:text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
               <X className="w-4 h-4" />Cerrar e Intentar de Nuevo
@@ -479,8 +485,8 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       {/* Success Modal */}
       {successModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-slate-900 border border-green-500/30 rounded-2xl p-8 max-w-md w-full shadow-2xl">
-            <div className="w-14 h-14 bg-green-500/10 border border-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-5">
+          <div className="bg-white dark:bg-slate-900 border border-green-500/30 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div className="w-14 h-14 bg-green-500/10 border border-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-5 shrink-0">
               <CheckCircle className="w-7 h-7 text-green-400" />
             </div>
             <h3 className="text-lg font-bold text-slate-900 dark:text-white text-center mb-3">{successModal.title}</h3>
@@ -496,15 +502,16 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       )}
 
       {/* Completion Modal */}
-      {completedCount === exercises.length && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-slate-900 border border-black dark:border-slate-700 rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-2xl">
-            <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/30">
+      {lessonCompletedModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 border border-black dark:border-slate-700 rounded-2xl p-6 sm:p-8 max-w-sm w-full mx-auto text-center shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-orange-500/30 shrink-0">
               <Trophy className="w-8 h-8 text-slate-900 dark:text-white" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">¡Lección completada!</h3>
             <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Completaste todos los ejercicios de <strong className="text-slate-900 dark:text-white">"{lesson.title}"</strong>.</p>
             <button onClick={() => {
+                setLessonCompletedModal(false);
                 if (activeLessonIdx < lessons.length - 1) {
                   switchLesson(activeLessonIdx + 1);
                 } else {

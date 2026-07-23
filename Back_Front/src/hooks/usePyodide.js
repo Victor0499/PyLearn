@@ -60,6 +60,9 @@ export function usePyodide() {
     setError(null);
 
     try {
+      // Set __source__ in Python's global namespace so tests can inspect the raw code
+      pyodide.globals.set('__source__', code);
+
       // First, run the user's code
       await pyodide.runPythonAsync(code);
 
