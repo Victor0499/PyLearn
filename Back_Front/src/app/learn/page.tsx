@@ -33,7 +33,7 @@ function DifficultyBadge({ color, label }: { color: string; label: string }) {
 function LearnContent({ lessons }: { lessons: any[] }) {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
-  const { isReady, runCode } = usePyodide();
+  const { isReady, runCode, promptRequest, submitPrompt } = usePyodide();
   const { saveProgress } = useProgress();
 
   const [activeLessonIdx, setActiveLessonIdx] = useState(0);
@@ -48,6 +48,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
   const [errorModal, setErrorModal] = useState<{ title: string; message: string } | null>(null);
   const [successModal, setSuccessModal] = useState<{ title: string; message: string } | null>(null);
   const [lessonCompletedModal, setLessonCompletedModal] = useState(false);
+  const [promptInputValue, setPromptInputValue] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
   const [mobileView, setMobileView] = useState<'theory' | 'exercises'>('theory');
@@ -166,7 +167,7 @@ function LearnContent({ lessons }: { lessons: any[] }) {
   const handleRun = async () => {
     setRunning(true);
     const result = await runCode(codes[activeExercise], currentEx.testCode || "");
-    const out = result.output?.trim() || "";
+    const out = result.output || "";
 
     updateLessonState(setAllOutputs, a => { a[activeExercise] = result.output || ""; return a; });
     updateLessonState(setAllErrors, a => { a[activeExercise] = result.error || ""; return a; });
@@ -199,11 +200,16 @@ function LearnContent({ lessons }: { lessons: any[] }) {
       setErrorModal({ title, message });
       updateLessonState(setAllSuccesses, a => { a[activeExercise] = false; return a; });
     } else if (currentEx.outputCheck) {
-      // Only strip trailing newlines (added by Python's print() automatically).
-      // We do NOT use .trim() because some exercises intentionally produce output with
-      // leading spaces (e.g. rjust(), ljust(), rstrip() exercises).
-      const cleanOut = out.replace(/\r\n/g, '\n').replace(/\n+$/, '');
-      const cleanExpected = currentEx.outputCheck.replace(/\r\n/g, '\n').replace(/\n+$/, '');
+      // Normalize: unify line endings, strip trailing whitespace per line, strip trailing blank lines
+      const normalizeOutput = (s: string) => s
+        .replace(/\r\n/g, '\n')
+        .split('\n')
+        .map(line => line.trimEnd())
+        .join('\n')
+        .replace(/\n+$/, '');
+
+      const cleanOut = normalizeOutput(out);
+      const cleanExpected = normalizeOutput(currentEx.outputCheck);
 
       if (cleanOut === cleanExpected) {
         updateLessonState(setAllSuccesses, a => { a[activeExercise] = true; return a; });
@@ -527,6 +533,52 @@ function LearnContent({ lessons }: { lessons: any[] }) {
               className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2">
               {activeLessonIdx < lessons.length - 1 ? 'Ir a la siguiente lección' : 'Volver al Dashboard'} <ArrowRight className="w-4 h-4" />
             </button>
+          </div>
+        </div>
+      )}
+      {/* Prompt Modal */}
+      {promptRequest && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-900 border border-blue-500/30 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl">
+            <div className="w-14 h-14 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-5 shrink-0">
+              <Terminal className="w-7 h-7 text-blue-500" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white text-center mb-3">Entrada requerida</h3>
+            <p className="text-slate-600 dark:text-slate-400 text-sm text-center mb-4 font-mono">{(promptRequest as any).message}</p>
+            <input
+              type="text"
+              autoFocus
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white mb-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              placeholder="Escribe tu respuesta aquí..."
+              value={promptInputValue}
+              onChange={(e) => setPromptInputValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  submitPrompt(promptInputValue);
+                  setPromptInputValue('');
+                }
+              }}
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  submitPrompt(null);
+                  setPromptInputValue('');
+                }}
+                className="flex-1 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium rounded-xl transition-all"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={() => {
+                  submitPrompt(promptInputValue);
+                  setPromptInputValue('');
+                }}
+                className="flex-1 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium rounded-xl transition-all"
+              >
+                Enviar
+              </button>
+            </div>
           </div>
         </div>
       )}
