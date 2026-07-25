@@ -28,7 +28,9 @@ export async function GET(req: NextRequest) {
 
   if (type === 'lessons') {
     const moduleId = searchParams.get('moduleId');
-    const query = supabaseAdmin.from('lessons').select('id, title, module_id, order_index').order('order_index');
+    const query = supabaseAdmin.from('lessons').select('id, title, module_id, order_index')
+      .order('module_id', { ascending: true })
+      .order('order_index', { ascending: true });
     if (moduleId) query.eq('module_id', parseInt(moduleId));
     const { data, error } = await query;
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });

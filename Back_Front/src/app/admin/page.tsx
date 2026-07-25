@@ -201,17 +201,24 @@ function CatalogTab({ token }: { token: string }) {
   useEffect(() => {
     fetch("/api/admin/curriculum?type=modules", { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json()).then(setModules);
+    fetch("/api/admin/curriculum?type=lessons", { headers: { Authorization: `Bearer ${token}` } })
+      .then(r => r.json()).then(data => {
+        if (Array.isArray(data)) {
+          const sorted = [...data].sort((a, b) => {
+            if (a.module_id !== b.module_id) return a.module_id - b.module_id;
+            return a.order_index - b.order_index;
+          });
+          setLessons(sorted);
+        }
+      });
   }, [token]);
 
-  const loadLessons = async (moduleId: number) => {
-    if (expandedModule === moduleId) { setExpandedModule(null); return; }
-    setExpandedModule(moduleId);
-    const res = await fetch(`/api/admin/curriculum?type=lessons&moduleId=${moduleId}`, { headers: { Authorization: `Bearer ${token}` } });
-    const data = await res.json();
-    setLessons(prev => {
-      const others = prev.filter(l => l.module_id !== moduleId);
-      return [...others, ...data];
-    });
+  const loadLessons = (moduleId: number) => {
+    if (expandedModule === moduleId) {
+      setExpandedModule(null);
+    } else {
+      setExpandedModule(moduleId);
+    }
   };
 
   const openLesson = async (lessonId: number) => {
@@ -315,15 +322,18 @@ function CatalogTab({ token }: { token: string }) {
           Módulo {expandedModule}: {mod?.title}
         </h2>
         <div className="border border-black dark:border-slate-800 rounded-xl divide-y divide-slate-800/50 bg-white dark:bg-slate-900/40 overflow-hidden">
-          {lessons.filter(l => l.module_id === expandedModule).map(l => (
-            <button key={l.id} onClick={() => openLesson(l.id)}
-              className="w-full flex items-center gap-3 px-6 py-4 hover:bg-slate-100 dark:bg-slate-800/60 transition-colors text-left group"
-            >
-              <span className="text-sm text-slate-500 dark:text-slate-500 font-mono w-8 shrink-0">#{l.id}</span>
-              <span className="text-base text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:text-white transition-colors flex-1 font-semibold">{l.title}</span>
-              <PenSquare className="w-5 h-5 text-slate-600 group-hover:text-red-400 transition-colors shrink-0" />
-            </button>
-          ))}
+          {lessons.filter(l => l.module_id === expandedModule).map((l) => {
+            const globalIndex = lessons.findIndex(item => item.id === l.id);
+            return (
+              <button key={l.id} onClick={() => openLesson(l.id)}
+                className="w-full flex items-center gap-3 px-6 py-4 hover:bg-slate-100 dark:bg-slate-800/60 transition-colors text-left group"
+              >
+                <span className="text-sm text-slate-500 dark:text-slate-500 font-mono w-8 shrink-0">#{globalIndex + 1}</span>
+                <span className="text-base text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:text-white transition-colors flex-1 font-semibold">{l.title}</span>
+                <PenSquare className="w-5 h-5 text-slate-600 group-hover:text-red-400 transition-colors shrink-0" />
+              </button>
+            );
+          })}
         </div>
       </div>
     );
@@ -366,11 +376,14 @@ function ExerciseCard({ exercise, idx, onSave, onChange, saving }: {
 }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-xl border border-black dark:border-slate-800 overflow-hidden">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center gap-3 p-4 bg-white dark:bg-slate-900/60 hover:bg-slate-100 dark:bg-slate-800/60 transition-colors text-left">
-        {open ? <ChevronDown className="w-4 h-4 text-slate-500 dark:text-slate-500 shrink-0" /> : <ChevronRight className="w-4 h-4 text-slate-500 dark:text-slate-500 shrink-0" />}
-        <span className="text-xs text-slate-500 dark:text-slate-500 font-mono shrink-0">{idx + 1}.</span>
-        <span className="text-sm text-slate-700 dark:text-slate-300 flex-1">{exercise.title}</span>
+    <div className={`rounded-xl border transition-all ${open ? 'border-red-500/40 bg-red-500/[0.02] dark:border-red-500/30' : 'border-black dark:border-slate-800'} overflow-hidden`}>
+      <button 
+        onClick={() => setOpen(!open)} 
+        className={`w-full flex items-center gap-3 p-4 transition-colors text-left ${open ? 'bg-slate-100/70 dark:bg-slate-800/50' : 'bg-white dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800/60'}`}
+      >
+        {open ? <ChevronDown className="w-4 h-4 text-red-500 dark:text-red-400 shrink-0" /> : <ChevronRight className="w-4 h-4 text-slate-500 dark:text-slate-500 shrink-0" />}
+        <span className={`text-xs font-mono shrink-0 ${open ? 'text-red-500 dark:text-red-400 font-bold' : 'text-slate-500 dark:text-slate-500'}`}>{idx + 1}.</span>
+        <span className={`text-sm flex-1 ${open ? 'text-slate-900 dark:text-white font-semibold' : 'text-slate-700 dark:text-slate-300'}`}>{exercise.title}</span>
         <span className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border font-bold ${
           exercise.difficulty_color === 'green' ? 'bg-green-500/20 text-green-400 border-green-500/30' :
           exercise.difficulty_color === 'yellow' ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' :
@@ -379,7 +392,7 @@ function ExerciseCard({ exercise, idx, onSave, onChange, saving }: {
         </span>
       </button>
       {open && (
-        <div className="border-t border-black dark:border-slate-800 p-5 space-y-4 bg-slate-50 dark:bg-slate-950/40">
+        <div className="border-t border-black dark:border-slate-800 p-5 space-y-4 bg-slate-50/50 dark:bg-slate-900/20">
           <Field label="Título" value={exercise.title} onChange={v => onChange({ ...exercise, title: v })} />
           <Field label="Instrucciones" value={exercise.instructions} onChange={v => onChange({ ...exercise, instructions: v })} multiline />
           <Field label="Código Inicial" value={exercise.initial_code} onChange={v => onChange({ ...exercise, initial_code: v })} multiline mono />
