@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import {
   School, LogOut, Plus, Copy, Check, Users, ChevronRight,
-  BookOpen, Loader2, X, Trophy
+  BookOpen, Loader2, X, Trophy, Menu
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Footer from "@/components/Footer";
@@ -31,6 +31,7 @@ export default function ProfesorDashboard() {
   const [newClassName, setNewClassName] = useState("");
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!loading && (!user || user.role !== "profesor")) {
@@ -153,23 +154,64 @@ export default function ProfesorDashboard() {
             <div className="bg-gradient-to-tr from-sky-500 to-indigo-500 text-white p-1.5 rounded-lg shrink-0">
               <BookOpen className="w-5 h-5" />
             </div>
-            <span className="hidden sm:block font-bold text-xl text-slate-800 dark:text-white tracking-tight">PyLearn</span>
-            <span className="px-2 py-0.5 ml-2 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[10px] sm:text-xs font-semibold truncate">
+            <span className="block font-bold text-lg sm:text-xl text-slate-800 dark:text-white tracking-tight">PyLearn</span>
+            <span className="px-1.5 sm:px-2 py-0.5 ml-1.5 sm:ml-2 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[9px] sm:text-xs font-semibold truncate">
               Profesor
             </span>
           </div>
           <div className="flex items-center space-x-2 sm:space-x-4 min-w-0 shrink-0">
-            <button onClick={() => router.push('/leaderboard')} className="hidden sm:flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group shrink-0" title="Ranking"><Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" /><span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span></button>
-            <ThemeToggle />
-          <button
-            onClick={logout}
-            className="p-2 text-slate-500 dark:text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
-            title="Cerrar Sesión"
-          >
-            <LogOut className="w-5 h-5" />
-          </button>
+            {/* Desktop controls */}
+            <div className="hidden sm:flex items-center space-x-2 sm:space-x-4">
+              <button onClick={() => router.push('/leaderboard')} className="flex flex-col items-center justify-center px-2 py-1 text-slate-500 dark:text-slate-500 hover:text-yellow-500 dark:hover:text-yellow-400 hover:bg-yellow-500/10 rounded-xl transition-all group shrink-0" title="Ranking">
+                <Trophy className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
+                <span className="text-[9px] font-bold mt-0.5 uppercase tracking-wider">Ranking</span>
+              </button>
+              <ThemeToggle />
+              <button
+                onClick={logout}
+                className="p-2 text-slate-500 dark:text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
+                title="Cerrar Sesión"
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Mobile hamburger menu toggle */}
+            <div className="sm:hidden flex items-center">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 rounded-full transition-all focus:outline-none"
+                title="Menú"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile dropdown popover */}
+        {mobileMenuOpen && (
+          <div className="absolute top-16 right-4 w-48 bg-white dark:bg-slate-900 border border-black dark:border-slate-800 rounded-2xl shadow-xl p-3 z-50 flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+            <button
+              onClick={() => { router.push('/leaderboard'); setMobileMenuOpen(false); }}
+              className="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-yellow-500/10 hover:text-yellow-500 rounded-xl transition-all"
+            >
+              <Trophy className="w-5 h-5 text-yellow-500" />
+              <span>Ranking</span>
+            </button>
+            <div className="flex items-center justify-between px-3 py-2 border-t border-b border-slate-100 dark:border-slate-800 my-1">
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Tema</span>
+              <ThemeToggle />
+            </div>
+            <button
+              onClick={() => { logout(); setMobileMenuOpen(false); }}
+              className="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
+            >
+              <LogOut className="w-5 h-5" />
+              <span>Cerrar Sesión</span>
+            </button>
+          </div>
+        )}
       </header>
 
       <main className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-10 flex-1 w-full">
